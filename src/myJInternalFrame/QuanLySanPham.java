@@ -16,6 +16,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
      */
     public QuanLySanPham() {
         initComponents();
+        System.out.println("chiến đã ghé thăm");
     }
 
     /**
