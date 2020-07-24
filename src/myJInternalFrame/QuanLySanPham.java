@@ -131,7 +131,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Địa chỉ"
+                "Mã sản phẩm", "Tên sản phẩm", "Đơn giá", "Số lượng sản phẩm", "Cấu hình", "Trạng thái"
             }
         ));
         tbQLSP.setFillsViewportHeight(true);

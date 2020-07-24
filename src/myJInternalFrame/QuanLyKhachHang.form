@@ -39,7 +39,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="1" title="H&#xf3;a &#x111;&#x1a1;n">
+            <TitledBorder justification="1" title="Qu&#x1ea3;n l&#xfd; kh&#xe1;ch h&#xe0;ng">
               <Font PropertyName="font" name="Monospaced" size="48" style="1"/>
               <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
             </TitledBorder>
