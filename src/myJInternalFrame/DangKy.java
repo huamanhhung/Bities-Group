@@ -18,6 +18,7 @@ public class DangKy extends javax.swing.JInternalFrame {
      */
     public DangKy() {
         initComponents();
+        System.out.println("Hưng đã rải binh ở đây!");
     }
 
     /**
