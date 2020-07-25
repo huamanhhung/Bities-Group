@@ -5,6 +5,8 @@
  */
 package myJInternalFrame;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author markhyun
@@ -16,6 +18,38 @@ public class BanHang extends javax.swing.JInternalFrame {
      */
     public BanHang() {
         initComponents();
+    }
+
+    //check loi
+    public boolean batLoi() {
+        boolean tma = false, tten = false, tsl = false;
+        if (txtSoLuong1.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập số lượng");
+            tsl = false;
+        } else {
+            try {
+                int sl = Integer.parseInt(txtSoLuong1.getText());
+                tsl = true;
+                if (sl < 0) {
+                    JOptionPane.showMessageDialog(this, "Số lượng phải trên 0");
+                    tsl = false;
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Số lượng phải là số");
+                tsl = false;
+            }
+        }
+        if (txtMaKH1.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Chưa nhập mã khách hàng");
+            tma = false;
+        } else {
+            tma = true;
+        }
+        if (tma == true && tsl == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -80,6 +114,11 @@ public class BanHang extends javax.swing.JInternalFrame {
         btnThemVaoGioHang1.setForeground(new java.awt.Color(72, 61, 139));
         btnThemVaoGioHang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Shopping_basket_add_Icon_32.png"))); // NOI18N
         btnThemVaoGioHang1.setText("Thêm vào giỏ hàng");
+        btnThemVaoGioHang1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemVaoGioHang1ActionPerformed(evt);
+            }
+        });
 
         lbNhanVienBanHang1.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         lbNhanVienBanHang1.setForeground(new java.awt.Color(252, 244, 252));
@@ -97,6 +136,11 @@ public class BanHang extends javax.swing.JInternalFrame {
         lbMaKH1.setText("Mã khách hàng");
 
         txtMaKH1.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        txtMaKH1.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtMaKH1CaretUpdate(evt);
+            }
+        });
 
         tbThanhToan1.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         tbThanhToan1.setModel(new javax.swing.table.DefaultTableModel(
@@ -161,19 +205,19 @@ public class BanHang extends javax.swing.JInternalFrame {
                                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbTenKH1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtTenKH1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 34, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbbSanPham1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbbSanPham1, 0, 0, Short.MAX_VALUE)
                                     .addComponent(lbDSSP1))
                                 .addGap(191, 191, 191)
                                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbSoLuong1, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                                    .addComponent(lbSoLuong1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtSoLuong1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                        .addComponent(txtSoLuong1)
                                         .addGap(62, 62, 62)))))
                         .addGap(163, 163, 163)
-                        .addComponent(btnThemVaoGioHang1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                        .addComponent(btnThemVaoGioHang1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(27, 27, 27))))
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -209,12 +253,13 @@ public class BanHang extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cpThanhToan1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThanhToan1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnXoaSP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(lbTongTien1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lbTongTien1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnThanhToan1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnXoaSP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(17, 17, 17))
         );
 
@@ -239,6 +284,18 @@ public class BanHang extends javax.swing.JInternalFrame {
     private void cbbSanPham1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbSanPham1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbbSanPham1ActionPerformed
+
+    private void txtMaKH1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtMaKH1CaretUpdate
+        // TODO add your handling code here:
+        txtTenKH1.setText(txtMaKH1.getText());
+    }//GEN-LAST:event_txtMaKH1CaretUpdate
+
+    private void btnThemVaoGioHang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemVaoGioHang1ActionPerformed
+        // TODO add your handling code here:
+        if (this.batLoi() == true) {
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+        }
+    }//GEN-LAST:event_btnThemVaoGioHang1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
