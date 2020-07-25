@@ -17,8 +17,8 @@ public class HoaDon extends javax.swing.JInternalFrame {
      * Creates new form HoaDon
      */
     public HoaDon() {
-        initComponents();
-        System.out.println("abc");
+        initComponents();  
+        System.out.println("aaaa");
     }
 
     /**
