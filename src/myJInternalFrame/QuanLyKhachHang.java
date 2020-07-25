@@ -5,6 +5,8 @@
  */
 package myJInternalFrame;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author markhyun
@@ -51,7 +53,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
 
-        kGradientPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quản lý khách hàng", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Monospaced", 1, 48), new java.awt.Color(255, 255, 255))); // NOI18N
+        kGradientPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hóa đơn", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Monospaced", 1, 48), new java.awt.Color(255, 255, 255))); // NOI18N
         kGradientPanel4.setkEndColor(new java.awt.Color(229, 189, 240));
         kGradientPanel4.setkGradientFocus(1000);
         kGradientPanel4.setkStartColor(new java.awt.Color(168, 168, 233));
@@ -100,6 +102,11 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         btnThemKH.setMaximumSize(new java.awt.Dimension(257, 41));
         btnThemKH.setMinimumSize(new java.awt.Dimension(257, 41));
         btnThemKH.setPreferredSize(new java.awt.Dimension(293, 41));
+        btnThemKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemKHActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -216,6 +223,30 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
+         try {
+                 if(txtMaKH.getText().length()==0){
+                JOptionPane.showMessageDialog(this, "Không được để trống mã nhân viên!!");
+                return;
+            }if(txtTenKH.getText().length()==0){
+                JOptionPane.showMessageDialog(this,"không được để trống tên nhân viên!!");
+                return;
+             }if(txtSoDT.getText().length()==0){
+               JOptionPane.showMessageDialog(this,"Không được để trống số Điện Thoại!!!");
+               return;
+             }if(taDiaChi.getText().length()==0){
+               JOptionPane.showMessageDialog(this,"Không được để trống địa chỉ!!");
+               return;
+               
+             }
+             else{
+                JOptionPane.showMessageDialog(this,"Thêm Khách hàng thành công!");
+             }
+        } catch (Exception e) {
+        }
+       
+    }//GEN-LAST:event_btnThemKHActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

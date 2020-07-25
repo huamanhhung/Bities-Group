@@ -5,6 +5,8 @@
  */
 package myJInternalFrame;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author markhyun
@@ -16,7 +18,6 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
      */
     public QuanLySanPham() {
         initComponents();
-        System.out.println("chiến đã ghé thăm");
     }
 
     /**
@@ -83,6 +84,11 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         btnThemSP.setMaximumSize(new java.awt.Dimension(257, 41));
         btnThemSP.setMinimumSize(new java.awt.Dimension(257, 41));
         btnThemSP.setPreferredSize(new java.awt.Dimension(293, 41));
+        btnThemSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemSPActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -132,7 +138,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Mã sản phẩm", "Tên sản phẩm", "Đơn giá", "Số lượng sản phẩm", "Cấu hình", "Trạng thái"
+                "Mã sản phẩm", "Tên sản phẩm", "Đơn giá", "Số lượng sp", "Cấu hình", "Trạng thái"
             }
         ));
         tbQLSP.setFillsViewportHeight(true);
@@ -241,6 +247,39 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
+        try {
+             JOptionPane.showMessageDialog(this,"Đăng nhập thành công.!!!");
+        } catch (Exception e) {
+        }
+        try {
+            if(txtMaSP.getText().length()==0){
+                JOptionPane.showMessageDialog(this,"Không được để trống mã Sản Phẩm");
+                return;
+            }if(txtTenSP.getText().length()==0){
+               JOptionPane.showMessageDialog(this,"Không được để trống tên Sản Phẩm");
+               return;
+                     
+            }if(txtDonGia.getText().length()==0){
+               JOptionPane.showMessageDialog(this, "Không đơn giá");
+               return;
+            }if(txtSoLuongSP.getText().length()==0){
+              JOptionPane.showMessageDialog(this, "Không được để trống số lượng sản phẩm");
+              return;
+            }if(taCauHinh.getText().length()==0){
+              JOptionPane.showMessageDialog(this,"Không được để trống cầu hình");
+              return;
+            }
+            else{
+             JOptionPane.showMessageDialog(this,"Thêm sản phẩm thành công.!!!");
+
+            }
+            
+        } catch (Exception e) {
+           
+        }
+    }//GEN-LAST:event_btnThemSPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

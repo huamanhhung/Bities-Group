@@ -5,6 +5,8 @@
  */
 package myJInternalFrame;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author markhyun
@@ -16,6 +18,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
      */
     public QuanLyNhanVien() {
         initComponents();
+        
     }
 
     /**
@@ -61,6 +64,11 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         lbMaNV.setText("Mã nhân viên:");
 
         txtMaNV.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        txtMaNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaNVActionPerformed(evt);
+            }
+        });
 
         lbTenNV.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         lbTenNV.setForeground(new java.awt.Color(252, 244, 252));
@@ -208,6 +216,34 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNVActionPerformed
+        try {
+           
+            
+        } catch (Exception e) {
+        }
+        try {
+            if(txtMaNV.getText().length()==0){
+                JOptionPane.showMessageDialog(this, "Không được để trống mã nhân viên!!");
+                return;
+            }if(txtTenNV.getText().length()==0){
+                JOptionPane.showMessageDialog(this,"không được để trống tên nhân viên!!");
+                return;
+             }if(txtSoDT.getText().length()==0){
+               JOptionPane.showMessageDialog(this,"Không được để trống số Điện Thoại!!!");
+               return;
+             }if(taDiaChi.getText().length()==0){
+               JOptionPane.showMessageDialog(this,"Không được để trống địa chỉ!!");
+               return;
+               
+             }
+             else{
+                JOptionPane.showMessageDialog(this,"Thêm nhân viên thành công!");
+             }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_txtMaNVActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

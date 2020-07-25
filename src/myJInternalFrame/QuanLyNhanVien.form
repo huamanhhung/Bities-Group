@@ -138,6 +138,9 @@
               <Font name="Monospaced" size="24" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaNVActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbTenNV">
           <Properties>
