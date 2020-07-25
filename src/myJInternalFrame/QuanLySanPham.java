@@ -249,35 +249,35 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
+
         try {
-             JOptionPane.showMessageDialog(this,"Đăng nhập thành công.!!!");
-        } catch (Exception e) {
-        }
-        try {
-            if(txtMaSP.getText().length()==0){
-                JOptionPane.showMessageDialog(this,"Không được để trống mã Sản Phẩm");
+            if (txtMaSP.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không được để trống mã Sản Phẩm");
                 return;
-            }if(txtTenSP.getText().length()==0){
-               JOptionPane.showMessageDialog(this,"Không được để trống tên Sản Phẩm");
-               return;
-                     
-            }if(txtDonGia.getText().length()==0){
-               JOptionPane.showMessageDialog(this, "Không đơn giá");
-               return;
-            }if(txtSoLuongSP.getText().length()==0){
-              JOptionPane.showMessageDialog(this, "Không được để trống số lượng sản phẩm");
-              return;
-            }if(taCauHinh.getText().length()==0){
-              JOptionPane.showMessageDialog(this,"Không được để trống cầu hình");
-              return;
             }
-            else{
-             JOptionPane.showMessageDialog(this,"Thêm sản phẩm thành công.!!!");
+            if (txtTenSP.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không được để trống tên Sản Phẩm");
+                return;
 
             }
-            
+            if (txtDonGia.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không đơn giá");
+                return;
+            }
+            if (txtSoLuongSP.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không được để trống số lượng sản phẩm");
+                return;
+            }
+            if (taCauHinh.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không được để trống cầu hình");
+                return;
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công.!!!");
+
+            }
+
         } catch (Exception e) {
-           
+
         }
     }//GEN-LAST:event_btnThemSPActionPerformed
 
