@@ -5,6 +5,8 @@
  */
 package myJInternalFrame;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author markhyun
@@ -27,7 +29,8 @@ public class DangKy extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        kGradientPanel4 = new keeptoo.KGradientPanel();
+        kGradientPanel1 = new keeptoo.KGradientPanel();
+        btnVaoQuanLi = new javax.swing.JButton();
         lbDangKy = new javax.swing.JLabel();
         lbTenDangNhap = new javax.swing.JLabel();
         lbMatKhau = new javax.swing.JLabel();
@@ -35,21 +38,24 @@ public class DangKy extends javax.swing.JInternalFrame {
         lbXacNhan = new javax.swing.JLabel();
         lbMaNV = new javax.swing.JLabel();
         txtTenDangNhap = new javax.swing.JTextField();
-        txtMatKhau = new javax.swing.JTextField();
         txtXacNhan = new javax.swing.JTextField();
+        txtMatKhau = new javax.swing.JTextField();
         txtMaNV = new javax.swing.JTextField();
         cbbVaiTro = new javax.swing.JComboBox<>();
         btnDangKi = new javax.swing.JButton();
-        btnVaoQuanLi = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
 
-        kGradientPanel4.setkEndColor(new java.awt.Color(229, 189, 240));
-        kGradientPanel4.setkGradientFocus(1000);
-        kGradientPanel4.setkStartColor(new java.awt.Color(168, 168, 233));
+        kGradientPanel1.setkEndColor(new java.awt.Color(229, 189, 240));
+        kGradientPanel1.setkStartColor(new java.awt.Color(168, 168, 233));
+        kGradientPanel1.setPreferredSize(new java.awt.Dimension(677, 454));
+
+        btnVaoQuanLi.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        btnVaoQuanLi.setForeground(new java.awt.Color(72, 61, 139));
+        btnVaoQuanLi.setText("Vào quản lí");
 
         lbDangKy.setFont(new java.awt.Font("Monospaced", 1, 48)); // NOI18N
         lbDangKy.setForeground(new java.awt.Color(255, 255, 255));
@@ -77,14 +83,14 @@ public class DangKy extends javax.swing.JInternalFrame {
 
         txtTenDangNhap.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
 
+        txtXacNhan.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+
         txtMatKhau.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMatKhauActionPerformed(evt);
             }
         });
-
-        txtXacNhan.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
 
         txtMaNV.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
 
@@ -102,95 +108,87 @@ public class DangKy extends javax.swing.JInternalFrame {
             }
         });
 
-        btnVaoQuanLi.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        btnVaoQuanLi.setForeground(new java.awt.Color(72, 61, 139));
-        btnVaoQuanLi.setText("Vào quản lí");
-
-        javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
-        kGradientPanel4.setLayout(kGradientPanel4Layout);
-        kGradientPanel4Layout.setHorizontalGroup(
-            kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 677, Short.MAX_VALUE)
-            .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(kGradientPanel4Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel4Layout.createSequentialGroup()
-                            .addGap(192, 192, 192)
-                            .addComponent(btnDangKi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(35, 35, 35)
-                            .addComponent(btnVaoQuanLi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(108, 108, 108))
-                        .addGroup(kGradientPanel4Layout.createSequentialGroup()
-                            .addGap(57, 57, 57)
-                            .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(kGradientPanel4Layout.createSequentialGroup()
-                                    .addGap(70, 70, 70)
-                                    .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lbXacNhan)
-                                        .addComponent(lbMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(lbTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(kGradientPanel4Layout.createSequentialGroup()
-                                    .addGap(13, 13, 13)
-                                    .addComponent(lbMaNV))
-                                .addGroup(kGradientPanel4Layout.createSequentialGroup()
-                                    .addGap(83, 83, 83)
-                                    .addComponent(lbVaiTro)))
-                            .addGap(59, 59, 59)
-                            .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtMatKhau)
-                                .addGroup(kGradientPanel4Layout.createSequentialGroup()
-                                    .addComponent(cbbVaiTro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGap(113, 113, 113))
-                                .addComponent(txtMaNV)
-                                .addComponent(txtXacNhan)
-                                .addComponent(txtTenDangNhap)))
-                        .addComponent(lbDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap()))
+        javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
+        kGradientPanel1.setLayout(kGradientPanel1Layout);
+        kGradientPanel1Layout.setHorizontalGroup(
+            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(btnDangKi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(35, 35, 35)
+                        .addComponent(btnVaoQuanLi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(108, 108, 108))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbXacNhan)
+                                    .addComponent(lbMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lbTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(lbMaNV))
+                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addGap(83, 83, 83)
+                                .addComponent(lbVaiTro)))
+                        .addGap(59, 59, 59)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMatKhau)
+                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addComponent(cbbVaiTro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(113, 113, 113))
+                            .addComponent(txtMaNV)
+                            .addComponent(txtXacNhan)
+                            .addComponent(txtTenDangNhap)))
+                    .addComponent(lbDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
-        kGradientPanel4Layout.setVerticalGroup(
-            kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
-            .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(kGradientPanel4Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lbDangKy)
-                    .addGap(28, 28, 28)
-                    .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtTenDangNhap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbTenDangNhap, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addGap(24, 24, 24)
-                    .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbMatKhau, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtMatKhau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtXacNhan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbXacNhan, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addGap(18, 18, 18)
-                    .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(cbbVaiTro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbVaiTro, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addGap(18, 18, 18)
-                    .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtMaNV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbMaNV, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addGap(18, 18, 18)
-                    .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnDangKi, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnVaoQuanLi, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        kGradientPanel1Layout.setVerticalGroup(
+            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbDangKy)
+                .addGap(28, 28, 28)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTenDangNhap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbTenDangNhap, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(24, 24, 24)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbMatKhau, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtMatKhau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtXacNhan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbXacNhan, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbbVaiTro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbVaiTro, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtMaNV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbMaNV, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDangKi, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnVaoQuanLi, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
         );
 
         pack();
@@ -201,7 +199,34 @@ public class DangKy extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtMatKhauActionPerformed
 
     private void btnDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKiActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:[
+        
+             String login= txtTenDangNhap.getText();
+        if (login.equals("")) {
+            JOptionPane.showMessageDialog(this, "Tên đăng nhập trống");
+            return;
+        }
+            String pass= txtMatKhau.getText();
+        if (pass.equals("")) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu trống");
+            return;
+        }
+            String confirm= txtXacNhan.getText();
+            if (!(confirm.equals(pass)) ) {
+            JOptionPane.showMessageDialog(this, "Không khớp");
+            return;
+        }
+            String manv= txtMaNV.getText();
+        if (manv.equals("")) {
+            JOptionPane.showMessageDialog(this, "Mã nhân viên trống");
+            return;
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Đăng kí thành công");
+        }
+        
+        
+    
     }//GEN-LAST:event_btnDangKiActionPerformed
 
 
@@ -209,7 +234,7 @@ public class DangKy extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnDangKi;
     private javax.swing.JButton btnVaoQuanLi;
     private javax.swing.JComboBox<String> cbbVaiTro;
-    private keeptoo.KGradientPanel kGradientPanel4;
+    private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lbDangKy;
     private javax.swing.JLabel lbMaNV;
     private javax.swing.JLabel lbMatKhau;
