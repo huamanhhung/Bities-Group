@@ -19,6 +19,9 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     public QuanLyKhachHang() {
         initComponents();
         System.out.println("a");
+        System.out.println("a");
+        System.out.println("a");
+
     }
 
     /**
@@ -226,27 +229,29 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
-         try {
-                 if(txtMaKH.getText().length()==0){
+        try {
+            if (txtMaKH.getText().length() == 0) {
                 JOptionPane.showMessageDialog(this, "Không được để trống mã khách hàng!!");
                 return;
-            }if(txtTenKH.getText().length()==0){
-                JOptionPane.showMessageDialog(this,"không được để trống tên khách hàng!!");
+            }
+            if (txtTenKH.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "không được để trống tên khách hàng!!");
                 return;
-             }if(txtSoDT.getText().length()==0){
-               JOptionPane.showMessageDialog(this,"Không được để trống số Điện Thoại!!!");
-               return;
-             }if(taDiaChi.getText().length()==0){
-               JOptionPane.showMessageDialog(this,"Không được để trống địa chỉ!!");
-               return;
-               
-             }
-             else{
-                JOptionPane.showMessageDialog(this,"Thêm Khách hàng thành công!");
-             }
+            }
+            if (txtSoDT.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không được để trống số Điện Thoại!!!");
+                return;
+            }
+            if (taDiaChi.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không được để trống địa chỉ!!");
+                return;
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm Khách hàng thành công!");
+            }
         } catch (Exception e) {
         }
-       
+
     }//GEN-LAST:event_btnThemKHActionPerformed
 
 
