@@ -18,6 +18,7 @@ public class HoaDon extends javax.swing.JInternalFrame {
      */
     public HoaDon() {
         initComponents();
+        System.out.println("abc");
     }
 
     /**
