@@ -5,6 +5,8 @@
  */
 package myJInternalFrame;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author markhyun
@@ -121,6 +123,11 @@ public class HoaDon extends javax.swing.JInternalFrame {
         btnXoaHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete_32x32.png"))); // NOI18N
         btnXoaHoaDon.setText("Xóa hóa đơn");
         btnXoaHoaDon.setInheritsPopupMenu(true);
+        btnXoaHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaHoaDonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
         jPanel1.add(btnXoaHoaDon, gridBagConstraints);
@@ -129,6 +136,11 @@ public class HoaDon extends javax.swing.JInternalFrame {
         btnTimKiemHoaDon.setForeground(new java.awt.Color(72, 61, 139));
         btnTimKiemHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search_Icon_32.png"))); // NOI18N
         btnTimKiemHoaDon.setText("Tìm hóa đơn");
+        btnTimKiemHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemHoaDonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -212,6 +224,16 @@ public class HoaDon extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnXoaHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaHoaDonActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Xóa thành công!");
+    }//GEN-LAST:event_btnXoaHoaDonActionPerformed
+
+    private void btnTimKiemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemHoaDonActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showInputDialog(this, "Nhập mã hóa đơn mà bạn muốn tìm");
+    }//GEN-LAST:event_btnTimKiemHoaDonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
