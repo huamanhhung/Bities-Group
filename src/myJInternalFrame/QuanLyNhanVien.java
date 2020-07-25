@@ -19,7 +19,6 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
     public QuanLyNhanVien() {
         initComponents();
   
-
     }
 
     /**
@@ -114,6 +113,11 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         btnThemnv.setMaximumSize(new java.awt.Dimension(257, 41));
         btnThemnv.setMinimumSize(new java.awt.Dimension(257, 41));
         btnThemnv.setPreferredSize(new java.awt.Dimension(293, 41));
+        btnThemnv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemnvActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -219,6 +223,10 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNVActionPerformed
+        
+    }//GEN-LAST:event_txtMaNVActionPerformed
+
+    private void btnThemnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemnvActionPerformed
         try {
 
         } catch (Exception e) {
@@ -245,7 +253,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
             }
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_txtMaNVActionPerformed
+    }//GEN-LAST:event_btnThemnvActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
