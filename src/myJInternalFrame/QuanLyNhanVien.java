@@ -18,7 +18,8 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
      */
     public QuanLyNhanVien() {
         initComponents();
-        
+  
+
     }
 
     /**
@@ -219,28 +220,29 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
 
     private void txtMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNVActionPerformed
         try {
-           
-            
+
         } catch (Exception e) {
         }
         try {
-            if(txtMaNV.getText().length()==0){
+            if (txtMaNV.getText().length() == 0) {
                 JOptionPane.showMessageDialog(this, "Không được để trống mã nhân viên!!");
                 return;
-            }if(txtTenNV.getText().length()==0){
-                JOptionPane.showMessageDialog(this,"không được để trống tên nhân viên!!");
+            }
+            if (txtTenNV.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "không được để trống tên nhân viên!!");
                 return;
-             }if(txtSoDT.getText().length()==0){
-               JOptionPane.showMessageDialog(this,"Không được để trống số Điện Thoại!!!");
-               return;
-             }if(taDiaChi.getText().length()==0){
-               JOptionPane.showMessageDialog(this,"Không được để trống địa chỉ!!");
-               return;
-               
-             }
-             else{
-                JOptionPane.showMessageDialog(this,"Thêm nhân viên thành công!");
-             }
+            }
+            if (txtSoDT.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không được để trống số Điện Thoại!!!");
+                return;
+            }
+            if (taDiaChi.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không được để trống địa chỉ!!");
+                return;
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công!");
+            }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_txtMaNVActionPerformed

@@ -18,10 +18,6 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
      */
     public QuanLyKhachHang() {
         initComponents();
-        System.out.println("a");
-        System.out.println("a");
-        System.out.println("a");
-
     }
 
     /**
