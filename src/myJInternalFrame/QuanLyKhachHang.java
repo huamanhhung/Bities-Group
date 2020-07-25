@@ -18,6 +18,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
      */
     public QuanLyKhachHang() {
         initComponents();
+        System.out.println("a");
     }
 
     /**
@@ -227,10 +228,10 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
          try {
                  if(txtMaKH.getText().length()==0){
-                JOptionPane.showMessageDialog(this, "Không được để trống mã nhân viên!!");
+                JOptionPane.showMessageDialog(this, "Không được để trống mã khách hàng!!");
                 return;
             }if(txtTenKH.getText().length()==0){
-                JOptionPane.showMessageDialog(this,"không được để trống tên nhân viên!!");
+                JOptionPane.showMessageDialog(this,"không được để trống tên khách hàng!!");
                 return;
              }if(txtSoDT.getText().length()==0){
                JOptionPane.showMessageDialog(this,"Không được để trống số Điện Thoại!!!");
