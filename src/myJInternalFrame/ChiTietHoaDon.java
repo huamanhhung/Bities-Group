@@ -5,6 +5,9 @@
  */
 package myJInternalFrame;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author markhyun
@@ -49,10 +52,13 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
         kGradientPanel2.setkGradientFocus(1000);
         kGradientPanel2.setkStartColor(new java.awt.Color(168, 168, 233));
 
+        txtMaHD.setEditable(false);
         txtMaHD.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
 
+        txtMaSP.setEditable(false);
         txtMaSP.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
 
+        txtSoLuong.setEditable(false);
         txtSoLuong.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
 
         lbMaHD.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
@@ -85,6 +91,11 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
         btnTimKiemHoaDon.setForeground(new java.awt.Color(72, 61, 139));
         btnTimKiemHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search_Icon_32.png"))); // NOI18N
         btnTimKiemHoaDon.setText("Tìm hóa đơn");
+        btnTimKiemHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemHoaDonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout kGradientPanel2Layout = new javax.swing.GroupLayout(kGradientPanel2);
         kGradientPanel2.setLayout(kGradientPanel2Layout);
@@ -151,6 +162,19 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTimKiemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemHoaDonActionPerformed
+        // TODO add your handling code here:
+        String option[] = {"Tìm bằng mã hóa đơn", "Tìm bằng mã sản phẩm"};
+        ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
+
+        int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, iconFind, option, option[0]);
+        if (result == 0) {
+            JOptionPane.showInputDialog(this, "Mời bạn nhập mã hóa đơn!", "Tìm kiếm bằng mã hóa đơn", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+        } else {
+            JOptionPane.showInputDialog(this, "Mời bạn nhập mã sản phẩm!", "Tìm kiếm bằng mã sản phẩm", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+        }
+    }//GEN-LAST:event_btnTimKiemHoaDonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

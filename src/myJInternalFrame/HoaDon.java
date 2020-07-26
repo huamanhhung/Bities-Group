@@ -5,6 +5,7 @@
  */
 package myJInternalFrame;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,8 +18,8 @@ public class HoaDon extends javax.swing.JInternalFrame {
      * Creates new form HoaDon
      */
     public HoaDon() {
-        initComponents();  
-        System.out.println("aaaa");
+        initComponents();
+
     }
 
     /**
@@ -233,7 +234,21 @@ public class HoaDon extends javax.swing.JInternalFrame {
 
     private void btnTimKiemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemHoaDonActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showInputDialog(this, "Nhập mã hóa đơn mà bạn muốn tìm");
+        String option[] = {"Tìm bằng mã HD", "Tìm bằng mã NV", "Tìm bằng khoảng ngày", "Tìm bằng mã KH"};
+        ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
+
+        int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, iconFind, option, option[0]);
+        if (result == 0) {
+            JOptionPane.showInputDialog(this, "Mời bạn nhập mã hóa đơn!", "Tìm kiếm bằng mã hóa đơn", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+        } else if (result == 1) {
+            JOptionPane.showInputDialog(this, "Mời bạn nhập vào mã nhân viên!", "Tìm kiếm bằng mã nhân viên", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+
+        } else if (result == 2) {
+            JOptionPane.showInputDialog(this, "Mời bạn nhập vào ngày!" + "\n" + "Định dạng ngày theo: dd/MM/yyyy", "Tìm kiếm theo ngày", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+
+        } else {
+            JOptionPane.showInputDialog(this, "Mời bạn nhập vào mã khách hàng!", "Tìm kiếm bằng mã khách hàng", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+        }
     }//GEN-LAST:event_btnTimKiemHoaDonActionPerformed
 
 
