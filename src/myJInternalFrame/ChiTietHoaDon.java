@@ -164,15 +164,15 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTimKiemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemHoaDonActionPerformed
-        // TODO add your handling code here:
-        String option[] = {"Tìm bằng mã hóa đơn", "Tìm bằng mã sản phẩm"};
+        String option[] = {"Tìm bằng mã hóa đơn", "Tìm bằng mã sản phẩm", "Hủy"};
         ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
 
         int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, iconFind, option, option[0]);
         if (result == 0) {
             JOptionPane.showInputDialog(this, "Mời bạn nhập mã hóa đơn!", "Tìm kiếm bằng mã hóa đơn", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
-        } else {
+        } else if (result == 1) {
             JOptionPane.showInputDialog(this, "Mời bạn nhập mã sản phẩm!", "Tìm kiếm bằng mã sản phẩm", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+        } else {
         }
     }//GEN-LAST:event_btnTimKiemHoaDonActionPerformed
 

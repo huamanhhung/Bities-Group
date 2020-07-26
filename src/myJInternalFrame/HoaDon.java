@@ -228,16 +228,15 @@ public class HoaDon extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXoaHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaHoaDonActionPerformed
-        // TODO add your handling code here:
         JOptionPane.showMessageDialog(this, "Xóa thành công!");
     }//GEN-LAST:event_btnXoaHoaDonActionPerformed
 
     private void btnTimKiemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemHoaDonActionPerformed
         // TODO add your handling code here:
-        String option[] = {"Tìm bằng mã HD", "Tìm bằng mã NV", "Tìm bằng khoảng ngày", "Tìm bằng mã KH"};
+        String option[] = {"Tìm bằng mã HD", "Tìm bằng mã NV", "Tìm bằng khoảng ngày", "Tìm bằng mã KH", "Hủy"};
         ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
-
-        int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, iconFind, option, option[0]);
+        
+        int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, iconFind, option, null);
         if (result == 0) {
             JOptionPane.showInputDialog(this, "Mời bạn nhập mã hóa đơn!", "Tìm kiếm bằng mã hóa đơn", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
         } else if (result == 1) {
@@ -246,8 +245,7 @@ public class HoaDon extends javax.swing.JInternalFrame {
         } else if (result == 2) {
             JOptionPane.showInputDialog(this, "Mời bạn nhập vào ngày!" + "\n" + "Định dạng ngày theo: dd/MM/yyyy", "Tìm kiếm theo ngày", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
 
-        } else {
-            JOptionPane.showInputDialog(this, "Mời bạn nhập vào mã khách hàng!", "Tìm kiếm bằng mã khách hàng", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+        } else if (result == 3){
         }
     }//GEN-LAST:event_btnTimKiemHoaDonActionPerformed
 
