@@ -160,6 +160,7 @@ public class BanHang extends javax.swing.JInternalFrame {
             }
         });
         tbThanhToan1.setFillsViewportHeight(true);
+        tbThanhToan1.setRowHeight(35);
         cpThanhToan1.setViewportView(tbThanhToan1);
 
         lbDSSP1.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
@@ -219,9 +220,10 @@ public class BanHang extends javax.swing.JInternalFrame {
                         .addGap(163, 163, 163)
                         .addComponent(btnThemVaoGioHang1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(27, 27, 27))))
-            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cpThanhToan1))
+                .addComponent(cpThanhToan1)
+                .addContainerGap())
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

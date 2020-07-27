@@ -98,7 +98,7 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
             }
         ));
         tbHoaDonChiTiet.setFillsViewportHeight(true);
-        tbHoaDonChiTiet.setRowHeight(25);
+        tbHoaDonChiTiet.setRowHeight(35);
         tbHoaDonChiTiet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbHoaDonChiTietMouseClicked(evt);

@@ -103,7 +103,7 @@ public class HoaDon extends javax.swing.JInternalFrame {
         ));
         tbHoaDon.setFillsViewportHeight(true);
         tbHoaDon.setGridColor(new java.awt.Color(255, 255, 255));
-        tbHoaDon.setRowHeight(25);
+        tbHoaDon.setRowHeight(35);
         tbHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbHoaDonMouseClicked(evt);

@@ -39,7 +39,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="1" title="H&#xf3;a &#x111;&#x1a1;n">
+            <TitledBorder justification="1" title="Qu&#x1ea3;n L&#xfd; Kh&#xe1;ch H&#xe0;ng">
               <Font PropertyName="font" name="Monospaced" size="48" style="1"/>
               <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
             </TitledBorder>
@@ -60,39 +60,32 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="cpQLKH" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbTenKH" alignment="1" pref="270" max="32767" attributes="0"/>
+                              <Component id="lbSoDT" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lbTenKH" alignment="1" pref="270" max="32767" attributes="0"/>
-                                      <Component id="lbSoDT" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lbMaKH" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbDiaChi" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="lbMaKH" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbDiaChi" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtTenKH" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtMaKH" alignment="1" max="32767" attributes="0"/>
-                              <Component id="cpDiaChi" alignment="0" pref="419" max="32767" attributes="0"/>
-                              <Component id="txtSoDT" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
-                          <Component id="pnButton" min="-2" pref="350" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="txtTenKH" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtMaKH" alignment="1" max="32767" attributes="0"/>
+                      <Component id="cpDiaChi" alignment="0" pref="419" max="32767" attributes="0"/>
+                      <Component id="txtSoDT" alignment="1" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="pnButton" min="-2" pref="350" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
               </Group>
+              <Component id="cpQLKH" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -120,7 +113,7 @@
                               <Component id="cpDiaChi" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
                               <Component id="lbDiaChi" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
                       </Group>
                       <Component id="pnButton" max="32767" attributes="0"/>
                   </Group>
@@ -171,6 +164,7 @@
                   </Table>
                 </Property>
                 <Property name="fillsViewportHeight" type="boolean" value="true"/>
+                <Property name="rowHeight" type="int" value="35"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -298,6 +292,9 @@
                   <Dimension value="[293, 41]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaKHActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
                   <GridBagConstraints gridX="0" gridY="9" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="20" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>

@@ -5,7 +5,15 @@
  */
 package myJInternalFrame;
 
+import connectionSQL.connectionSQL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import myClass.ClassSanPham;
 
 /**
  *
@@ -13,11 +21,14 @@ import javax.swing.JOptionPane;
  */
 public class QuanLySanPham extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form QuanLyKhachHnag
-     */
+    List<ClassSanPham> listSanPham = new ArrayList<>();
+    Connection cn;
+
     public QuanLySanPham() {
         initComponents();
+        cn = connectionSQL.ketnoi(title);
+        fillToTable();
+
     }
 
     /**
@@ -142,6 +153,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
             }
         ));
         tbQLSP.setFillsViewportHeight(true);
+        tbQLSP.setRowHeight(35);
         cpQLSP.setViewportView(tbQLSP);
 
         lbTenSP.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
@@ -305,4 +317,40 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSoLuongSP;
     private javax.swing.JTextField txtTenSP;
     // End of variables declaration//GEN-END:variables
+  private void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tbQLSP.getModel();
+        model.setRowCount(0);
+
+        try {
+            listSanPham.clear();
+            Statement st = connectionSQL.ketnoi(title).createStatement();
+            String sql = "SELECT * FROM SANPHAM";
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                String maSP = rs.getString(1);
+                String tenSP = rs.getString(2);
+                String soLuong = rs.getString(3);
+                double donGia = rs.getDouble(4);
+                String cauHinh = rs.getString(5);
+                String trangThai = rs.getString(6);
+
+                ClassSanPham sp = new ClassSanPham(maSP, tenSP, soLuong, donGia, cauHinh, trangThai);
+                listSanPham.add(sp);
+                System.out.println(listSanPham.size());
+            }
+            for (int i = 0; i < listSanPham.size(); i++) {
+                Object[] sanPhamObject = new Object[]{
+                    listSanPham.get(i).getMaSP(),
+                    listSanPham.get(i).getMaSP(),
+                    listSanPham.get(i).getTenSP(),
+                    listSanPham.get(i).getSoLuong(),
+                    listSanPham.get(i).getDonGia(),
+                    listSanPham.get(i).getCauHinh(),
+                    listSanPham.get(i).getTrangThai(),};
+                model.addRow(sanPhamObject);
+            }
+        } catch (Exception e) {
+        }
+    }
 }

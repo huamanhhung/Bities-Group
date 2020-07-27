@@ -5,7 +5,16 @@
  */
 package myJInternalFrame;
 
+import connectionSQL.connectionSQL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import myClass.ClassKhachHang;
 
 /**
  *
@@ -13,11 +22,14 @@ import javax.swing.JOptionPane;
  */
 public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form QuanLyKhachHnag
-     */
-    public QuanLyKhachHang() {
+    List<ClassKhachHang> listKhachHang = new ArrayList<>();
+    Connection cn;
+
+    public QuanLyKhachHang() throws SQLException {
         initComponents();
+        cn = connectionSQL.ketnoi(title);
+        fillToTable();
+
     }
 
     /**
@@ -53,7 +65,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
 
-        kGradientPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hóa đơn", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Monospaced", 1, 48), new java.awt.Color(255, 255, 255))); // NOI18N
+        kGradientPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quản Lý Khách Hàng", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Monospaced", 1, 48), new java.awt.Color(255, 255, 255))); // NOI18N
         kGradientPanel4.setkEndColor(new java.awt.Color(229, 189, 240));
         kGradientPanel4.setkGradientFocus(1000);
         kGradientPanel4.setkStartColor(new java.awt.Color(168, 168, 233));
@@ -74,6 +86,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             }
         ));
         tbQLKH.setFillsViewportHeight(true);
+        tbQLKH.setRowHeight(35);
         cpQLKH.setViewportView(tbQLKH);
 
         lbTenKH.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
@@ -130,6 +143,11 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         btnXoaKH.setText("Xóa khách hàng");
         btnXoaKH.setMaximumSize(new java.awt.Dimension(293, 41));
         btnXoaKH.setPreferredSize(new java.awt.Dimension(293, 41));
+        btnXoaKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaKHActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
@@ -159,28 +177,24 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel4Layout.createSequentialGroup()
-                        .addComponent(cpQLKH)
-                        .addContainerGap())
+                        .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbTenKH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                            .addComponent(lbSoDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18))
                     .addGroup(kGradientPanel4Layout.createSequentialGroup()
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(kGradientPanel4Layout.createSequentialGroup()
-                                .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbTenKH, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                                    .addComponent(lbSoDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18))
-                            .addGroup(kGradientPanel4Layout.createSequentialGroup()
-                                .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbMaKH)
-                                    .addComponent(lbDiaChi))
-                                .addGap(29, 29, 29)))
-                        .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTenKH)
-                            .addComponent(txtMaKH, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cpDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
-                            .addComponent(txtSoDT, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(137, 137, 137)
-                        .addComponent(pnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99))))
+                            .addComponent(lbMaKH)
+                            .addComponent(lbDiaChi))
+                        .addGap(29, 29, 29)))
+                .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTenKH)
+                    .addComponent(txtMaKH, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cpDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                    .addComponent(txtSoDT, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(137, 137, 137)
+                .addComponent(pnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99))
+            .addComponent(cpQLKH)
         );
         kGradientPanel4Layout.setVerticalGroup(
             kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +217,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cpDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 23, Short.MAX_VALUE))
+                        .addGap(0, 27, Short.MAX_VALUE))
                     .addComponent(pnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cpQLKH, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,6 +264,10 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnThemKHActionPerformed
 
+    private void btnXoaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKHActionPerformed
+        JOptionPane.showMessageDialog(this, "Xóa thành công");
+    }//GEN-LAST:event_btnXoaKHActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaKH;
@@ -270,4 +288,37 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSoDT;
     private javax.swing.JTextField txtTenKH;
     // End of variables declaration//GEN-END:variables
+private void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tbQLKH.getModel();
+        model.setRowCount(0);
+
+        try {
+            listKhachHang.clear();
+            Statement st = connectionSQL.ketnoi(title).createStatement();
+            String sql = "SELECT * FROM KHACHHANG";
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                String maKH = rs.getString(1);
+                String tenKH = rs.getString(2);
+                String soDT = rs.getString(3);
+                String diaChi = rs.getString(4);
+
+                ClassKhachHang kh = new ClassKhachHang(maKH, tenKH, soDT, diaChi);
+
+                listKhachHang.add(kh);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        for (int i = 0; i < listKhachHang.size(); i++) {
+            Object[] khachHangObject = new Object[]{
+                listKhachHang.get(i).getMaKH(),
+                listKhachHang.get(i).getTenKH(),
+                listKhachHang.get(i).getSdt(),
+                listKhachHang.get(i).getDiaChi()};
+            model.addRow(khachHangObject);
+        }
+    }
 }

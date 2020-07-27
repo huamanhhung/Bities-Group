@@ -5,7 +5,16 @@
  */
 package myJInternalFrame;
 
+import connectionSQL.connectionSQL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import myClass.ClassKhachHang;
+import myClass.ClassNhanVien;
 
 /**
  *
@@ -13,12 +22,14 @@ import javax.swing.JOptionPane;
  */
 public class QuanLyNhanVien extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form QuanLyKhachHnag
-     */
+    List<ClassNhanVien> listNhanVien = new ArrayList<>();
+    Connection cn;
+
     public QuanLyNhanVien() {
         initComponents();
-  
+        cn = connectionSQL.ketnoi(title);
+        fillToTable();
+
     }
 
     /**
@@ -101,6 +112,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
             }
         ));
         tbQLNV.setFillsViewportHeight(true);
+        tbQLNV.setRowHeight(35);
         cpQLNV.setViewportView(tbQLNV);
 
         pnButton.setOpaque(false);
@@ -223,7 +235,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNVActionPerformed
-        
+
     }//GEN-LAST:event_txtMaNVActionPerformed
 
     private void btnThemnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemnvActionPerformed
@@ -255,7 +267,6 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnThemnvActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaNhanVien;
     private javax.swing.JButton btnThemnv;
@@ -275,4 +286,38 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSoDT;
     private javax.swing.JTextField txtTenNV;
     // End of variables declaration//GEN-END:variables
+    private void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tbQLNV.getModel();
+        model.setRowCount(0);
+
+        try {
+            listNhanVien.clear();
+            Statement st = connectionSQL.ketnoi(title).createStatement();
+            String sql = "SELECT * FROM NHANVIEN";
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                String maNV = rs.getString(1);
+                String tenNV = rs.getString(2);
+                String soDT = rs.getString(3);
+                String diaChi = rs.getString(4);
+
+                ClassNhanVien nv = new ClassNhanVien(maNV, tenNV, soDT, diaChi);
+                listNhanVien.add(nv);
+            }
+            for (int i = 0; i < listNhanVien.size(); i++) {
+                Object[] khachHangObject = new Object[]{
+                    listNhanVien.get(i).getMaNV(),
+                    listNhanVien.get(i).getTenNV(),
+                    listNhanVien.get(i).getSdt(),
+                    listNhanVien.get(i).getDiaChi()};
+                model.addRow(khachHangObject);
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 }

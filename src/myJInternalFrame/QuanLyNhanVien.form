@@ -228,6 +228,7 @@
                   </Table>
                 </Property>
                 <Property name="fillsViewportHeight" type="boolean" value="true"/>
+                <Property name="rowHeight" type="int" value="35"/>
               </Properties>
             </Component>
           </SubComponents>
