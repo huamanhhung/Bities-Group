@@ -5,8 +5,16 @@
  */
 package myJInternalFrame;
 
+import myClass.ClassCTHoaDon;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import connectionSQL.connectionSQL;
 
 /**
  *
@@ -17,8 +25,13 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
     /**
      * Creates new form HoaDonChiTiet
      */
+    Connection cn;
+    List<ClassCTHoaDon> listCTHD = new ArrayList<>();
+
     public ChiTietHoaDon() {
         initComponents();
+        cn = connectionSQL.ketnoi(title);
+        fillToTable();
     }
 
     /**
@@ -39,7 +52,7 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
         lbSoLuong = new javax.swing.JLabel();
         pnButton = new javax.swing.JPanel();
         cpHoaDon = new javax.swing.JScrollPane();
-        tbHoaDonChiTiet1 = new javax.swing.JTable();
+        tbHoaDonChiTiet = new javax.swing.JTable();
         btnTimKiemHoaDon = new javax.swing.JButton();
 
         setClosable(true);
@@ -75,8 +88,8 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
 
         pnButton.setLayout(new java.awt.GridBagLayout());
 
-        tbHoaDonChiTiet1.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
-        tbHoaDonChiTiet1.setModel(new javax.swing.table.DefaultTableModel(
+        tbHoaDonChiTiet.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        tbHoaDonChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -84,8 +97,14 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
                 "Mã HD", "Mã SP", "Số lượng ", "Đơn giá", "Tổng tiền"
             }
         ));
-        tbHoaDonChiTiet1.setFillsViewportHeight(true);
-        cpHoaDon.setViewportView(tbHoaDonChiTiet1);
+        tbHoaDonChiTiet.setFillsViewportHeight(true);
+        tbHoaDonChiTiet.setRowHeight(25);
+        tbHoaDonChiTiet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbHoaDonChiTietMouseClicked(evt);
+            }
+        });
+        cpHoaDon.setViewportView(tbHoaDonChiTiet);
 
         btnTimKiemHoaDon.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         btnTimKiemHoaDon.setForeground(new java.awt.Color(72, 61, 139));
@@ -176,6 +195,11 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnTimKiemHoaDonActionPerformed
 
+    private void tbHoaDonChiTietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonChiTietMouseClicked
+        // TODO add your handling code here:
+        showDetail();
+    }//GEN-LAST:event_tbHoaDonChiTietMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTimKiemHoaDon;
@@ -185,9 +209,55 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbMaSP;
     private javax.swing.JLabel lbSoLuong;
     private javax.swing.JPanel pnButton;
-    private javax.swing.JTable tbHoaDonChiTiet1;
+    private javax.swing.JTable tbHoaDonChiTiet;
     private javax.swing.JTextField txtMaHD;
     private javax.swing.JTextField txtMaSP;
     private javax.swing.JTextField txtSoLuong;
     // End of variables declaration//GEN-END:variables
+
+    private void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tbHoaDonChiTiet.getModel();
+        model.setRowCount(0);
+
+        try {
+            listCTHD.clear();
+            Statement st = connectionSQL.ketnoi(title).createStatement();
+
+            String sql = "select * from cthoadon";
+
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                String maHD = rs.getString(1);
+                String maSP = rs.getString(2);
+                int soLuong = rs.getInt(3);
+                double donGia = rs.getDouble(4);
+                double thanhTien = rs.getDouble(5);
+
+                ClassCTHoaDon cthd = new ClassCTHoaDon(maHD, maSP, soLuong, donGia, thanhTien);
+                listCTHD.add(cthd);
+            }
+            
+            for (int i = 0; i < listCTHD.size(); i++) {
+                Object [] cthdObject = new Object[]{
+                    listCTHD.get(i).getMaHD(),
+                    listCTHD.get(i).getMaSP(),
+                    listCTHD.get(i).getSoLuong(),
+                    listCTHD.get(i).getDonGia(),
+                    listCTHD.get(i).getThanhTien(),
+                };
+                model.addRow(cthdObject);
+            }
+        } catch (Exception e) {
+        }
+    }
+    
+    private void showDetail(){
+        int selectRow = tbHoaDonChiTiet.getSelectedRow();
+        ClassCTHoaDon cthd = listCTHD.get(selectRow);
+        
+        txtMaHD.setText(cthd.getMaHD());
+        txtMaSP.setText(cthd.getMaSP());
+        txtSoLuong.setText(Integer.toString(cthd.getSoLuong()));
+    }
 }

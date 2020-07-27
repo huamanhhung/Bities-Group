@@ -1,12 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package myJInternalFrame;
+
+import myClass.ClassHoaDon;
+import java.util.List;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import connectionSQL.connectionSQL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,11 +19,14 @@ import javax.swing.JOptionPane;
  */
 public class HoaDon extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form HoaDon
-     */
-    public HoaDon() {
+    List<ClassHoaDon> listHoaDon = new ArrayList<>();
+    Connection cn;
+
+    public HoaDon() throws SQLException {
         initComponents();
+        cn = connectionSQL.ketnoi(title);
+        fillToTable();
+        
 
     }
 
@@ -95,6 +103,12 @@ public class HoaDon extends javax.swing.JInternalFrame {
         ));
         tbHoaDon.setFillsViewportHeight(true);
         tbHoaDon.setGridColor(new java.awt.Color(255, 255, 255));
+        tbHoaDon.setRowHeight(25);
+        tbHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbHoaDonMouseClicked(evt);
+            }
+        });
         cpHoaDon.setViewportView(tbHoaDon);
 
         lbMaKH.setBackground(new java.awt.Color(252, 244, 252));
@@ -235,7 +249,7 @@ public class HoaDon extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String option[] = {"Tìm bằng mã HD", "Tìm bằng mã NV", "Tìm bằng khoảng ngày", "Tìm bằng mã KH", "Hủy"};
         ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
-        
+
         int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, iconFind, option, null);
         if (result == 0) {
             JOptionPane.showInputDialog(this, "Mời bạn nhập mã hóa đơn!", "Tìm kiếm bằng mã hóa đơn", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
@@ -245,9 +259,14 @@ public class HoaDon extends javax.swing.JInternalFrame {
         } else if (result == 2) {
             JOptionPane.showInputDialog(this, "Mời bạn nhập vào ngày!" + "\n" + "Định dạng ngày theo: dd/MM/yyyy", "Tìm kiếm theo ngày", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
 
-        } else if (result == 3){
+        } else if (result == 3) {
         }
     }//GEN-LAST:event_btnTimKiemHoaDonActionPerformed
+
+    private void tbHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonMouseClicked
+        // TODO add your handling code here:
+        showDetail();
+    }//GEN-LAST:event_tbHoaDonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -268,4 +287,52 @@ public class HoaDon extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNgayMua;
     private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
+
+    private void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tbHoaDon.getModel();
+        model.setRowCount(0);
+
+        try {
+            listHoaDon.clear();
+            Statement st = connectionSQL.ketnoi(title).createStatement();
+            String sql = "select * from hoadon";
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                String maHD = rs.getString(1);
+                String maNV = rs.getString(2);
+                String ngayBan = rs.getString(3);
+                String maKH = rs.getString(4);
+                Double tongTien = rs.getDouble(5);
+
+                ClassHoaDon hd = new ClassHoaDon(maHD, maNV, ngayBan, maKH, tongTien);
+                listHoaDon.add(hd);
+            }
+            for (int i = 0; i < listHoaDon.size(); i++) {
+                Object[] hoaDonObject = new Object[]{
+                    listHoaDon.get(i).getMaHD(),
+                    listHoaDon.get(i).getMaNV(),
+                    listHoaDon.get(i).getNgayBan(),
+                    listHoaDon.get(i).getMaKH(),
+                    listHoaDon.get(i).getTongTien(),};
+                model.addRow(hoaDonObject);
+            }
+        } catch (Exception e) {
+        }
+
+    }
+    
+    //show hóa đơn lên textfield
+   
+    private void showDetail(){
+        int selectRow = tbHoaDon.getSelectedRow();
+        
+        ClassHoaDon hd = listHoaDon.get(selectRow);
+        
+        txtMaHD.setText(hd.getMaHD());
+        txtMaNV.setText(hd.getMaNV());
+        txtNgayMua.setText(hd.getNgayBan());
+        txtMaKH.setText(hd.getMaKH());
+        txtTongTien.setText(Double.toString(hd.getTongTien()));
+    }
 }
