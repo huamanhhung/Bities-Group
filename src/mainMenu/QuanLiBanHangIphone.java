@@ -225,9 +225,15 @@ public class QuanLiBanHangIphone extends javax.swing.JFrame {
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
         // TODO add your handling code here:
-        QuanLyKhachHang qlkh = new QuanLyKhachHang();
-        Desktop.add(qlkh);
-        qlkh.setVisible(true);
+        QuanLyKhachHang qlkh;
+        try {
+            qlkh = new QuanLyKhachHang();
+            Desktop.add(qlkh);
+            qlkh.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLiBanHangIphone.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_jMenu3MouseClicked
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
@@ -247,8 +253,8 @@ public class QuanLiBanHangIphone extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(QuanLiBanHangIphone.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
