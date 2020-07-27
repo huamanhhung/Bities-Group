@@ -7,7 +7,7 @@ public class connectionSQL {
 
     public static Connection ketnoi(String hoaDon) {
         try {
-            String user = "sa", password = "1", databaseName = "QLIPHONE";
+            String user = "sa", password = "123", databaseName = "QLIPHONE";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://DESKTOP-TJJ188P\\SQLEXPRESS:1433;databaseName=" + databaseName;
 
