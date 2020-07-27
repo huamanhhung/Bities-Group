@@ -5,6 +5,9 @@ package mainMenu;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import myJInternalFrame.BanHang;
 import myJInternalFrame.HoaDon;
 import myJInternalFrame.QuanLySanPham;
@@ -236,9 +239,16 @@ public class QuanLiBanHangIphone extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        HoaDon hd = new HoaDon();
-        Desktop.add(hd);
-        hd.setVisible(true);
+        HoaDon hd;
+        try {
+            hd = new HoaDon();
+            Desktop.add(hd);
+            hd.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLiBanHangIphone.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
