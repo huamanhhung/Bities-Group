@@ -267,40 +267,14 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
-
-        try {
-            if (txtMaSP.getText().length() == 0) {
-                JOptionPane.showMessageDialog(this, "Không được để trống mã Sản Phẩm");
-                return;
-            }
-            if (txtTenSP.getText().length() == 0) {
-                JOptionPane.showMessageDialog(this, "Không được để trống tên Sản Phẩm");
-                return;
-
-            }
-            if (txtDonGia.getText().length() == 0) {
-                JOptionPane.showMessageDialog(this, "Không đơn giá");
-                return;
-            }
-            if (txtSoLuongSP.getText().length() == 0) {
-                JOptionPane.showMessageDialog(this, "Không được để trống số lượng sản phẩm");
-                return;
-            }
-            if (taCauHinh.getText().length() == 0) {
-                JOptionPane.showMessageDialog(this, "Không được để trống cầu hình");
-                return;
-            } else {
-                JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công.!!!");
-
-            }
-
-        } catch (Exception e) {
-
-        }
+     if(this.batLoi()){
+       JOptionPane.showMessageDialog(this,"Đăng Nhập Thành công");
+       
+     }
     }//GEN-LAST:event_btnThemSPActionPerformed
 
     private void tbQLSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLSPMouseClicked
-      showDetail();
+        showDetail();
     }//GEN-LAST:event_tbQLSPMouseClicked
 
 
@@ -362,6 +336,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
+
     private void showDetail() {
         try {
             int selectRow = tbQLSP.getSelectedRow();
@@ -373,22 +348,104 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
             txtDonGia.setText(sp.getDonGia() + "");
             txtSoLuongSP.setText(sp.getSoLuong() + "");
             taCauHinh.setText(sp.getCauHinh());
-            cbbTrangThai.getSelectedItem();
+            cbbTrangThai.setSelectedItem(sp.getCauHinh());
         } catch (Exception e) {
         }
 
     }
-    private void addsp(){
-      Statement stm = null;
-      ResultSet rs = null;
-      String sql = "SELECT TRANGTHAI FROM SANPHAM";
+
+    private void addsp() {
+        Statement stm = null;
+        ResultSet rs = null;
+        String sql = "SELECT TRANGTHAI FROM SANPHAM";
         try {
             stm = cn.createStatement();
             rs = stm.executeQuery(sql);
-            while(rs.next()){
-              cbbTrangThai.addItem(rs.getString(1));
+            while (rs.next()) {
+                cbbTrangThai.addItem(rs.getString(1));
             }
         } catch (Exception e) {
         }
+    }
+
+    private boolean batLoi() {
+        boolean tma = false, tten = false, tDonGia = false, tSL = false, tCH = false;
+
+        //bắt lỗi mã
+        if (txtMaSP.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không được để trống mã");
+            tma = false;
+
+        } else {
+            tma = true;
+        }
+        //bắt lỗi tên sản phẩm 
+        if (tma) {
+            if (txtTenSP.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không được để trống tên sản phẩm");
+                tten = false;
+
+            } else {
+                tten = true;
+            }
+        }
+        //bắt lỗi đơn giá
+        if (tten) {
+            if (txtDonGia.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không được để trống đơn giá");
+                tDonGia = false;
+            } else {
+                try {
+                    double donGia = Double.parseDouble(txtDonGia.getText());
+
+                    if (donGia > 0) {
+                        tDonGia = true;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Đơn giá phải lớn hơn 0");
+                        tDonGia = false;
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Đơn giá phải là kiểu số!");
+                    tDonGia = false;
+                }
+            }
+        }
+            //Bắt lỗi số lượng
+        if (tDonGia) {
+            if (txtSoLuongSP.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không được để trống số lượng");
+                tSL = false;
+            } else {
+                try {
+                    int soLuong = Integer.parseInt(txtSoLuongSP.getText());
+
+                    if (soLuong > 0) {
+                        tSL = true;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0");
+                        tSL = false;
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Số lượng sản phẩm phải là kiểu số!");
+                    tSL = false;
+                }
+            }
+        }
+        
+         //bắt lỗi cấu hình
+        if (tSL) {
+            if (taCauHinh.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không để trống cấu hình");
+                tCH = false;
+            } else {
+                tCH = true;
+            }
+        }
+        if(tCH){
+          return true;
+        }else{
+          return false;
+        }
+
     }
 }

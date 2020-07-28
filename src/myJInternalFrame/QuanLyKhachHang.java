@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package myJInternalFrame;
 
 import connectionSQL.connectionSQL;
@@ -16,10 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import myClass.ClassKhachHang;
 
-/**
- *
- * @author markhyun
- */
 public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
     List<ClassKhachHang> listKhachHang = new ArrayList<>();
@@ -255,27 +246,9 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
-        try {
-            if (txtMaKH.getText().length() == 0) {
-                JOptionPane.showMessageDialog(this, "Không được để trống mã khách hàng!!");
-                return;
-            }
-            if (txtTenKH.getText().length() == 0) {
-                JOptionPane.showMessageDialog(this, "không được để trống tên khách hàng!!");
-                return;
-            }
-            if (txtSoDT.getText().length() == 0) {
-                JOptionPane.showMessageDialog(this, "Không được để trống số Điện Thoại!!!");
-                return;
-            }
-            if (taDiaChi.getText().length() == 0) {
-                JOptionPane.showMessageDialog(this, "Không được để trống địa chỉ!!");
-                return;
 
-            } else {
-                JOptionPane.showMessageDialog(this, "Thêm Khách hàng thành công!");
-            }
-        } catch (Exception e) {
+        if (this.batLoi()) {
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
         }
 
     }//GEN-LAST:event_btnThemKHActionPerformed
@@ -343,6 +316,62 @@ private void fillToTable() {
         }
     }
 
+    public boolean batLoi() {
+        boolean tma = false, tten = false, tsdt = false, tdiachi = false;
+        //bắt lỗi mã
+        if (txtMaKH.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không để trống mã");
+            tma = false;
+        } else {
+            tma = true;
+        }
+        //bắt lỗi tên
+        if (tma) {
+            if (txtTenKH.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không để trống tên");
+                tten = false;
+            } else {
+                tten = true;
+            }
+        }
+        //bắt lỗi sdt
+        if (tten) {
+            if (txtSoDT.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không để trống số điện thoại");
+                tsdt = false;
+            } else {
+                try {
+                    int sdt = Integer.parseInt(txtSoDT.getText());
+                    String soSDT = String.valueOf(sdt);
+                    if (soSDT.length() == 9 && txtSoDT.getText().length() == 10) {
+                        tsdt = true;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Số điện thoại không đúng");
+                        tsdt = false;
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Số điện thoại sai định dạng");
+                     tsdt = false;
+                }
+            }
+        }
+        //bắt lỗi địa chỉ
+        if (tsdt) {
+            if (taDiaChi.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không để trống địa chỉ");
+                tdiachi = false;
+            } else {
+                tdiachi = true;
+            }
+        }
+        //trả kết quả
+        if (tdiachi) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private void showDeail() {
         try {
             int selextRow = tbQLKH.getSelectedRow();
@@ -356,4 +385,5 @@ private void fillToTable() {
         } catch (Exception e) {
         }
     }
+
 }

@@ -245,31 +245,8 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtMaNVActionPerformed
 
     private void btnThemnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemnvActionPerformed
-        try {
-
-        } catch (Exception e) {
-        }
-        try {
-            if (txtMaNV.getText().length() == 0) {
-                JOptionPane.showMessageDialog(this, "Không được để trống mã nhân viên!!");
-                return;
-            }
-            if (txtTenNV.getText().length() == 0) {
-                JOptionPane.showMessageDialog(this, "không được để trống tên nhân viên!!");
-                return;
-            }
-            if (txtSoDT.getText().length() == 0) {
-                JOptionPane.showMessageDialog(this, "Không được để trống số Điện Thoại!!!");
-                return;
-            }
-            if (taDiaChi.getText().length() == 0) {
-                JOptionPane.showMessageDialog(this, "Không được để trống địa chỉ!!");
-                return;
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công!");
-            }
-        } catch (Exception e) {
+        if (this.checkForm()) {
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
         }
     }//GEN-LAST:event_btnThemnvActionPerformed
 
@@ -343,4 +320,70 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         }
     }
 
+    public boolean checkForm() {
+        boolean tma = false, tten = false, tsdt = false, tdiachi = false;
+        //bắt lỗi mã
+        if (txtMaNV.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không để trống mã");
+            tma = false;
+        } else {
+            tma = true;
+        }
+        //bắt lỗi tên
+        if (tma) {
+            if (txtTenNV.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không để trống tên");
+                tten = false;
+            }
+//            if (tma) {
+//                for (int i = 0; i < listNhanVien.size(); i++) {
+//                    ClassNhanVien nv = listNhanVien.get(i);
+//                    if (txtMaNV.getText().equalsIgnoreCase(nv.getMaNV())) {
+//                        JOptionPane.showMessageDialog(this, "Trùng mã nhân viên");
+//                        tten = false;
+//                        break;
+//                    }
+//                }
+//            }
+            else {
+                tten = true;
+            }
+        }
+        //bắt lỗi sdt
+        if (tten) {
+            if (txtSoDT.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không để trống số điện thoại");
+                tsdt = false;
+            } else {
+                try {
+                    int sdt = Integer.parseInt(txtSoDT.getText());
+                    String soSDT = String.valueOf(sdt);
+                    if (soSDT.length() == 9 && txtSoDT.getText().length() == 10) {
+                        tsdt = true;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Số điện thoại không đúng");
+                        tsdt = false;
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Số điện thoại sai định dạng");
+                    tsdt = false;
+                }
+            }
+        }
+        //bắt lỗi địa chỉ
+        if (tsdt) {
+            if (taDiaChi.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "Không để trống địa chỉ");
+                tdiachi = false;
+            } else {
+                tdiachi = true;
+            }
+        }
+        //trả kết quả
+        if (tdiachi) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
