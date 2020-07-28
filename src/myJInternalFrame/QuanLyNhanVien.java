@@ -329,14 +329,18 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
             System.out.println(e);
         }
     }
-    private  void showDetail(){
-    int selextRow = tbQLNV.getSelectedRow();
-       
-        ClassNhanVien nv = listNhanVien.get(selextRow);
-       txtMaNV.setText(nv.getMaNV());
-       txtTenNV.setText(nv.getTenNV());
-       txtSoDT.setText(nv.getSdt());
-       taDiaChi.setText(nv.getDiaChi());
+
+    private void showDetail() {
+        try {
+            int selextRow = tbQLNV.getSelectedRow();
+
+            ClassNhanVien nv = listNhanVien.get(selextRow);
+            txtMaNV.setText(nv.getMaNV());
+            txtTenNV.setText(nv.getTenNV());
+            txtSoDT.setText(nv.getSdt());
+            taDiaChi.setText(nv.getDiaChi());
+        } catch (Exception e) {
+        }
     }
 
 }

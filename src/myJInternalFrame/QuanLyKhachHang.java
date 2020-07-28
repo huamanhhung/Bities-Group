@@ -274,7 +274,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnXoaKHActionPerformed
 
     private void tbQLKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLKHMouseClicked
-      showDeail();
+        showDeail();
     }//GEN-LAST:event_tbQLKHMouseClicked
 
 
@@ -330,14 +330,18 @@ private void fillToTable() {
             model.addRow(khachHangObject);
         }
     }
-private void showDeail(){
-    int selextRow = tbQLKH.getSelectedRow();
-       
-       ClassKhachHang kh = listKhachHang.get(selextRow);
-       
-       txtMaKH.setText(kh.getMaKH());
-       txtTenKH.setText(kh.getTenKH());
-       txtSoDT.setText(kh.getSdt());
-       taDiaChi.setText(kh.getDiaChi());
- }
+
+    private void showDeail() {
+        try {
+            int selextRow = tbQLKH.getSelectedRow();
+
+            ClassKhachHang kh = listKhachHang.get(selextRow);
+
+            txtMaKH.setText(kh.getMaKH());
+            txtTenKH.setText(kh.getTenKH());
+            txtSoDT.setText(kh.getSdt());
+            taDiaChi.setText(kh.getDiaChi());
+        } catch (Exception e) {
+        }
+    }
 }
