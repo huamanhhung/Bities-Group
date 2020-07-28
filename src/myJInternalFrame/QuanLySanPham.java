@@ -154,6 +154,11 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         ));
         tbQLSP.setFillsViewportHeight(true);
         tbQLSP.setRowHeight(35);
+        tbQLSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbQLSPMouseClicked(evt);
+            }
+        });
         cpQLSP.setViewportView(tbQLSP);
 
         lbTenSP.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
@@ -293,6 +298,10 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnThemSPActionPerformed
 
+    private void tbQLSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLSPMouseClicked
+       showDetail();
+    }//GEN-LAST:event_tbQLSPMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaSP;
@@ -342,8 +351,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
             for (int i = 0; i < listSanPham.size(); i++) {
                 Object[] sanPhamObject = new Object[]{
                     listSanPham.get(i).getMaSP(),
-                    listSanPham.get(i).getMaSP(),
-                    listSanPham.get(i).getTenSP(),
+                    listSanPham.get(i).getTenSP(), 
                     listSanPham.get(i).getSoLuong(),
                     listSanPham.get(i).getDonGia(),
                     listSanPham.get(i).getCauHinh(),
@@ -353,4 +361,17 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
+  private void showDetail(){
+      int selectRow = tbQLSP.getSelectedRow();
+      
+      ClassSanPham sp  = listSanPham.get(selectRow);
+      
+      txtMaSP.setText(sp.getMaSP());
+      txtTenSP.setText(sp.getTenSP());
+      txtDonGia.setText(sp.getDonGia()+"");
+      txtSoLuongSP.setText(sp.getSoLuong()+"");
+      taCauHinh.setText(sp.getCauHinh());
+      cbbTrangThai.getSelectedItem();
+     
+  }
 }

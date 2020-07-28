@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import myClass.ClassKhachHang;
 import myClass.ClassNhanVien;
+import myClass.ClassSanPham;
 
 /**
  *
@@ -113,6 +114,11 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         ));
         tbQLNV.setFillsViewportHeight(true);
         tbQLNV.setRowHeight(35);
+        tbQLNV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbQLNVMouseClicked(evt);
+            }
+        });
         cpQLNV.setViewportView(tbQLNV);
 
         pnButton.setOpaque(false);
@@ -267,6 +273,10 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnThemnvActionPerformed
 
+    private void tbQLNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLNVMouseClicked
+        showDetail();
+    }//GEN-LAST:event_tbQLNVMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaNhanVien;
     private javax.swing.JButton btnThemnv;
@@ -318,6 +328,15 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+    private  void showDetail(){
+    int selextRow = tbQLNV.getSelectedRow();
+       
+        ClassNhanVien nv = listNhanVien.get(selextRow);
+       txtMaNV.setText(nv.getMaNV());
+       txtTenNV.setText(nv.getTenNV());
+       txtSoDT.setText(nv.getSdt());
+       taDiaChi.setText(nv.getDiaChi());
     }
 
 }

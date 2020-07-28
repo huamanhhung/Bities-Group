@@ -87,6 +87,11 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         ));
         tbQLKH.setFillsViewportHeight(true);
         tbQLKH.setRowHeight(35);
+        tbQLKH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbQLKHMouseClicked(evt);
+            }
+        });
         cpQLKH.setViewportView(tbQLKH);
 
         lbTenKH.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
@@ -268,6 +273,10 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "Xóa thành công");
     }//GEN-LAST:event_btnXoaKHActionPerformed
 
+    private void tbQLKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLKHMouseClicked
+      showDeail();
+    }//GEN-LAST:event_tbQLKHMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaKH;
@@ -321,4 +330,14 @@ private void fillToTable() {
             model.addRow(khachHangObject);
         }
     }
+private void showDeail(){
+    int selextRow = tbQLKH.getSelectedRow();
+       
+       ClassKhachHang kh = listKhachHang.get(selextRow);
+       
+       txtMaKH.setText(kh.getMaKH());
+       txtTenKH.setText(kh.getTenKH());
+       txtSoDT.setText(kh.getSdt());
+       taDiaChi.setText(kh.getDiaChi());
+ }
 }

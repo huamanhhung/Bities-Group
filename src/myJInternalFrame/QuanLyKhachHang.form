@@ -166,6 +166,9 @@
                 <Property name="fillsViewportHeight" type="boolean" value="true"/>
                 <Property name="rowHeight" type="int" value="35"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbQLKHMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
