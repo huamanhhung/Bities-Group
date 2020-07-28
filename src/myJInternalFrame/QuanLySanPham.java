@@ -28,6 +28,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         initComponents();
         cn = connectionSQL.ketnoi(title);
         fillToTable();
+        addsp();
 
     }
 
@@ -181,7 +182,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         lbTrangThai.setText("  Trạng thái:");
 
         cbbTrangThai.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
-        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Máy mới - Nguyên hộp", "Máy cũ - 99%", "Mới - Chưa Active", "Mới - Đã Active" }));
+        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mới - Chưa Active", "Mới - Đã Active" }));
         cbbTrangThai.setToolTipText("");
 
         javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
@@ -299,7 +300,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnThemSPActionPerformed
 
     private void tbQLSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLSPMouseClicked
-        showDetail();
+      showDetail();
     }//GEN-LAST:event_tbQLSPMouseClicked
 
 
@@ -361,7 +362,6 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
-
     private void showDetail() {
         try {
             int selectRow = tbQLSP.getSelectedRow();
@@ -377,5 +377,18 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
 
+    }
+    private void addsp(){
+      Statement stm = null;
+      ResultSet rs = null;
+      String sql = "SELECT TRANGTHAI FROM SANPHAM";
+        try {
+            stm = cn.createStatement();
+            rs = stm.executeQuery(sql);
+            while(rs.next()){
+              cbbTrangThai.addItem(rs.getString(1));
+            }
+        } catch (Exception e) {
+        }
     }
 }
