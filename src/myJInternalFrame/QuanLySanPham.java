@@ -330,7 +330,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
             while (rs.next()) {
                 String maSP = rs.getString(1);
                 String tenSP = rs.getString(2);
-                String soLuong = rs.getString(3);
+                int soLuong = rs.getInt(3);
                 double donGia = rs.getDouble(4);
                 String cauHinh = rs.getString(5);
                 String trangThai = rs.getString(6);

@@ -12,7 +12,7 @@ package myClass;
 public class ClassSanPham {
     private String maSP;
     private String tenSP;
-    private String soLuong;
+    private int soLuong;
     private double donGia;
     private String cauHinh;
     private String trangThai;
@@ -20,7 +20,7 @@ public class ClassSanPham {
     public ClassSanPham() {
     }
 
-    public ClassSanPham(String maSP, String tenSP, String soLuong, double donGia, String cauHinh, String trangThai) {
+    public ClassSanPham(String maSP, String tenSP, int soLuong, double donGia, String cauHinh, String trangThai) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
@@ -45,11 +45,11 @@ public class ClassSanPham {
         this.tenSP = tenSP;
     }
 
-    public String getSoLuong() {
+    public int getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(String soLuong) {
+    public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
 
@@ -77,10 +77,13 @@ public class ClassSanPham {
         this.trangThai = trangThai;
     }
 
+    
+    
     @Override
     public String toString() {
         return "ClassSanPham{" + "maSP=" + maSP + ", tenSP=" + tenSP + ", soLuong=" + soLuong + ", donGia=" + donGia + ", cauHinh=" + cauHinh + ", trangThai=" + trangThai + '}';
     }
-    
+
+   
     
 }
