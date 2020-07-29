@@ -25,6 +25,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
 
     List<ClassNhanVien> listNhanVien = new ArrayList<>();
     Connection cn;
+    
 
     public QuanLyNhanVien() {
         initComponents();
@@ -159,6 +160,11 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         btnXoanv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete_32x32.png"))); // NOI18N
         btnXoanv.setText("Xóa nhân viên");
         btnXoanv.setPreferredSize(new java.awt.Dimension(293, 41));
+        btnXoanv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoanvActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -256,6 +262,10 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         showDetail();
     }//GEN-LAST:event_tbQLNVMouseClicked
 
+    private void btnXoanvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoanvActionPerformed
+        
+    }//GEN-LAST:event_btnXoanvActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaNhanVien;
     private javax.swing.JButton btnThemnv;
@@ -339,7 +349,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
                 }
             }
         }
-
+         //bắt lỗi tên
         if (tma) {
             if (txtTenNV.getText().length() == 0) {
                 JOptionPane.showMessageDialog(this, "Không để trống tên");
@@ -384,5 +394,8 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         } else {
             return false;
         }
+    }
+    private void xoaNv(){
+        
     }
 }
