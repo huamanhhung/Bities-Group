@@ -5,6 +5,9 @@
  */
 package myJInternalFrame;
 
+import connectionSQL.connectionSQL;
+import java.sql.Connection;
+
 /**
  *
  * @author markhyun
@@ -74,6 +77,7 @@ public class XuatHoaDon extends javax.swing.JInternalFrame {
         txtNgayMua.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         txtNgayMua.setEnabled(false);
 
+        tbInHoaDon.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbInHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -84,6 +88,7 @@ public class XuatHoaDon extends javax.swing.JInternalFrame {
         ));
         tbInHoaDon.setFillsViewportHeight(true);
         tbInHoaDon.setGridColor(new java.awt.Color(255, 255, 255));
+        tbInHoaDon.setRowHeight(25);
         tbInHoaDon.setSelectionBackground(new java.awt.Color(255, 255, 255));
         cpInHoaDon.setViewportView(tbInHoaDon);
 
