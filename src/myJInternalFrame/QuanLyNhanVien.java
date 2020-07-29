@@ -29,8 +29,10 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
     public QuanLyNhanVien() {
         initComponents();
         cn = connectionSQL.ketnoi(title);
-        fillToTable();
 
+        fillToTable();
+        System.out.println(listNhanVien.get(1).getMaNV());
+        System.out.println(listNhanVien.get(1).getMaNV().length());
     }
 
     /**
@@ -328,24 +330,21 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
             tma = false;
         } else {
             tma = true;
+            for (int i = 0; i < listNhanVien.size(); i++) {
+                ClassNhanVien nv = listNhanVien.get(i);
+                if (txtMaNV.getText().equalsIgnoreCase(nv.getMaNV())) {
+                    JOptionPane.showMessageDialog(this, "Trùng mã nhân viên");
+                    tma = false;
+                    break;
+                }
+            }
         }
-        //bắt lỗi tên
+
         if (tma) {
             if (txtTenNV.getText().length() == 0) {
                 JOptionPane.showMessageDialog(this, "Không để trống tên");
                 tten = false;
-            }
-//            if (tma) {
-//                for (int i = 0; i < listNhanVien.size(); i++) {
-//                    ClassNhanVien nv = listNhanVien.get(i);
-//                    if (txtMaNV.getText().equalsIgnoreCase(nv.getMaNV())) {
-//                        JOptionPane.showMessageDialog(this, "Trùng mã nhân viên");
-//                        tten = false;
-//                        break;
-//                    }
-//                }
-//            }
-            else {
+            } else {
                 tten = true;
             }
         }
