@@ -7,15 +7,15 @@ package myJInternalFrame;
 
 import connectionSQL.connectionSQL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import myClass.ClassKhachHang;
 import myClass.ClassNhanVien;
-import myClass.ClassSanPham;
 
 /**
  *
@@ -23,17 +23,15 @@ import myClass.ClassSanPham;
  */
 public class QuanLyNhanVien extends javax.swing.JInternalFrame {
 
+    int index = 0;
     List<ClassNhanVien> listNhanVien = new ArrayList<>();
     Connection cn;
-    
 
     public QuanLyNhanVien() {
         initComponents();
         cn = connectionSQL.ketnoi(title);
 
         fillToTable();
-        System.out.println(listNhanVien.get(1).getMaNV());
-        System.out.println(listNhanVien.get(1).getMaNV().length());
     }
 
     /**
@@ -55,13 +53,12 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         txtSoDT = new javax.swing.JTextField();
         lbDiaChi = new javax.swing.JLabel();
         cpDiaChi = new javax.swing.JScrollPane();
-        taDiaChi = new javax.swing.JTextArea();
+        txtDiaChi = new javax.swing.JTextArea();
         cpQLNV = new javax.swing.JScrollPane();
         tbQLNV = new javax.swing.JTable();
         pnButton = new javax.swing.JPanel();
         btnThemnv = new javax.swing.JButton();
         btnSuaNhanVien = new javax.swing.JButton();
-        btnXoanv = new javax.swing.JButton();
         btnTimkiemnv = new javax.swing.JButton();
 
         setClosable(true);
@@ -101,10 +98,10 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         lbDiaChi.setForeground(new java.awt.Color(252, 244, 252));
         lbDiaChi.setText("      Địa chỉ:");
 
-        taDiaChi.setColumns(20);
-        taDiaChi.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
-        taDiaChi.setRows(5);
-        cpDiaChi.setViewportView(taDiaChi);
+        txtDiaChi.setColumns(20);
+        txtDiaChi.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        txtDiaChi.setRows(5);
+        cpDiaChi.setViewportView(txtDiaChi);
 
         tbQLNV.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         tbQLNV.setModel(new javax.swing.table.DefaultTableModel(
@@ -149,33 +146,27 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         btnSuaNhanVien.setForeground(new java.awt.Color(72, 61, 139));
         btnSuaNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Edit_32x32.png"))); // NOI18N
         btnSuaNhanVien.setText("Sửa thông tin NV");
+        btnSuaNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaNhanVienActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         pnButton.add(btnSuaNhanVien, gridBagConstraints);
 
-        btnXoanv.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        btnXoanv.setForeground(new java.awt.Color(72, 61, 139));
-        btnXoanv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete_32x32.png"))); // NOI18N
-        btnXoanv.setText("Xóa nhân viên");
-        btnXoanv.setPreferredSize(new java.awt.Dimension(293, 41));
-        btnXoanv.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoanvActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
-        pnButton.add(btnXoanv, gridBagConstraints);
-
         btnTimkiemnv.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         btnTimkiemnv.setForeground(new java.awt.Color(72, 61, 139));
         btnTimkiemnv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search_Icon_32.png"))); // NOI18N
         btnTimkiemnv.setText("Tìm kiếm NV");
         btnTimkiemnv.setPreferredSize(new java.awt.Dimension(293, 41));
+        btnTimkiemnv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimkiemnvActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -254,23 +245,27 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
 
     private void btnThemnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemnvActionPerformed
         if (this.checkForm()) {
-            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            themNV();
         }
     }//GEN-LAST:event_btnThemnvActionPerformed
 
     private void tbQLNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLNVMouseClicked
-        showDetail();
+        this.showDetail();
     }//GEN-LAST:event_tbQLNVMouseClicked
 
-    private void btnXoanvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoanvActionPerformed
-        
-    }//GEN-LAST:event_btnXoanvActionPerformed
+    private void btnSuaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaNhanVienActionPerformed
+        // TODO add your handling code here:
+        this.suaNhanVien();
+    }//GEN-LAST:event_btnSuaNhanVienActionPerformed
+
+    private void btnTimkiemnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemnvActionPerformed
+        timNV();
+    }//GEN-LAST:event_btnTimkiemnvActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaNhanVien;
     private javax.swing.JButton btnThemnv;
     private javax.swing.JButton btnTimkiemnv;
-    private javax.swing.JButton btnXoanv;
     private javax.swing.JScrollPane cpDiaChi;
     private javax.swing.JScrollPane cpQLNV;
     private keeptoo.KGradientPanel kGradientPanel4;
@@ -279,12 +274,13 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbSoDT;
     private javax.swing.JLabel lbTenNV;
     private javax.swing.JPanel pnButton;
-    private javax.swing.JTextArea taDiaChi;
     private javax.swing.JTable tbQLNV;
+    private javax.swing.JTextArea txtDiaChi;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtSoDT;
     private javax.swing.JTextField txtTenNV;
     // End of variables declaration//GEN-END:variables
+
     private void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tbQLNV.getModel();
         model.setRowCount(0);
@@ -321,14 +317,165 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
 
     private void showDetail() {
         try {
-            int selextRow = tbQLNV.getSelectedRow();
+            int selectRow = tbQLNV.getSelectedRow();
 
-            ClassNhanVien nv = listNhanVien.get(selextRow);
+            ClassNhanVien nv = listNhanVien.get(selectRow);
             txtMaNV.setText(nv.getMaNV());
             txtTenNV.setText(nv.getTenNV());
             txtSoDT.setText(nv.getSdt());
-            taDiaChi.setText(nv.getDiaChi());
+            txtDiaChi.setText(nv.getDiaChi());
         } catch (Exception e) {
+
+        }
+    }
+
+    private void themNV() {
+        try {
+            String sql = "INSERT INTO NHANVIEN\n" + "VALUES(?,?,?,?)";
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(1, txtMaNV.getText());
+            ps.setString(2, txtTenNV.getText());
+            ps.setString(3, txtSoDT.getText());
+            ps.setString(4, txtDiaChi.getText());
+
+            int row = ps.executeUpdate();
+            if (row > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
+                index = listNhanVien.size() - 1;
+                showDetail();
+            } else {
+                JOptionPane.showMessageDialog(this, "Lỗi thêm");
+            }
+            ps.close();
+            fillToTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Thêm nhân viên không thành công");
+        }
+
+    }
+
+    private void suaNhanVien() {
+        try {
+            String sql = "UPDATE NHANVIEN\n"
+                    + "set TENNV=?, SDT=?, DIACHI=?\n"
+                    + "where MANV=?";
+
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(4, txtMaNV.getText());
+            ps.setString(1, txtTenNV.getText());
+            ps.setString(2, txtSoDT.getText());
+            ps.setString(3, txtDiaChi.getText());
+
+            int row = ps.executeUpdate();
+            if (row > 0) {
+                JOptionPane.showMessageDialog(this, "Sửa thông tin nhân viên thành công");
+                index = listNhanVien.size() - 1;
+                showDetail();
+            } else {
+                JOptionPane.showMessageDialog(this, "Lỗi Sửa");
+            }
+            cn.close();
+            fillToTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Sửa thông tin nhân viên không thành công");
+        }
+    }
+
+
+    private void loadTable() {
+        DefaultTableModel model = (DefaultTableModel) tbQLNV.getModel();
+        model.setRowCount(0);
+
+        for (int i = 0; i < listNhanVien.size(); i++) {
+            Object[] objectNV = new Object[]{
+                listNhanVien.get(i).getMaNV(),
+                listNhanVien.get(i).getTenNV(),
+                listNhanVien.get(i).getSdt(),
+                listNhanVien.get(i).getDiaChi()};
+            model.addRow(objectNV);
+
+        }
+    }
+
+    private void timNV() {
+        DefaultTableModel model = (DefaultTableModel) tbQLNV.getModel();
+        String option[] = {"Tìm theo mã NV", "Tìm theo tên NV", "Tìm theo SĐT NV", "Hủy"};
+        ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
+
+        int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm nhân viên", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, iconFind, option, null);
+
+        if (result == 0) {
+            String maNV = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập mã nhân viên!", "Tìm kiếm bằng mã nhân viên", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listNhanVien.size(); i++) {
+                if (maNV.equals(listNhanVien.get(i).getMaNV())) {
+                    JOptionPane.showMessageDialog(this, "Tìm thấy nhân viên!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+                    resultInput = true;
+                    txtMaNV.setText(listNhanVien.get(i).getMaNV());
+                    txtTenNV.setText(listNhanVien.get(i).getTenNV());
+                    txtSoDT.setText(listNhanVien.get(i).getSdt());
+                    txtDiaChi.setText(listNhanVien.get(i).getDiaChi());
+                    model.setRowCount(0);
+
+                    Object objectNV[] = new Object[]{
+                        listNhanVien.get(i).getMaNV(),
+                        listNhanVien.get(i).getTenNV(),
+                        listNhanVien.get(i).getSdt(),
+                        listNhanVien.get(i).getDiaChi(),};
+                    model.addRow(objectNV);
+                }
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
+        } else if (result == 1) {
+            String tenNV = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập tên nhân viên!", "Tìm kiếm bằng tên nhân viên", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listNhanVien.size(); i++) {
+                if (tenNV.equals(listNhanVien.get(i).getTenNV())) {
+                    JOptionPane.showMessageDialog(this, "Tìm thấy nhân viên!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+                    resultInput = true;
+                    txtMaNV.setText(listNhanVien.get(i).getMaNV());
+                    txtTenNV.setText(listNhanVien.get(i).getTenNV());
+                    txtSoDT.setText(listNhanVien.get(i).getSdt());
+                    txtDiaChi.setText(listNhanVien.get(i).getDiaChi());
+                    model.setRowCount(0);
+
+                    Object objectNV[] = new Object[]{
+                        listNhanVien.get(i).getMaNV(),
+                        listNhanVien.get(i).getTenNV(),
+                        listNhanVien.get(i).getSdt(),
+                        listNhanVien.get(i).getDiaChi(),};
+                    model.addRow(objectNV);
+                }
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
+        } else if (result == 2) {
+            String soDT = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập số điện thoại của nhân viên!", "Tìm kiếm bằng số điện thoại nhân viên", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listNhanVien.size(); i++) {
+                if (soDT.equals(listNhanVien.get(i).getSdt())) {
+                    JOptionPane.showMessageDialog(this, "Tìm thấy nhân viên!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+                    resultInput = true;
+                    txtMaNV.setText(listNhanVien.get(i).getMaNV());
+                    txtTenNV.setText(listNhanVien.get(i).getTenNV());
+                    txtSoDT.setText(listNhanVien.get(i).getSdt());
+                    txtDiaChi.setText(listNhanVien.get(i).getDiaChi());
+                    model.setRowCount(0);
+
+                    Object objectNV[] = new Object[]{
+                        listNhanVien.get(i).getMaNV(),
+                        listNhanVien.get(i).getTenNV(),
+                        listNhanVien.get(i).getSdt(),
+                        listNhanVien.get(i).getDiaChi(),};
+                    model.addRow(objectNV);
+                }
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
         }
     }
 
@@ -349,7 +496,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
                 }
             }
         }
-         //bắt lỗi tên
+
         if (tma) {
             if (txtTenNV.getText().length() == 0) {
                 JOptionPane.showMessageDialog(this, "Không để trống tên");
@@ -381,7 +528,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         }
         //bắt lỗi địa chỉ
         if (tsdt) {
-            if (taDiaChi.getText().length() == 0) {
+            if (txtDiaChi.getText().length() == 0) {
                 JOptionPane.showMessageDialog(this, "Không để trống địa chỉ");
                 tdiachi = false;
             } else {
@@ -394,8 +541,5 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         } else {
             return false;
         }
-    }
-    private void xoaNv(){
-        
     }
 }
