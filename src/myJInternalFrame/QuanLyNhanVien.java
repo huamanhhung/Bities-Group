@@ -60,6 +60,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         btnThemnv = new javax.swing.JButton();
         btnSuaNhanVien = new javax.swing.JButton();
         btnTimkiemnv = new javax.swing.JButton();
+        btnThemMoi = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -138,7 +139,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         pnButton.add(btnThemnv, gridBagConstraints);
 
@@ -153,7 +154,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         pnButton.add(btnSuaNhanVien, gridBagConstraints);
 
@@ -171,6 +172,23 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         pnButton.add(btnTimkiemnv, gridBagConstraints);
+
+        btnThemMoi.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        btnThemMoi.setForeground(new java.awt.Color(72, 61, 139));
+        btnThemMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add_1_Icon_32.png"))); // NOI18N
+        btnThemMoi.setText("Thêm mới");
+        btnThemMoi.setMaximumSize(new java.awt.Dimension(293, 41));
+        btnThemMoi.setPreferredSize(new java.awt.Dimension(293, 41));
+        btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemMoiActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
+        pnButton.add(btnThemMoi, gridBagConstraints);
 
         javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
         kGradientPanel4.setLayout(kGradientPanel4Layout);
@@ -262,8 +280,13 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         timNV();
     }//GEN-LAST:event_btnTimkiemnvActionPerformed
 
+    private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
+        this.clear();
+    }//GEN-LAST:event_btnThemMoiActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaNhanVien;
+    private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnThemnv;
     private javax.swing.JButton btnTimkiemnv;
     private javax.swing.JScrollPane cpDiaChi;
@@ -478,6 +501,13 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
             }
         }
     }
+    
+    private void clear() {
+        txtMaNV.setText("");
+        txtTenNV.setText("");
+        txtSoDT.setText("");
+        txtDiaChi.setText("");
+    }
 
     public boolean checkForm() {
         boolean tma = false, tten = false, tsdt = false, tdiachi = false;
@@ -543,3 +573,4 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         }
     }
 }
+

@@ -49,7 +49,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         pnButton = new javax.swing.JPanel();
         btnThemKH = new javax.swing.JButton();
         btnSuaKH = new javax.swing.JButton();
-        btnXoaKH = new javax.swing.JButton();
+        btnThemMoi = new javax.swing.JButton();
         btnTimkiemKH = new javax.swing.JButton();
         cpDiaChi = new javax.swing.JScrollPane();
         taDiaChi = new javax.swing.JTextArea();
@@ -122,7 +122,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         pnButton.add(btnThemKH, gridBagConstraints);
@@ -142,22 +142,22 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         pnButton.add(btnSuaKH, gridBagConstraints);
 
-        btnXoaKH.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        btnXoaKH.setForeground(new java.awt.Color(72, 61, 139));
-        btnXoaKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete_32x32.png"))); // NOI18N
-        btnXoaKH.setText("Xóa khách hàng");
-        btnXoaKH.setMaximumSize(new java.awt.Dimension(293, 41));
-        btnXoaKH.setPreferredSize(new java.awt.Dimension(293, 41));
-        btnXoaKH.addActionListener(new java.awt.event.ActionListener() {
+        btnThemMoi.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        btnThemMoi.setForeground(new java.awt.Color(72, 61, 139));
+        btnThemMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add_1_Icon_32.png"))); // NOI18N
+        btnThemMoi.setText("Thêm mới");
+        btnThemMoi.setMaximumSize(new java.awt.Dimension(293, 41));
+        btnThemMoi.setPreferredSize(new java.awt.Dimension(293, 41));
+        btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaKHActionPerformed(evt);
+                btnThemMoiActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
-        pnButton.add(btnXoaKH, gridBagConstraints);
+        pnButton.add(btnThemMoi, gridBagConstraints);
 
         btnTimkiemKH.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         btnTimkiemKH.setForeground(new java.awt.Color(72, 61, 139));
@@ -268,11 +268,9 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnThemKHActionPerformed
 
-    private void btnXoaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKHActionPerformed
-        this.xoaKHKhoiTable();
+    private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         this.clear();
-
-    }//GEN-LAST:event_btnXoaKHActionPerformed
+    }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void tbQLKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLKHMouseClicked
         showDeail();
@@ -291,8 +289,8 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaKH;
     private javax.swing.JButton btnThemKH;
+    private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnTimkiemKH;
-    private javax.swing.JButton btnXoaKH;
     private javax.swing.JScrollPane cpDiaChi;
     private javax.swing.JScrollPane cpQLKH;
     private javax.swing.JLabel erroMaKH;
@@ -479,11 +477,7 @@ private void fillToTable() {
         taDiaChi.setText("");
     }
 
-    private void xoaKHKhoiTable() {
-        int selectRow = tbQLKH.getSelectedRow();
-        listKhachHang.remove(selectRow);
-        this.loadTable();
-    }
+   
 
     private void loadTable() {
         DefaultTableModel model = (DefaultTableModel) tbQLKH.getModel();

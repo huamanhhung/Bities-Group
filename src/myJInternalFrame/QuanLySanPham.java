@@ -53,7 +53,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         pnButton = new javax.swing.JPanel();
         btnThemSP = new javax.swing.JButton();
         btnSuaSP = new javax.swing.JButton();
-        btnXoaSP = new javax.swing.JButton();
+        btnThemMoi = new javax.swing.JButton();
         btnTimkiemSP = new javax.swing.JButton();
         lbMaSP = new javax.swing.JLabel();
         txtMaSP = new javax.swing.JTextField();
@@ -106,7 +106,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         pnButton.add(btnThemSP, gridBagConstraints);
 
@@ -125,21 +125,21 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         pnButton.add(btnSuaSP, gridBagConstraints);
 
-        btnXoaSP.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        btnXoaSP.setForeground(new java.awt.Color(72, 61, 139));
-        btnXoaSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete_32x32.png"))); // NOI18N
-        btnXoaSP.setText("Xóa sản phẩm");
-        btnXoaSP.setPreferredSize(new java.awt.Dimension(293, 41));
-        btnXoaSP.addActionListener(new java.awt.event.ActionListener() {
+        btnThemMoi.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        btnThemMoi.setForeground(new java.awt.Color(72, 61, 139));
+        btnThemMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add_1_Icon_32.png"))); // NOI18N
+        btnThemMoi.setText("Thêm mới");
+        btnThemMoi.setPreferredSize(new java.awt.Dimension(293, 41));
+        btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaSPActionPerformed(evt);
+                btnThemMoiActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
-        pnButton.add(btnXoaSP, gridBagConstraints);
+        pnButton.add(btnThemMoi, gridBagConstraints);
 
         btnTimkiemSP.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         btnTimkiemSP.setForeground(new java.awt.Color(72, 61, 139));
@@ -221,7 +221,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                     .addComponent(txtTenSP, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDonGia, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbbTrangThai, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cpCauHinh, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cpCauHinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                     .addComponent(txtSoLuongSP, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtMaSP))
                 .addGap(125, 125, 125)
@@ -293,17 +293,17 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         this.suaSp();
     }//GEN-LAST:event_btnSuaSPActionPerformed
 
-    private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
-        this.xoaSPKhoiTable();
+    private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
+        
         this.clear();
-    }//GEN-LAST:event_btnXoaSPActionPerformed
+    }//GEN-LAST:event_btnThemMoiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaSP;
+    private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnThemSP;
     private javax.swing.JButton btnTimkiemSP;
-    private javax.swing.JButton btnXoaSP;
     private javax.swing.JComboBox<String> cbbTrangThai;
     private javax.swing.JScrollPane cpCauHinh;
     private javax.swing.JScrollPane cpQLSP;
@@ -535,11 +535,6 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         }
     }
 
-    private void xoaSPKhoiTable() {
-        int selectRow = tbQLSP.getSelectedRow();
-        listSanPham.remove(selectRow);
-        this.loadTable();
-    }
 
     private void loadTable() {
         DefaultTableModel model = (DefaultTableModel) tbQLSP.getModel();
