@@ -26,7 +26,6 @@ public class HoaDon extends javax.swing.JInternalFrame {
         initComponents();
         cn = connectionSQL.ketnoi(title);
         fillToTable();
-        
 
     }
 
@@ -54,8 +53,8 @@ public class HoaDon extends javax.swing.JInternalFrame {
         lbTongTien = new javax.swing.JLabel();
         txtTongTien = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        btnXoaHoaDon = new javax.swing.JButton();
         btnTimKiemHoaDon = new javax.swing.JButton();
+        btnHienThiAll = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -134,34 +133,33 @@ public class HoaDon extends javax.swing.JInternalFrame {
         jPanel1Layout.columnWeights = new double[] {1.0};
         jPanel1.setLayout(jPanel1Layout);
 
-        btnXoaHoaDon.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        btnXoaHoaDon.setForeground(new java.awt.Color(72, 61, 139));
-        btnXoaHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete_32x32.png"))); // NOI18N
-        btnXoaHoaDon.setText("Xóa hóa đơn");
-        btnXoaHoaDon.setInheritsPopupMenu(true);
-        btnXoaHoaDon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaHoaDonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
-        jPanel1.add(btnXoaHoaDon, gridBagConstraints);
-
         btnTimKiemHoaDon.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         btnTimKiemHoaDon.setForeground(new java.awt.Color(72, 61, 139));
         btnTimKiemHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search_Icon_32.png"))); // NOI18N
         btnTimKiemHoaDon.setText("Tìm hóa đơn");
+        btnTimKiemHoaDon.setPreferredSize(new java.awt.Dimension(285, 41));
         btnTimKiemHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimKiemHoaDonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 21, 0);
+        jPanel1.add(btnTimKiemHoaDon, gridBagConstraints);
+
+        btnHienThiAll.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        btnHienThiAll.setForeground(new java.awt.Color(72, 61, 139));
+        btnHienThiAll.setText("Hiển thị tất cả HD");
+        btnHienThiAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHienThiAllActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
-        jPanel1.add(btnTimKiemHoaDon, gridBagConstraints);
+        jPanel1.add(btnHienThiAll, gridBagConstraints);
 
         javax.swing.GroupLayout kGradientPanel3Layout = new javax.swing.GroupLayout(kGradientPanel3);
         kGradientPanel3.setLayout(kGradientPanel3Layout);
@@ -193,8 +191,8 @@ public class HoaDon extends javax.swing.JInternalFrame {
                                     .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 221, Short.MAX_VALUE)))
                         .addGap(101, 101, 101)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107))))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))))
         );
         kGradientPanel3Layout.setVerticalGroup(
             kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,7 +221,7 @@ public class HoaDon extends javax.swing.JInternalFrame {
                     .addComponent(lbTongTien)
                     .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(64, 64, 64)
-                .addComponent(cpHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                .addComponent(cpHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -241,25 +239,95 @@ public class HoaDon extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnXoaHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaHoaDonActionPerformed
-        JOptionPane.showMessageDialog(this, "Xóa thành công!");
-    }//GEN-LAST:event_btnXoaHoaDonActionPerformed
-
     private void btnTimKiemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemHoaDonActionPerformed
         // TODO add your handling code here:
-        String option[] = {"Tìm bằng mã HD", "Tìm bằng mã NV", "Tìm bằng khoảng ngày", "Tìm bằng mã KH", "Hủy"};
+        DefaultTableModel model = (DefaultTableModel) tbHoaDon.getModel();
+        
+        String option[] = {"Tìm bằng mã HD", "Tìm bằng mã NV", "Tìm bằng mã KH", "Hủy"};
         ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
 
         int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, iconFind, option, null);
         if (result == 0) {
-            JOptionPane.showInputDialog(this, "Mời bạn nhập mã hóa đơn!", "Tìm kiếm bằng mã hóa đơn", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            String maHD = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập mã hóa đơn!", "Tìm kiếm bằng mã hóa đơn", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listHoaDon.size(); i++) {
+                if (maHD.equals(listHoaDon.get(i).getMaHD())) {
+                    JOptionPane.showMessageDialog(this, "Tìm thấy hóa đơn!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+                    resultInput = true;
+                    txtMaHD.setText(listHoaDon.get(i).getMaHD());
+                    txtMaNV.setText(listHoaDon.get(i).getMaNV());
+                    txtNgayMua.setText(listHoaDon.get(i).getNgayBan());
+                    txtMaKH.setText(listHoaDon.get(i).getMaKH());
+                    txtTongTien.setText(Double.toString(listHoaDon.get(i).getTongTien()));
+                    model.setRowCount(0);
+                    
+                    Object [] objectHD = new Object[]{
+                        listHoaDon.get(i).getMaHD(),
+                        listHoaDon.get(i).getMaNV(),
+                        listHoaDon.get(i).getNgayBan(),
+                        listHoaDon.get(i).getMaKH(),
+                        Double.toString(listHoaDon.get(i).getTongTien())
+                    };
+                    model.addRow(objectHD);
+                }
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tồn tại mã hóa đơn này!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
         } else if (result == 1) {
-            JOptionPane.showInputDialog(this, "Mời bạn nhập vào mã nhân viên!", "Tìm kiếm bằng mã nhân viên", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
-
+            String maNV = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập vào mã nhân viên!", "Tìm kiếm bằng mã nhân viên", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listHoaDon.size(); i++) {
+                if (maNV.equals(listHoaDon.get(i).getMaNV())) {
+                    JOptionPane.showMessageDialog(this, "Tìm thấy hóa đơn!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+                    resultInput = true;
+                    txtMaHD.setText(listHoaDon.get(i).getMaHD());
+                    txtMaNV.setText(listHoaDon.get(i).getMaNV());
+                    txtNgayMua.setText(listHoaDon.get(i).getNgayBan());
+                    txtMaKH.setText(listHoaDon.get(i).getMaKH());
+                    txtTongTien.setText(Double.toString(listHoaDon.get(i).getTongTien()));
+                    model.setRowCount(0);
+                    
+                    Object [] objectHD = new Object[]{
+                        listHoaDon.get(i).getMaHD(),
+                        listHoaDon.get(i).getMaNV(),
+                        listHoaDon.get(i).getNgayBan(),
+                        listHoaDon.get(i).getMaKH(),
+                        Double.toString(listHoaDon.get(i).getTongTien())
+                    };
+                    model.addRow(objectHD);
+                }
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tồn tại mã nhân viên này trong bảng hóa đơn!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
         } else if (result == 2) {
-            JOptionPane.showInputDialog(this, "Mời bạn nhập vào ngày!" + "\n" + "Định dạng ngày theo: dd/MM/yyyy", "Tìm kiếm theo ngày", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
-
-        } else if (result == 3) {
+            String maKH = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập vào mã khách hàng!", "Tìm kiếm bằng mã khách hàng", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listHoaDon.size(); i++) {
+                if (maKH.equals(listHoaDon.get(i).getMaKH())) {
+                    JOptionPane.showMessageDialog(this, "Tìm thấy hóa đơn!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+                    resultInput = true;
+                    txtMaHD.setText(listHoaDon.get(i).getMaHD());
+                    txtMaNV.setText(listHoaDon.get(i).getMaNV());
+                    txtNgayMua.setText(listHoaDon.get(i).getNgayBan());
+                    txtMaKH.setText(listHoaDon.get(i).getMaKH());
+                    txtTongTien.setText(Double.toString(listHoaDon.get(i).getTongTien()));
+                    model.setRowCount(0);
+                    
+                    Object [] objectHD = new Object[]{
+                        listHoaDon.get(i).getMaHD(),
+                        listHoaDon.get(i).getMaNV(),
+                        listHoaDon.get(i).getNgayBan(),
+                        listHoaDon.get(i).getMaKH(),
+                        Double.toString(listHoaDon.get(i).getTongTien())
+                    };
+                    model.addRow(objectHD);
+                }
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tồn tại ngày giao dịch này trong bảng hóa đơn!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
         }
     }//GEN-LAST:event_btnTimKiemHoaDonActionPerformed
 
@@ -268,10 +336,15 @@ public class HoaDon extends javax.swing.JInternalFrame {
         showDetail();
     }//GEN-LAST:event_tbHoaDonMouseClicked
 
+    private void btnHienThiAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiAllActionPerformed
+        // TODO add your handling code here:
+        fillToTable();
+    }//GEN-LAST:event_btnHienThiAllActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHienThiAll;
     private javax.swing.JButton btnTimKiemHoaDon;
-    private javax.swing.JButton btnXoaHoaDon;
     private javax.swing.JScrollPane cpHoaDon;
     private javax.swing.JPanel jPanel1;
     private keeptoo.KGradientPanel kGradientPanel3;
@@ -321,14 +394,13 @@ public class HoaDon extends javax.swing.JInternalFrame {
         }
 
     }
-    
+
     //show hóa đơn lên textfield
-   
-    private void showDetail(){
+    private void showDetail() {
         int selectRow = tbHoaDon.getSelectedRow();
-        
+
         ClassHoaDon hd = listHoaDon.get(selectRow);
-        
+
         txtMaHD.setText(hd.getMaHD());
         txtMaNV.setText(hd.getMaNV());
         txtNgayMua.setText(hd.getNgayBan());

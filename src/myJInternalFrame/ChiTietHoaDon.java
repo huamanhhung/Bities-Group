@@ -42,6 +42,7 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         kGradientPanel2 = new keeptoo.KGradientPanel();
         txtMaHD = new javax.swing.JTextField();
@@ -51,9 +52,10 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
         lbMaSP = new javax.swing.JLabel();
         lbSoLuong = new javax.swing.JLabel();
         pnButton = new javax.swing.JPanel();
+        btnTimKiemHoaDon = new javax.swing.JButton();
+        btnHienThiAll = new javax.swing.JButton();
         cpHoaDon = new javax.swing.JScrollPane();
         tbHoaDonChiTiet = new javax.swing.JTable();
-        btnTimKiemHoaDon = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -86,7 +88,36 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
         lbSoLuong.setForeground(new java.awt.Color(252, 244, 252));
         lbSoLuong.setText("Số lượng:");
 
+        pnButton.setOpaque(false);
         pnButton.setLayout(new java.awt.GridBagLayout());
+
+        btnTimKiemHoaDon.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        btnTimKiemHoaDon.setForeground(new java.awt.Color(72, 61, 139));
+        btnTimKiemHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search_Icon_32.png"))); // NOI18N
+        btnTimKiemHoaDon.setText("Tìm hóa đơn");
+        btnTimKiemHoaDon.setPreferredSize(new java.awt.Dimension(285, 41));
+        btnTimKiemHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemHoaDonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
+        pnButton.add(btnTimKiemHoaDon, gridBagConstraints);
+
+        btnHienThiAll.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        btnHienThiAll.setForeground(new java.awt.Color(72, 61, 139));
+        btnHienThiAll.setText("Hiển thị tất cả HD");
+        btnHienThiAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHienThiAllActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
+        pnButton.add(btnHienThiAll, gridBagConstraints);
 
         tbHoaDonChiTiet.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         tbHoaDonChiTiet.setModel(new javax.swing.table.DefaultTableModel(
@@ -106,64 +137,52 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
         });
         cpHoaDon.setViewportView(tbHoaDonChiTiet);
 
-        btnTimKiemHoaDon.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        btnTimKiemHoaDon.setForeground(new java.awt.Color(72, 61, 139));
-        btnTimKiemHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search_Icon_32.png"))); // NOI18N
-        btnTimKiemHoaDon.setText("Tìm hóa đơn");
-        btnTimKiemHoaDon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimKiemHoaDonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout kGradientPanel2Layout = new javax.swing.GroupLayout(kGradientPanel2);
         kGradientPanel2.setLayout(kGradientPanel2Layout);
         kGradientPanel2Layout.setHorizontalGroup(
             kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cpHoaDon)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel2Layout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbMaHD)
-                    .addComponent(lbSoLuong)
-                    .addComponent(lbMaSP))
-                .addGap(49, 49, 49)
-                .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtMaSP, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMaHD, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(179, 179, 179)
-                .addComponent(btnTimKiemHoaDon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnButton, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                .addGap(77, 77, 77))
+            .addGroup(kGradientPanel2Layout.createSequentialGroup()
+                .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kGradientPanel2Layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbMaHD)
+                            .addComponent(lbSoLuong)
+                            .addComponent(lbMaSP))
+                        .addGap(49, 49, 49)
+                        .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtMaSP, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMaHD, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(105, 105, 105)
+                        .addComponent(pnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(kGradientPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cpHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 1305, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         kGradientPanel2Layout.setVerticalGroup(
             kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel2Layout.createSequentialGroup()
                 .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(kGradientPanel2Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbMaHD)
                             .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(21, 21, 21)
                         .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbMaSP)
-                            .addComponent(txtMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTimKiemHoaDon))
-                        .addGap(20, 20, 20)
+                            .addComponent(txtMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
                         .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbSoLuong)
                             .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel2Layout.createSequentialGroup()
+                        .addContainerGap(79, Short.MAX_VALUE)
+                        .addComponent(pnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)))
                 .addComponent(cpHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -172,7 +191,7 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1333, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,16 +202,63 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTimKiemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemHoaDonActionPerformed
-        String option[] = {"Tìm bằng mã hóa đơn", "Tìm bằng mã sản phẩm", "Hủy"};
+        DefaultTableModel model = (DefaultTableModel) tbHoaDonChiTiet.getModel();
+        model.setRowCount(0);
+        String option[] = {"Tìm bằng mã HD", "Tìm bằng mã SP", "Hủy"};
         ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
-
-        int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, iconFind, option, option[0]);
+        int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, iconFind, option, null);
         if (result == 0) {
-            JOptionPane.showInputDialog(this, "Mời bạn nhập mã hóa đơn!", "Tìm kiếm bằng mã hóa đơn", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            String maHD = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập mã hóa đơn!", "Tìm kiếm bằng mã hóa đơn", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listCTHD.size(); i++) {
+                if (maHD.equals(listCTHD.get(i).getMaHD())) {
+                    resultInput = true;
+                    txtMaHD.setText(listCTHD.get(i).getMaHD());
+                    txtMaSP.setText(listCTHD.get(i).getMaSP());
+                    txtSoLuong.setText(Integer.toString(listCTHD.get(i).getSoLuong()));
+
+                    Object[] objectHD = new Object[]{
+                        listCTHD.get(i).getMaHD(),
+                        listCTHD.get(i).getMaSP(),
+                        listCTHD.get(i).getSoLuong(),
+                        listCTHD.get(i).getDonGia(),
+                        listCTHD.get(i).getThanhTien()
+                    };
+                    model.addRow(objectHD);
+                }
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tồn tại mã sản phẩm này!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            } else {
+                JOptionPane.showMessageDialog(this, "Tìm thấy hóa đơn!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
         } else if (result == 1) {
-            JOptionPane.showInputDialog(this, "Mời bạn nhập mã sản phẩm!", "Tìm kiếm bằng mã sản phẩm", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
-        } else {
+            String maSP = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập mã sản phẩm!", "Tìm kiếm bằng mã sản phẩm", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listCTHD.size(); i++) {
+                if (maSP.equals(listCTHD.get(i).getMaSP())) {
+                    resultInput = true;
+                    txtMaHD.setText(listCTHD.get(i).getMaHD());
+                    txtMaSP.setText(listCTHD.get(i).getMaSP());
+                    txtSoLuong.setText(Integer.toString(listCTHD.get(i).getSoLuong()));
+
+                    Object[] objectHD = new Object[]{
+                        listCTHD.get(i).getMaHD(),
+                        listCTHD.get(i).getMaSP(),
+                        listCTHD.get(i).getSoLuong(),
+                        listCTHD.get(i).getDonGia(),
+                        listCTHD.get(i).getThanhTien()
+                    };
+                    model.addRow(objectHD);
+                }
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tồn tại mã hóa đơn này!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            } else {
+                JOptionPane.showMessageDialog(this, "Tìm thấy hóa đơn!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
         }
+
     }//GEN-LAST:event_btnTimKiemHoaDonActionPerformed
 
     private void tbHoaDonChiTietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHoaDonChiTietMouseClicked
@@ -200,8 +266,14 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
         showDetail();
     }//GEN-LAST:event_tbHoaDonChiTietMouseClicked
 
+    private void btnHienThiAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiAllActionPerformed
+        // TODO add your handling code here:
+        fillToTable();
+    }//GEN-LAST:event_btnHienThiAllActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHienThiAll;
     private javax.swing.JButton btnTimKiemHoaDon;
     private javax.swing.JScrollPane cpHoaDon;
     private keeptoo.KGradientPanel kGradientPanel2;
@@ -223,7 +295,7 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
             listCTHD.clear();
             Statement st = connectionSQL.ketnoi(title).createStatement();
 
-            String sql = "select * from cthoadon";
+            String sql = "SELECT * FROM CTHOADON";
 
             ResultSet rs = st.executeQuery(sql);
 
@@ -237,25 +309,24 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
                 ClassCTHoaDon cthd = new ClassCTHoaDon(maHD, maSP, soLuong, donGia, thanhTien);
                 listCTHD.add(cthd);
             }
-            
+
             for (int i = 0; i < listCTHD.size(); i++) {
-                Object [] cthdObject = new Object[]{
+                Object[] cthdObject = new Object[]{
                     listCTHD.get(i).getMaHD(),
                     listCTHD.get(i).getMaSP(),
                     listCTHD.get(i).getSoLuong(),
                     listCTHD.get(i).getDonGia(),
-                    listCTHD.get(i).getThanhTien(),
-                };
+                    listCTHD.get(i).getThanhTien(),};
                 model.addRow(cthdObject);
             }
         } catch (Exception e) {
         }
     }
-    
-    private void showDetail(){
+
+    private void showDetail() {
         int selectRow = tbHoaDonChiTiet.getSelectedRow();
         ClassCTHoaDon cthd = listCTHD.get(selectRow);
-        
+
         txtMaHD.setText(cthd.getMaHD());
         txtMaSP.setText(cthd.getMaSP());
         txtSoLuong.setText(Integer.toString(cthd.getSoLuong()));
