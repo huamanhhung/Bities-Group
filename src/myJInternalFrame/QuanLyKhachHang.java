@@ -2,6 +2,7 @@ package myJInternalFrame;
 
 import connectionSQL.connectionSQL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,6 +16,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
     List<ClassKhachHang> listKhachHang = new ArrayList<>();
     Connection cn;
+    int index = 0;
 
     public QuanLyKhachHang() throws SQLException {
         initComponents();
@@ -128,6 +130,11 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         btnSuaKH.setForeground(new java.awt.Color(72, 61, 139));
         btnSuaKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Edit_32x32.png"))); // NOI18N
         btnSuaKH.setText("Sửa thông tin KH");
+        btnSuaKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaKHActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
@@ -248,7 +255,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
 
         if (this.batLoi()) {
-            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            this.themKH();
         }
 
     }//GEN-LAST:event_btnThemKHActionPerformed
@@ -260,6 +267,10 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     private void tbQLKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLKHMouseClicked
         showDeail();
     }//GEN-LAST:event_tbQLKHMouseClicked
+
+    private void btnSuaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaKHActionPerformed
+       this.suaKH();
+    }//GEN-LAST:event_btnSuaKHActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -324,7 +335,13 @@ private void fillToTable() {
             tma = false;
         } else {
             tma = true;
-        }
+            for (int i = 0; i < listKhachHang.size(); i++) {
+                ClassKhachHang kh = listKhachHang.get(i);
+                if (txtMaKH.getText().equalsIgnoreCase(kh.getMaKH())) {
+                    JOptionPane.showMessageDialog(this, "Trùng mã nhân viên");
+                    tma = false;
+                    break;
+        }}}
         //bắt lỗi tên
         if (tma) {
             if (txtTenKH.getText().length() == 0) {
@@ -383,6 +400,56 @@ private void fillToTable() {
             txtSoDT.setText(kh.getSdt());
             taDiaChi.setText(kh.getDiaChi());
         } catch (Exception e) {
+        }
+    }
+    private void themKH(){
+        try {
+            String sql = "INSERT INTO KHACHHANG\n" + "VALUES(?,?,?,?)";
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(1,txtMaKH.getText());
+            ps.setString(2,txtTenKH.getText());
+            ps.setString(3,txtSoDT.getText());
+            ps.setString(4,taDiaChi.getText());
+
+            int row = ps.executeUpdate();
+            if(row>0){
+               JOptionPane.showMessageDialog(this,"Thêm khách hàng thành công");
+               index = listKhachHang.size()-1;
+               showDeail();
+            }else{
+               JOptionPane.showMessageDialog(this, "Lỗi thêm");
+             }          
+            cn.close();
+            fillToTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"Thêm khách hàng không thành công");
+        }
+
+    }
+    private void suaKH(){
+       try {
+            String sql = "update KHACHHANG\n"
+                    + "set HOVATEN=?, SDT=?, DIACHI=?\n"
+                    + "where MAKH=?";
+
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(4,txtMaKH.getText());
+            ps.setString(1,txtTenKH.getText());
+            ps.setString(2,txtSoDT.getText());
+            ps.setString(3,taDiaChi.getText());
+
+            int row = ps.executeUpdate();
+            if(row>0){
+               JOptionPane.showMessageDialog(this,"Sửa thông tin khách hàng thành công");
+               index = listKhachHang.size()-1;
+               showDeail();
+            }else{
+               JOptionPane.showMessageDialog(this, "Lỗi Sửa");
+             }          
+            cn.close();
+            fillToTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"Sửa thông tin khách hàng không thành công");
         }
     }
 
