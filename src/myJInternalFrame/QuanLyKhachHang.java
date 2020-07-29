@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import myClass.ClassKhachHang;
@@ -163,6 +164,11 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         btnTimkiemKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search_Icon_32.png"))); // NOI18N
         btnTimkiemKH.setText("Tìm khách hàng");
         btnTimkiemKH.setPreferredSize(new java.awt.Dimension(293, 41));
+        btnTimkiemKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimkiemKHActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
@@ -263,9 +269,9 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnThemKHActionPerformed
 
     private void btnXoaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKHActionPerformed
-         this.xoaKH();
-         this.clear();
-         this.fillToTable();
+        this.xoaKHKhoiTable();
+        this.clear();
+
     }//GEN-LAST:event_btnXoaKHActionPerformed
 
     private void tbQLKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLKHMouseClicked
@@ -276,6 +282,10 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         this.suaKH();
         this.clear();
     }//GEN-LAST:event_btnSuaKHActionPerformed
+
+    private void btnTimkiemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemKHActionPerformed
+        this.timKH();
+    }//GEN-LAST:event_btnTimkiemKHActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -427,7 +437,7 @@ private void fillToTable() {
             } else {
                 JOptionPane.showMessageDialog(this, "Lỗi thêm");
             }
-            cn.close();
+            ps.close();
             fillToTable();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Thêm khách hàng không thành công");
@@ -455,48 +465,10 @@ private void fillToTable() {
             } else {
                 JOptionPane.showMessageDialog(this, "Lỗi Sửa");
             }
-            cn.close();
+            ps.close();
             fillToTable();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Sửa thông tin khách hàng không thành công");
-        }
-    }
-
-    private void xoaKH() {
-        try {
-            if (listKhachHang.size() <= 0) {
-                JOptionPane.showMessageDialog(this, "Không còn dữ liệu để xóa");
-                return;
-            }
-            int hoi = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không ?", "Xóa Nhân Viên", JOptionPane.YES_NO_OPTION);
-            if (hoi != JOptionPane.YES_OPTION) {
-                return;
-            }
-            //xóa trong list
-            listKhachHang.remove(index);
-            //XÓA trong csdl
-            String sql = "delete from KHACHHANG\n"
-                    + "where maKH=?";
-            PreparedStatement ps = cn.prepareStatement(sql);
-            ps.setString(1, txtMaKH.getText());
-
-            int row = ps.executeUpdate();
-            if (row > 0) {
-                JOptionPane.showMessageDialog(this, "Xóa thành công");
-                //sử lý sau khi xóa
-                if (listKhachHang.size() == 0) {
-                    clear();
-                }else{
-                  if(index == listKhachHang.size()){
-                    index--;
-                  }
-                  showDeail();
-                }
-            }else{
-               JOptionPane.showMessageDialog(this, "Bạn không xóa được khách hàng nào");
-            }
-        } catch (Exception e) {
-               JOptionPane.showMessageDialog(this, "Lỗi xóa ");
         }
     }
 
@@ -507,4 +479,151 @@ private void fillToTable() {
         taDiaChi.setText("");
     }
 
+    private void xoaKHKhoiTable() {
+        int selectRow = tbQLKH.getSelectedRow();
+        listKhachHang.remove(selectRow);
+        this.loadTable();
+    }
+
+    private void loadTable() {
+        DefaultTableModel model = (DefaultTableModel) tbQLKH.getModel();
+        model.setRowCount(0);
+
+        for (int i = 0; i < listKhachHang.size(); i++) {
+            Object[] khachHangObject = new Object[]{
+                listKhachHang.get(i).getMaKH(),
+                listKhachHang.get(i).getTenKH(),
+                listKhachHang.get(i).getSdt(),
+                listKhachHang.get(i).getDiaChi()};
+            model.addRow(khachHangObject);
+
+        }
+    }
+    private void timKH() {
+        DefaultTableModel model = (DefaultTableModel) tbQLKH.getModel();
+        String option[] = {"Tìm theo mã KH", "Tìm theo tên KH", "Tìm theo SĐT KH", "Hủy"};
+        ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
+
+        int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm Khách hàng", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, iconFind, option, null);
+
+        if (result == 0) {
+            String makh = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập mã Khách hàng!", "Tìm kiếm bằng mã khách hàng", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listKhachHang.size(); i++) {
+                if (makh.equals(listKhachHang.get(i).getMaKH())) {
+                    JOptionPane.showMessageDialog(this, "Tìm thấy khách hàng!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+                    resultInput = true;
+                    txtMaKH.setText(listKhachHang.get(i).getMaKH());
+                    txtTenKH.setText(listKhachHang.get(i).getTenKH());
+                    txtSoDT.setText(listKhachHang.get(i).getSdt());
+                    taDiaChi.setText(listKhachHang.get(i).getDiaChi());
+                    model.setRowCount(0);
+
+                    Object objectKH[] = new Object[]{
+                        listKhachHang.get(i).getMaKH(),
+                        listKhachHang.get(i).getTenKH(),
+                        listKhachHang.get(i).getSdt(),
+                        listKhachHang.get(i).getDiaChi(),};
+                    model.addRow(objectKH);
+                }
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
+        } else if (result == 1) {
+            String tenKH = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập tên khách hàng!", "Tìm kiếm bằng tên khách", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listKhachHang.size(); i++) {
+                if (tenKH.equals(listKhachHang.get(i).getTenKH())) {
+                    JOptionPane.showMessageDialog(this, "Tìm thấy khách hàng", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+                    resultInput = true;
+                    txtMaKH.setText(listKhachHang.get(i).getMaKH());
+                    txtTenKH.setText(listKhachHang.get(i).getTenKH());
+                    txtSoDT.setText(listKhachHang.get(i).getSdt());
+                    taDiaChi.setText(listKhachHang.get(i).getDiaChi());
+                    model.setRowCount(0);
+
+                    Object objectKH[] = new Object[]{
+                        listKhachHang.get(i).getMaKH(),
+                        listKhachHang.get(i).getTenKH(),
+                        listKhachHang.get(i).getSdt(),
+                        listKhachHang.get(i).getDiaChi()};
+                    model.addRow(objectKH);
+                }
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
+        } else if (result == 2) {
+            String soDT = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập số điện thoại của khách hàng!", "Tìm kiếm bằng số điện thoại khách hàng", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listKhachHang.size(); i++) {
+                if (soDT.equals(listKhachHang.get(i).getSdt())) {
+                    JOptionPane.showMessageDialog(this, "Tìm thấy khách hàng!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+                    resultInput = true;
+                    txtMaKH.setText(listKhachHang.get(i).getMaKH());
+                    txtTenKH.setText(listKhachHang.get(i).getTenKH());
+                    txtSoDT.setText(listKhachHang.get(i).getSdt());
+                    taDiaChi.setText(listKhachHang.get(i).getDiaChi());
+                    model.setRowCount(0);
+
+                    Object objectKH[] = new Object[]{
+                        listKhachHang.get(i).getMaKH(),
+                        listKhachHang.get(i).getTenKH(),
+                        listKhachHang.get(i).getSdt(),
+                        listKhachHang.get(i).getDiaChi()};
+                    model.addRow(objectKH);
+                }
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
+        }
+    }
+    //    private void xoaKH() {
+//        try {
+//             int selectRow = tbQLNV.getSelectedRow();
+//            listNhanVien.remove(selectRow);
+//             this.loadTable();
+//        } catch (Exception e) {
+//        }
+
+//            if (listKhachHang.size() <= 0) {
+//                JOptionPane.showMessageDialog(this, "Không còn dữ liệu để xóa");
+//                return;
+//            }
+//            int hoi = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không ?", "Xóa Nhân Viên", JOptionPane.YES_NO_OPTION);
+//            if (hoi != JOptionPane.YES_OPTION) {
+//                return;
+//            }
+//            //xóa trong list
+//            
+//            listKhachHang.remove(index);
+//            JOptionPane.showMessageDialog(this,"Xóa thành côngg");
+//            showDeail();
+    //XÓA trong csdl
+//            String sql = "delete from KHACHHANG\n"
+//                    + "where maKH=?";
+//            PreparedStatement ps = cn.prepareStatement(sql);
+//            ps.setString(1, txtMaKH.getText());
+//            int row = ps.executeUpdate();
+//            if (row > 0) {
+//                JOptionPane.showMessageDialog(this, "Xóa thành công");
+//                //sử lý sau khi xóa
+//                if (listKhachHang.size() == 0) {
+//                    clear();
+//                }else{
+//                  if(index == listKhachHang.size()){
+//                    index--;
+//                  }
+//                  showDeail();
+//                  ps.close();
+//                }
+//            }else{
+//               JOptionPane.showMessageDialog(this, "Bạn không xóa được khách hàng nào");
+//            }
+//        } catch (Exception e) {
+//               JOptionPane.showMessageDialog(this, "Lỗi xóa ");
+//        }
+//    }
 }

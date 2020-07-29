@@ -7,12 +7,14 @@ package myJInternalFrame;
 
 import connectionSQL.connectionSQL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 import myClass.ClassSanPham;
 
 /**
@@ -23,6 +25,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
 
     List<ClassSanPham> listSanPham = new ArrayList<>();
     Connection cn;
+    int index = 0;
 
     public QuanLySanPham() {
         initComponents();
@@ -111,6 +114,11 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         btnSuaSP.setForeground(new java.awt.Color(72, 61, 139));
         btnSuaSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Edit_32x32.png"))); // NOI18N
         btnSuaSP.setText("Sửa thông tin SP");
+        btnSuaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaSPActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
@@ -122,6 +130,11 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         btnXoaSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete_32x32.png"))); // NOI18N
         btnXoaSP.setText("Xóa sản phẩm");
         btnXoaSP.setPreferredSize(new java.awt.Dimension(293, 41));
+        btnXoaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaSPActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
@@ -182,7 +195,6 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         lbTrangThai.setText("  Trạng thái:");
 
         cbbTrangThai.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
-        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mới - Chưa Active", "Mới - Đã Active" }));
         cbbTrangThai.setToolTipText("");
 
         javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
@@ -267,15 +279,24 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
-     if(this.batLoi()){
-       JOptionPane.showMessageDialog(this,"Đăng Nhập Thành công");
-       
-     }
+        if (this.batLoi()) {
+            this.themSp();
+
+        }
     }//GEN-LAST:event_btnThemSPActionPerformed
 
     private void tbQLSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLSPMouseClicked
         showDetail();
     }//GEN-LAST:event_tbQLSPMouseClicked
+
+    private void btnSuaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaSPActionPerformed
+        this.suaSp();
+    }//GEN-LAST:event_btnSuaSPActionPerformed
+
+    private void btnXoaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSPActionPerformed
+        this.xoaSPKhoiTable();
+        this.clear();
+    }//GEN-LAST:event_btnXoaSPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -378,6 +399,14 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
 
         } else {
             tma = true;
+            for (int i = 0; i < listSanPham.size(); i++) {
+                ClassSanPham sp = listSanPham.get(i);
+                if (txtMaSP.getText().equalsIgnoreCase(sp.getMaSP())) {
+                    JOptionPane.showMessageDialog(this, "Trùng mã Sản phẩm");
+                    tma = false;
+                    break;
+                }
+            }
         }
         //bắt lỗi tên sản phẩm 
         if (tma) {
@@ -410,7 +439,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                 }
             }
         }
-            //Bắt lỗi số lượng
+        //Bắt lỗi số lượng
         if (tDonGia) {
             if (txtSoLuongSP.getText().length() == 0) {
                 JOptionPane.showMessageDialog(this, "Không được để trống số lượng");
@@ -431,8 +460,8 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                 }
             }
         }
-        
-         //bắt lỗi cấu hình
+
+        //bắt lỗi cấu hình
         if (tSL) {
             if (taCauHinh.getText().length() == 0) {
                 JOptionPane.showMessageDialog(this, "Không để trống cấu hình");
@@ -441,11 +470,101 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                 tCH = true;
             }
         }
-        if(tCH){
-          return true;
-        }else{
-          return false;
+        if (tCH) {
+            return true;
+        } else {
+            return false;
         }
+
+    }
+
+    private void themSp() {
+        try {
+            String sql = "INSERT INTO SANPHAM \n"
+                    + "VALUES(?,?,?,?,?)";
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(1, txtMaSP.getText());
+            ps.setString(2, txtTenSP.getText());
+            ps.setString(3, txtDonGia.getText());
+            ps.setString(4, txtSoLuongSP.getText());
+            ps.setString(5, taCauHinh.getText());
+            ps.setString(6, (String) cbbTrangThai.getSelectedItem());
+
+            int row = ps.executeUpdate();
+            if (row > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công!");
+                index = listSanPham.size() - 1;
+                showDetail();
+            } else {
+                JOptionPane.showMessageDialog(this, "Lỗi thêm");
+            }
+            ps.close();
+            fillToTable();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi thêm");
+        }
+    }
+
+    private void suaSp() {
+        try {
+            String sql = "UPDATE KHACHHANG \n"
+                    + "SET TENSP =?,SOLUONG=?,DONGIA=?,CAUHINH=?,TRANGTHAI=?\n"
+                    + "WHERE MASP=?";
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(1, txtMaSP.getText());
+            ps.setString(2, txtTenSP.getText());
+            ps.setString(3, txtDonGia.getText());
+            ps.setString(4, txtSoLuongSP.getText());
+            ps.setString(5, taCauHinh.getText());
+            ps.setString(6, (String) cbbTrangThai.getSelectedItem());
+
+            int row = ps.executeUpdate();
+            if (row > 0) {
+                JOptionPane.showMessageDialog(this, "Sửa sản phẩm thành công!");
+                index = listSanPham.size() - 1;
+                showDetail();
+            } else {
+                JOptionPane.showMessageDialog(this, "Lỗi sửa");
+            }
+            ps.close();
+            fillToTable();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi sửa");
+        }
+    }
+
+    private void xoaSPKhoiTable() {
+        int selectRow = tbQLSP.getSelectedRow();
+        listSanPham.remove(selectRow);
+        this.loadTable();
+    }
+
+    private void loadTable() {
+        DefaultTableModel model = (DefaultTableModel) tbQLSP.getModel();
+        model.setRowCount(0);
+
+        for (int i = 0; i < listSanPham.size(); i++) {
+            Object[] sanPhamObject = new Object[]{
+                listSanPham.get(i).getMaSP(),
+                listSanPham.get(i).getTenSP(),
+                listSanPham.get(i).getDonGia(),
+                listSanPham.get(i).getSoLuong(),
+                listSanPham.get(i).getCauHinh(),
+                listSanPham.get(i).getTrangThai()};
+
+            model.addRow(sanPhamObject);
+
+        }
+    }
+
+    private void clear() {
+        txtDonGia.setText("");
+        txtMaSP.setText("");
+        txtSoLuongSP.setText("");
+        txtTenSP.setText("");
+        taCauHinh.setText("");
 
     }
 }
