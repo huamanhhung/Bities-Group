@@ -61,7 +61,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         tbQLSP = new javax.swing.JTable();
         lbTenSP = new javax.swing.JLabel();
         cpCauHinh = new javax.swing.JScrollPane();
-        taCauHinh = new javax.swing.JTextArea();
+        txtCauHinh = new javax.swing.JTextArea();
         txtSoLuongSP = new javax.swing.JTextField();
         lbCauHinh = new javax.swing.JLabel();
         lbTrangThai = new javax.swing.JLabel();
@@ -179,10 +179,10 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         lbTenSP.setForeground(new java.awt.Color(252, 244, 252));
         lbTenSP.setText("Tên sản phẩm:");
 
-        taCauHinh.setColumns(20);
-        taCauHinh.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
-        taCauHinh.setRows(5);
-        cpCauHinh.setViewportView(taCauHinh);
+        txtCauHinh.setColumns(20);
+        txtCauHinh.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        txtCauHinh.setRows(5);
+        cpCauHinh.setViewportView(txtCauHinh);
 
         txtSoLuongSP.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
 
@@ -290,11 +290,11 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tbQLSPMouseClicked
 
     private void btnSuaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaSPActionPerformed
-        this.suaSp();
+        this.suaSP();
     }//GEN-LAST:event_btnSuaSPActionPerformed
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-        
+
         this.clear();
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
@@ -315,8 +315,8 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbTenSP;
     private javax.swing.JLabel lbTrangThai;
     private javax.swing.JPanel pnButton;
-    private javax.swing.JTextArea taCauHinh;
     private javax.swing.JTable tbQLSP;
+    private javax.swing.JTextArea txtCauHinh;
     private javax.swing.JTextField txtDonGia;
     private javax.swing.JTextField txtMaSP;
     private javax.swing.JTextField txtSoLuongSP;
@@ -368,7 +368,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
             txtTenSP.setText(sp.getTenSP());
             txtDonGia.setText(sp.getDonGia() + "");
             txtSoLuongSP.setText(sp.getSoLuong() + "");
-            taCauHinh.setText(sp.getCauHinh());
+            txtCauHinh.setText(sp.getCauHinh());
             cbbTrangThai.setSelectedItem(sp.getCauHinh());
         } catch (Exception e) {
         }
@@ -463,7 +463,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
 
         //bắt lỗi cấu hình
         if (tSL) {
-            if (taCauHinh.getText().length() == 0) {
+            if (txtCauHinh.getText().length() == 0) {
                 JOptionPane.showMessageDialog(this, "Không để trống cấu hình");
                 tCH = false;
             } else {
@@ -487,7 +487,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
             ps.setString(2, txtTenSP.getText());
             ps.setString(3, txtDonGia.getText());
             ps.setString(4, txtSoLuongSP.getText());
-            ps.setString(5, taCauHinh.getText());
+            ps.setString(5, txtCauHinh.getText());
             ps.setString(6, (String) cbbTrangThai.getSelectedItem());
 
             int row = ps.executeUpdate();
@@ -506,18 +506,18 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         }
     }
 
-    private void suaSp() {
+    private void suaSP() {
         try {
-            String sql = "UPDATE KHACHHANG \n"
-                    + "SET TENSP =?,SOLUONG=?,DONGIA=?,CAUHINH=?,TRANGTHAI=?\n"
+            String sql = "UPDATE SANPHAM\n"
+                    + "SET TENSP =?, SOLUONG=?, DONGIA=?, CAUHINH=?, TRANGTHAI=?\n"
                     + "WHERE MASP=?";
             PreparedStatement ps = cn.prepareStatement(sql);
-            ps.setString(1, txtMaSP.getText());
-            ps.setString(2, txtTenSP.getText());
+            ps.setString(6, txtMaSP.getText());
+            ps.setString(1, txtTenSP.getText());
+            ps.setString(2, txtSoLuongSP.getText());
             ps.setString(3, txtDonGia.getText());
-            ps.setString(4, txtSoLuongSP.getText());
-            ps.setString(5, taCauHinh.getText());
-            ps.setString(6, (String) cbbTrangThai.getSelectedItem());
+            ps.setString(4, txtCauHinh.getText());
+            ps.setString(5, (String) cbbTrangThai.getSelectedItem());
 
             int row = ps.executeUpdate();
             if (row > 0) {
@@ -534,7 +534,6 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Lỗi sửa");
         }
     }
-
 
     private void loadTable() {
         DefaultTableModel model = (DefaultTableModel) tbQLSP.getModel();
@@ -559,7 +558,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         txtMaSP.setText("");
         txtSoLuongSP.setText("");
         txtTenSP.setText("");
-        taCauHinh.setText("");
+        txtCauHinh.setText("");
 
     }
 }
