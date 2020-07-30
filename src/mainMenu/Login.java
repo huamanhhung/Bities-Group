@@ -5,6 +5,12 @@
  */
 package mainMenu;
 
+import com.sun.net.httpserver.Authenticator;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -161,30 +167,53 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-        // TODO add your handling code here:
-        String ten = txtTenDN.getText();
-        if(ten.equals("")){
-            JOptionPane.showMessageDialog(this,"Chưa điền tên đăng nhập");
-            return;
+        try {
+            String user = "sa", password = "123";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://ADMIN\\SQLEXPRESS:1433;databaseName=QLIPHONE";
+            Connection cn = DriverManager.getConnection(url, user, password);
+            String sql = "Select * from nguoidung where usename=? and password=?";
+
+            PreparedStatement pts = cn.prepareStatement(sql);
+            pts.setString(1, txtTenDN.getText());
+            pts.setString(2, tpPassworld.getText());
+            ResultSet rs = pts.executeQuery();
+
+            if (rs.next()) {
+                QuanLiBanHangIphone Qli = new QuanLiBanHangIphone();
+                Qli.setVisible(true);
+                setVisible(false);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Sai mật khẩu ");
+                txtTenDN.requestFocus();
+            }
+            cn.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
-        char[] pass0 = tpPassworld.getPassword();
-        String pass ="";
-        for (char c : pass0) {
-            pass = pass + String.valueOf(c);
-        }
-       if(pass.equals("")){
-           JOptionPane.showMessageDialog(this, "Mật khẩu trống", "Thông báo", JOptionPane.WARNING_MESSAGE);
-           return;
-       }
-       else{
-        JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
-           setVisible(false);
-           QuanLiBanHangIphone quanLi = new QuanLiBanHangIphone();
-           quanLi.setVisible(true);
-    }
 
     }//GEN-LAST:event_btnDangNhapActionPerformed
-
+    public boolean batLoi() {
+        boolean tdn = false, matkhau = false;
+        if (txtTenDN.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Mời bạn chọn tên đăng nhập");
+            tdn = false;
+        } else {
+            tdn = true;
+        }
+        if (tpPassworld.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Mời bạn nhập mật khẩu");
+            matkhau = false;
+        } else {
+            matkhau = true;
+        }
+        if (tdn == true && matkhau == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     private void tpPassworldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpPassworldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tpPassworldActionPerformed
