@@ -22,9 +22,11 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    Connection con;
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
+        con = connectionSQL.connectionSQL.ketnoi("QLIPHONE");
     }
 
     /**
@@ -37,7 +39,6 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         kGradientPanel1 = new keeptoo.KGradientPanel();
-        cbNhoMatKhau = new javax.swing.JCheckBox();
         btnHuy = new javax.swing.JButton();
         btnDangNhap = new javax.swing.JButton();
         lbMatKhau = new javax.swing.JLabel();
@@ -52,12 +53,6 @@ public class Login extends javax.swing.JFrame {
         kGradientPanel1.setkEndColor(new java.awt.Color(229, 189, 240));
         kGradientPanel1.setkStartColor(new java.awt.Color(168, 168, 233));
         kGradientPanel1.setPreferredSize(new java.awt.Dimension(624, 428));
-
-        cbNhoMatKhau.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        cbNhoMatKhau.setForeground(new java.awt.Color(252, 244, 252));
-        cbNhoMatKhau.setText("Nhớ mật khẩu ");
-        cbNhoMatKhau.setIconTextGap(10);
-        cbNhoMatKhau.setOpaque(false);
 
         btnHuy.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         btnHuy.setForeground(new java.awt.Color(72, 61, 139));
@@ -98,25 +93,19 @@ public class Login extends javax.swing.JFrame {
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(lbTitle)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(lbTitle)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbTenDangNhap)
-                            .addComponent(lbMatKhau))
-                        .addGap(37, 37, 37)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTenDN)
-                            .addComponent(tpPassworld))
-                        .addGap(17, 17, 17))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(cbNhoMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(lbTenDangNhap)
+                    .addComponent(lbMatKhau))
+                .addGap(37, 37, 37)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTenDN)
+                    .addComponent(tpPassworld))
+                .addGap(25, 25, 25))
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,7 +118,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -139,13 +128,11 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addComponent(tpPassworld, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)))
-                .addGap(33, 33, 33)
-                .addComponent(cbNhoMatKhau)
-                .addGap(34, 34, 34)
+                .addGap(55, 55, 55)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDangNhap)
                     .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53))
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -158,9 +145,9 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 454, Short.MAX_VALUE)
+            .addGap(0, 375, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
+                .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE))
         );
 
         pack();
@@ -168,13 +155,9 @@ public class Login extends javax.swing.JFrame {
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
        try {
-            String user = "sa", password = "123";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://ADMIN\\SQLEXPRESS:1433;databaseName=QLIPHONE";
-            Connection cn = DriverManager.getConnection(url, user, password);
             String sql = "Select * from nguoidung where usename=? and password=?";
 
-            PreparedStatement pts = cn.prepareStatement(sql);
+            PreparedStatement pts = con.prepareStatement(sql);
             pts.setString(1, txtTenDN.getText());
             pts.setString(2, tpPassworld.getText());
             ResultSet rs = pts.executeQuery();
@@ -188,7 +171,6 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Sai mật khẩu ");
                 txtTenDN.requestFocus();
             }
-            cn.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -255,7 +237,6 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangNhap;
     private javax.swing.JButton btnHuy;
-    private javax.swing.JCheckBox cbNhoMatKhau;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lbMatKhau;
     private javax.swing.JLabel lbTenDangNhap;
