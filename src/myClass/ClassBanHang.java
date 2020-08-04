@@ -17,8 +17,8 @@ public class ClassBanHang implements Serializable{
     private String makh;
     private String tenkh;
     private int soluong;
-    private double dongia;
-    private double thanhtien;
+    private String dongia;
+    private String thanhtien;
     //
 
     public ClassBanHang() {
@@ -73,19 +73,19 @@ public class ClassBanHang implements Serializable{
         this.soluong = soluong;
     }
 
-    public double getDongia() {
+    public String getDongia() {
         return dongia;
     }
 
-    public void setDongia(double dongia) {
+    public void setDongia(String dongia) {
         this.dongia = dongia;
     }
 
-    public double getThanhtien() {
+    public String getThanhtien() {
         return thanhtien;
     }
 
-    public void setThanhtien(double thanhtien) {
+    public void setThanhtien(String thanhtien) {
         this.thanhtien = thanhtien;
     }
     
