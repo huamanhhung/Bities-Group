@@ -29,7 +29,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
 
     public QuanLyNhanVien() {
         initComponents();
-        cn = connectionSQL.ketnoi(title);
+        cn = connectionSQL.ketnoi("QLIPHONE");
 
         fillToTable();
     }
@@ -310,7 +310,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
 
         try {
             listNhanVien.clear();
-            Statement st = connectionSQL.ketnoi(title).createStatement();
+            Statement st = connectionSQL.ketnoi("QLIPHONE").createStatement();
             String sql = "SELECT * FROM NHANVIEN";
             ResultSet rs = st.executeQuery(sql);
 

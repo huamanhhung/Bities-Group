@@ -21,7 +21,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
     public QuanLyKhachHang() throws SQLException {
         initComponents();
-        cn = connectionSQL.ketnoi(title);
+        cn = connectionSQL.ketnoi("QLIPHONE");
         fillToTable();
 
     }
@@ -312,7 +312,7 @@ private void fillToTable() {
 
         try {
             listKhachHang.clear();
-            Statement st = connectionSQL.ketnoi(title).createStatement();
+            Statement st = connectionSQL.ketnoi("QLIPHONE").createStatement();
             String sql = "SELECT * FROM KHACHHANG";
             ResultSet rs = st.executeQuery(sql);
 

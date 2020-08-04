@@ -29,7 +29,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
 
     public QuanLySanPham() {
         initComponents();
-        cn = connectionSQL.ketnoi(title);
+        cn = connectionSQL.ketnoi("QLIPHONE");
         fillToTable();
         addsp();
 
@@ -328,7 +328,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
 
         try {
             listSanPham.clear();
-            Statement st = connectionSQL.ketnoi(title).createStatement();
+            Statement st = connectionSQL.ketnoi("QLIPHONE").createStatement();
             String sql = "SELECT * FROM SANPHAM";
             ResultSet rs = st.executeQuery(sql);
 
@@ -342,7 +342,6 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
 
                 ClassSanPham sp = new ClassSanPham(maSP, tenSP, soLuong, donGia, cauHinh, trangThai);
                 listSanPham.add(sp);
-                System.out.println(listSanPham.size());
             }
             for (int i = 0; i < listSanPham.size(); i++) {
                 Object[] sanPhamObject = new Object[]{

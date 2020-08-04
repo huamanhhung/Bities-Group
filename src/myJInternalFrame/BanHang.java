@@ -36,7 +36,7 @@ public class BanHang extends javax.swing.JInternalFrame {
 
     public BanHang() {
         initComponents();
-        con = connectionSQL.ketnoi(title);
+        con = connectionSQL.ketnoi("QLIPHONE");
         this.addCBX();
     }
 

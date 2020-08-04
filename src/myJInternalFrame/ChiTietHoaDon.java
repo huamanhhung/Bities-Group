@@ -30,7 +30,7 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
 
     public ChiTietHoaDon() {
         initComponents();
-        cn = connectionSQL.ketnoi(title);
+        cn = connectionSQL.ketnoi("QLIPHONE");
         fillToTable();
     }
 
@@ -293,7 +293,7 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
 
         try {
             listCTHD.clear();
-            Statement st = connectionSQL.ketnoi(title).createStatement();
+            Statement st = connectionSQL.ketnoi("QLIPHONE").createStatement();
 
             String sql = "SELECT * FROM CTHOADON";
 

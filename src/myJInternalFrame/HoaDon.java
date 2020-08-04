@@ -24,7 +24,7 @@ public class HoaDon extends javax.swing.JInternalFrame {
 
     public HoaDon() throws SQLException {
         initComponents();
-        cn = connectionSQL.ketnoi(title);
+        cn = connectionSQL.ketnoi("QLIPHONE");
         fillToTable();
 
     }
@@ -367,7 +367,7 @@ public class HoaDon extends javax.swing.JInternalFrame {
 
         try {
             listHoaDon.clear();
-            Statement st = connectionSQL.ketnoi(title).createStatement();
+            Statement st = connectionSQL.ketnoi("QLIPHONE").createStatement();
             String sql = "select * from hoadon";
             ResultSet rs = st.executeQuery(sql);
 
