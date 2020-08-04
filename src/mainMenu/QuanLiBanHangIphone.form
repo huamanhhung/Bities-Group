@@ -45,6 +45,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Chuy&#x1ec3;n t&#xe0;i kho&#x1ea3;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemDangKy">
               <Properties>

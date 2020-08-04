@@ -167,7 +167,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-        try {
+       try {
             String user = "sa", password = "123";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://ADMIN\\SQLEXPRESS:1433;databaseName=QLIPHONE";
@@ -192,7 +192,6 @@ public class Login extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-
     }//GEN-LAST:event_btnDangNhapActionPerformed
     public boolean batLoi() {
         boolean tdn = false, matkhau = false;
