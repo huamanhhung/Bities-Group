@@ -415,14 +415,14 @@
                               <Component id="txtNgayMua" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtMaNV" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtMaHD" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtNgayMua1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtKH2" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
                                   <Component id="lbNgayMua2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                                  <Component id="txtNgayMua2" max="32767" attributes="0"/>
+                                  <Component id="txtTenKH2" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
@@ -434,7 +434,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="lbTongTien" min="-2" pref="389" max="-2" attributes="0"/>
+                                  <Component id="lbTongTien2" min="-2" pref="389" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="636" max="-2" attributes="0"/>
                                   <Component id="btnInHoaDon2" min="-2" pref="218" max="-2" attributes="0"/>
                               </Group>
@@ -468,15 +468,15 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbNgayMua1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNgayMua1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="txtKH2" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="lbNgayMua2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNgayMua2" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="txtTenKH2" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="cpInHoaDon" min="-2" pref="314" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbTongTien" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbTongTien2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnInHoaDon2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -569,7 +569,7 @@
                 </Property>
                 <Property name="rowHeight" type="int" value="25"/>
                 <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="ff" green="66" red="66" type="rgb"/>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -578,7 +578,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="lbTongTien">
+        <Component class="javax.swing.JLabel" name="lbTongTien2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Monospaced" size="24" style="1"/>
@@ -614,7 +614,7 @@
             <Property name="text" type="java.lang.String" value="M&#xe3; KH:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNgayMua1">
+        <Component class="javax.swing.JTextField" name="txtKH2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Monospaced" size="24" style="1"/>
@@ -633,7 +633,7 @@
             <Property name="text" type="java.lang.String" value="T&#xea;n KH:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNgayMua2">
+        <Component class="javax.swing.JTextField" name="txtTenKH2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Monospaced" size="24" style="1"/>
