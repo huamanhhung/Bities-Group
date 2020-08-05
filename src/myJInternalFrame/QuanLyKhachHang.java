@@ -23,7 +23,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         initComponents();
         cn = connectionSQL.ketnoi("QLIPHONE");
         fillToTable();
-
+        setTextMaKH();
     }
 
     /**
@@ -69,6 +69,8 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         lbMaKH.setForeground(new java.awt.Color(252, 244, 252));
         lbMaKH.setText(" Mã khách hàng:");
 
+        txtMaKH.setEditable(false);
+        txtMaKH.setBackground(new java.awt.Color(216, 216, 216));
         txtMaKH.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
 
         tbQLKH.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
@@ -264,12 +266,20 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             this.themKH();
             this.clear();
             this.fillToTable();
+            
+            int index = listKhachHang.size() - 1;
+            txtMaKH.setText(listKhachHang.get(index).getMaKH());
+            txtTenKH.setText(listKhachHang.get(index).getTenKH());
+            txtSoDT.setText(listKhachHang.get(index).getSdt());
+            taDiaChi.setText(listKhachHang.get(index).getDiaChi());
+
         }
 
     }//GEN-LAST:event_btnThemKHActionPerformed
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         this.clear();
+        setTextMaKH();
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void tbQLKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLKHMouseClicked
@@ -306,7 +316,8 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSoDT;
     private javax.swing.JTextField txtTenKH;
     // End of variables declaration//GEN-END:variables
-private void fillToTable() {
+
+    private void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tbQLKH.getModel();
         model.setRowCount(0);
 
@@ -477,8 +488,6 @@ private void fillToTable() {
         taDiaChi.setText("");
     }
 
-   
-
     private void loadTable() {
         DefaultTableModel model = (DefaultTableModel) tbQLKH.getModel();
         model.setRowCount(0);
@@ -493,6 +502,7 @@ private void fillToTable() {
 
         }
     }
+
     private void timKH() {
         DefaultTableModel model = (DefaultTableModel) tbQLKH.getModel();
         String option[] = {"Tìm theo mã KH", "Tìm theo tên KH", "Tìm theo SĐT KH", "Hủy"};
@@ -620,4 +630,28 @@ private void fillToTable() {
 //               JOptionPane.showMessageDialog(this, "Lỗi xóa ");
 //        }
 //    }
+    private void setTextMaKH() {
+        int lastKH = listKhachHang.size() + 1;
+        String first = "KH";
+        String first1 = "KH0";
+
+        if (lastKH < 10) {
+            txtMaKH.setText(first1 + lastKH);
+        } else {
+            txtMaKH.setText(first + lastKH);
+        }
+
+//        try {
+//            String sql = "select manv from nhanvien";
+//
+//            PreparedStatement pst = cn.prepareStatement(sql);
+//            
+//            ResultSet rs = pst.executeQuery();
+//            
+//            while(){
+//                
+//            }
+//        } catch (Exception e) {
+//        }
+    }
 }

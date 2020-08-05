@@ -30,8 +30,8 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
     public QuanLyNhanVien() {
         initComponents();
         cn = connectionSQL.ketnoi("QLIPHONE");
-
         fillToTable();
+        setTextMaNV();
     }
 
     /**
@@ -76,6 +76,8 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         lbMaNV.setForeground(new java.awt.Color(252, 244, 252));
         lbMaNV.setText("Mã nhân viên:");
 
+        txtMaNV.setEditable(false);
+        txtMaNV.setBackground(new java.awt.Color(216, 216, 216));
         txtMaNV.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         txtMaNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -404,7 +406,6 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         }
     }
 
-
     private void loadTable() {
         DefaultTableModel model = (DefaultTableModel) tbQLNV.getModel();
         model.setRowCount(0);
@@ -501,7 +502,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     private void clear() {
         txtMaNV.setText("");
         txtTenNV.setText("");
@@ -572,5 +573,32 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
             return false;
         }
     }
-}
 
+    private void setTextMaNV() {
+
+        int size = 0;
+
+        try {
+            String sql = "select manv from nhanvien";
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                size++;
+            }
+
+        } catch (Exception e) {
+        }
+
+        int lastNV = size + 1;
+        String first = "NV";
+        String first1 = "NV0";
+
+        if (lastNV < 10) {
+            txtMaNV.setText(first1 + lastNV);
+        } else {
+            txtMaNV.setText(first + lastNV);
+        }
+        System.out.println(size);
+    }
+}
