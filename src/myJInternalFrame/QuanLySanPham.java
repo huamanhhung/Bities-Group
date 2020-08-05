@@ -77,6 +77,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         kGradientPanel4.setkGradientFocus(1000);
         kGradientPanel4.setkStartColor(new java.awt.Color(168, 168, 233));
 
+        txtTenSP.setEditable(false);
         txtTenSP.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
 
         lbDonGia.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
@@ -155,6 +156,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         lbMaSP.setForeground(new java.awt.Color(252, 244, 252));
         lbMaSP.setText(" Mã sản phẩm:");
 
+        txtMaSP.setEditable(false);
         txtMaSP.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
 
         tbQLSP.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
@@ -179,6 +181,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         lbTenSP.setForeground(new java.awt.Color(252, 244, 252));
         lbTenSP.setText("Tên sản phẩm:");
 
+        txtCauHinh.setEditable(false);
         txtCauHinh.setColumns(20);
         txtCauHinh.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         txtCauHinh.setRows(5);
@@ -294,7 +297,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSuaSPActionPerformed
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-
+        this.elb();
         this.clear();
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
@@ -559,5 +562,11 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         txtTenSP.setText("");
         txtCauHinh.setText("");
 
+    }
+    private void elb(){
+      txtMaSP.setEditable(true);
+      txtTenSP.setEditable(true);
+      txtCauHinh.setEditable(true);
+      
     }
 }

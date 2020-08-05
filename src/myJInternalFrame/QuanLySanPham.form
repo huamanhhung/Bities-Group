@@ -141,6 +141,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtTenSP">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Monospaced" size="24" style="0"/>
             </Property>
@@ -297,6 +298,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtMaSP">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Monospaced" size="24" style="0"/>
             </Property>
@@ -390,6 +392,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="txtCauHinh">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Monospaced" size="24" style="0"/>
