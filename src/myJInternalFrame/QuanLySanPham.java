@@ -284,12 +284,14 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
         if (this.batLoi()) {
             this.themSp();
+            
 
         }
     }//GEN-LAST:event_btnThemSPActionPerformed
 
     private void tbQLSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLSPMouseClicked
-        showDetail();
+        showDetail(); 
+        elbfale();
     }//GEN-LAST:event_tbQLSPMouseClicked
 
     private void btnSuaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaSPActionPerformed
@@ -297,7 +299,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSuaSPActionPerformed
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-        this.elb();
+       this.elb();
         this.clear();
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
@@ -483,7 +485,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     private void themSp() {
         try {
             String sql = "INSERT INTO SANPHAM \n"
-                    + "VALUES(?,?,?,?,?)";
+                    + "VALUES(?,?,?,?,?,?)";
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(1, txtMaSP.getText());
             ps.setString(2, txtTenSP.getText());
@@ -498,13 +500,14 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                 index = listSanPham.size() - 1;
                 showDetail();
             } else {
-                JOptionPane.showMessageDialog(this, "Lỗi thêm");
+                JOptionPane.showMessageDialog(this, "Lỗi thêm nè");
             }
             ps.close();
             fillToTable();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Lỗi thêm");
+            e.printStackTrace();
         }
     }
 
@@ -567,6 +570,12 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
       txtMaSP.setEditable(true);
       txtTenSP.setEditable(true);
       txtCauHinh.setEditable(true);
-      
+      cbbTrangThai.enable(true);
+    }
+        private void elbfale(){
+      txtMaSP.setEditable(false);
+      txtTenSP.setEditable(false);
+      txtCauHinh.setEditable(false); 
+      cbbTrangThai.enable(false);
     }
 }
