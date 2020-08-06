@@ -6,6 +6,7 @@
 package mainMenu;
 
 import com.sun.net.httpserver.Authenticator;
+import connectionSQL.connectionSQL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,10 +25,20 @@ public class Login extends javax.swing.JFrame {
      */
     Connection cn;
     boolean vaitro;
-
+    
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
+        try {
+            String user = "sa", password = "123";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://DESKTOP-BFNI15L\\SQLEXPRESS:1433;databaseName=QLIPHONE";
+            cn = DriverManager.getConnection(url, user, password);
+            if (cn != null) {
+                System.out.println("Kết nối thành công");
+            }
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -66,6 +77,11 @@ public class Login extends javax.swing.JFrame {
         btnHuy.setForeground(new java.awt.Color(72, 61, 139));
         btnHuy.setText("Hủy");
         btnHuy.setMaximumSize(new java.awt.Dimension(159, 41));
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyActionPerformed(evt);
+            }
+        });
 
         btnDangNhap.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         btnDangNhap.setForeground(new java.awt.Color(72, 61, 139));
@@ -170,44 +186,46 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-        try {
-            String user = "sa", password = "123";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://ADMIN\\SQLEXPRESS:1433;databaseName=QLIPHONE";
-            Connection cn = DriverManager.getConnection(url, user, password);
-            String sql = "Select * from nguoidung where usename=? and password=?";
-
-            PreparedStatement pts = cn.prepareStatement(sql);
-            pts.setString(1, txtTenDN.getText());
-            String passWord = new String(tpPassworld.getPassword());
-            pts.setString(2, passWord);
-            ResultSet rs = pts.executeQuery();
-
-            while (rs.next()) {
-               if(rs.getString(3).equals("1")){
-                   vaitro=true;
-               }
-               else{
-                   vaitro=false;
-               }
-
-            }
-            rs.close();
-            pts.close();
-
-            if (vaitro == true) {
-                JOptionPane.showMessageDialog(this,  "Bạn đã đăng nhập với vai trò quản trị viên");
+        if (this.batLoi()) {
+            String name = "", passt = "", vaitroT = "";
+            String pass = new String(tpPassworld.getPassword());
+            String sql = "select * from NGUOIDUNG\n"
+                    + "WHERE USENAME = ?";
+            try {
                 
-            } else {
-                //xử lý khi đăng nhập thành công                
-                JOptionPane.showMessageDialog(this,  "Bạn đã đăng nhập với vai trò nhân viên");
-//            
+                PreparedStatement pstm = cn.prepareStatement(sql);
+                pstm.setString(1, txtTenDN.getText());
+                ResultSet rs = pstm.executeQuery();
+                while (rs.next()) {
+                    name = rs.getString(1);
+                    passt = rs.getString(2);
+                    vaitroT = rs.getString(3);
+                }
+                if (name.length() == 0) {
+                    JOptionPane.showMessageDialog(this, "Không tồn tại người dùng");
+                    return;
+                } else {
+                    if (!pass.trim().equalsIgnoreCase(passt)) {
+                        JOptionPane.showMessageDialog(this, "Sai mật khẩu mời đăng nhập lại");
+                        return;
+                    } else {
+                        if (vaitroT.equals("1")) {
+                            JOptionPane.showMessageDialog(this, "Bạn đăng nhập quyền quản trị");
+                            vaitro = true;
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Bạn là nhân viên");
+                            vaitro = false;
+                        }
+                        
+                        QuanLiBanHangIphone ql = new QuanLiBanHangIphone(vaitro, name);
+                        ql.setLocationRelativeTo(null);
+                        ql.setVisible(true);
+                        this.setVisible(false);
+                    }
+                }
+                
+            } catch (Exception e) {
             }
-            QuanLiBanHangIphone ql = new QuanLiBanHangIphone();
-            ql.setVisible(true);
-        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, "Lỗi Login");
-            e.printStackTrace();
         }
     }//GEN-LAST:event_btnDangNhapActionPerformed
 //    public boolean role(){
@@ -237,6 +255,11 @@ public class Login extends javax.swing.JFrame {
     private void tpPassworldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpPassworldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tpPassworldActionPerformed
+
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnHuyActionPerformed
 
     /**
      * @param args the command line arguments

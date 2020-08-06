@@ -8,6 +8,7 @@ package mainMenu;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import myJInternalFrame.BanHang;
 import myJInternalFrame.HoaDon;
 import myJInternalFrame.QuanLySanPham;
@@ -26,7 +27,12 @@ public class QuanLiBanHangIphone extends javax.swing.JFrame {
     /**
      * Creates new form demoMDI
      */
-    public QuanLiBanHangIphone() {
+    boolean vaiTro;
+    String nhanVien;
+
+    public QuanLiBanHangIphone(boolean vaitro, String nhanvien) {
+        vaiTro = vaitro;
+        nhanVien = nhanvien;
         initComponents();
     }
 
@@ -215,11 +221,15 @@ public class QuanLiBanHangIphone extends javax.swing.JFrame {
 
     private void menuItemDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemDangKyActionPerformed
         // TODO add your handling code here:
-        DangKy dk = new DangKy();
-        Desktop.add(dk);
-        dk.setVisible(true);
-        dk.setLocation((Desktop.WIDTH - dk.WIDTH) / 2, (Desktop.HEIGHT - dk.HEIGHT) / 2);
-        System.out.println(Desktop.WIDTH);
+        if (vaiTro) {
+            DangKy dk = new DangKy();
+            Desktop.add(dk);
+            dk.setVisible(true);
+            dk.setLocation((Desktop.WIDTH - dk.WIDTH) / 2, (Desktop.HEIGHT - dk.HEIGHT) / 2);
+            System.out.println(Desktop.WIDTH);
+        } else {
+            JOptionPane.showMessageDialog(this, "Chức năng này chỉ dành cho quản lí");
+        }
 
     }//GEN-LAST:event_menuItemDangKyActionPerformed
 
@@ -246,6 +256,7 @@ public class QuanLiBanHangIphone extends javax.swing.JFrame {
         QuanLySanPham qlsp = new QuanLySanPham();
         Desktop.add(qlsp);
         qlsp.setVisible(true);
+        
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -278,7 +289,7 @@ public class QuanLiBanHangIphone extends javax.swing.JFrame {
 
     private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
         // TODO add your handling code here:
-        BanHang bh = new BanHang();
+        BanHang bh = new BanHang(nhanVien);
         Desktop.add(bh);
         bh.setVisible(true);
         jPanel1.setVisible(false);
@@ -288,53 +299,58 @@ public class QuanLiBanHangIphone extends javax.swing.JFrame {
 
     private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
         // TODO add your handling code here:
-        QuanLyNhanVien qlnv = new QuanLyNhanVien();
-        Desktop.add(qlnv);
-        qlnv.setVisible(true);
+        if (vaiTro) {
+            QuanLyNhanVien qlnv = new QuanLyNhanVien();
+            Desktop.add(qlnv);
+            qlnv.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Chức năng này chỉ dành cho quản lý");
+        }
     }//GEN-LAST:event_jMenu8MouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         Login lg = new Login();
         lg.setVisible(true);
-        
+        this.setVisible(false);
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuanLiBanHangIphone.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuanLiBanHangIphone.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuanLiBanHangIphone.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuanLiBanHangIphone.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new QuanLiBanHangIphone().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(QuanLiBanHangIphone.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(QuanLiBanHangIphone.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(QuanLiBanHangIphone.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(QuanLiBanHangIphone.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new QuanLiBanHangIphone().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Desktop;
