@@ -17,20 +17,24 @@ public class ClassBanHang implements Serializable{
     private String makh;
     private String tenkh;
     private int soluong;
-    private String dongia;
-    private String thanhtien;
+    private double dongia;
+    private double thanhtien;
     //
 
     public ClassBanHang() {
     }
 
-    public ClassBanHang(String masp, String tensp, String makh, String tenkh, int soluong) {
+    public ClassBanHang(String masp, String tensp, String makh, String tenkh, int soluong, double dongia, double thanhtien) {
         this.masp = masp;
         this.tensp = tensp;
         this.makh = makh;
         this.tenkh = tenkh;
         this.soluong = soluong;
+        this.dongia = dongia;
+        this.thanhtien = thanhtien;
     }
+
+    
     //
 
     public String getMasp() {
@@ -73,19 +77,19 @@ public class ClassBanHang implements Serializable{
         this.soluong = soluong;
     }
 
-    public String getDongia() {
+    public double getDongia() {
         return dongia;
     }
 
-    public void setDongia(String dongia) {
+    public void setDongia(double dongia) {
         this.dongia = dongia;
     }
 
-    public String getThanhtien() {
+    public double getThanhtien() {
         return thanhtien;
     }
 
-    public void setThanhtien(String thanhtien) {
+    public void setThanhtien(double thanhtien) {
         this.thanhtien = thanhtien;
     }
     
