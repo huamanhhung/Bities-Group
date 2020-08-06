@@ -27,7 +27,7 @@ public class DangKy extends javax.swing.JInternalFrame {
     ArrayList<ClassNguoiDung> lstAccount = new ArrayList<>();
     Connection cn;
     int index = 0;
-    
+
     public DangKy() {
         initComponents();
         cn = connectionSQL.ketnoi("QLIPHONE");
@@ -49,17 +49,15 @@ public class DangKy extends javax.swing.JInternalFrame {
         lbMatKhau = new javax.swing.JLabel();
         lbVaiTro = new javax.swing.JLabel();
         lbXacNhan = new javax.swing.JLabel();
-        lbMaNV = new javax.swing.JLabel();
         txtTenDangNhap = new javax.swing.JTextField();
-        txtXacNhan = new javax.swing.JTextField();
-        txtMatKhau = new javax.swing.JTextField();
-        txtMaNV = new javax.swing.JTextField();
         cbbVaiTro = new javax.swing.JComboBox<>();
         btnDangKi = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        tpPass = new javax.swing.JPasswordField();
+        tpConfirm = new javax.swing.JPasswordField();
 
         setClosable(true);
         setIconifiable(true);
@@ -99,22 +97,7 @@ public class DangKy extends javax.swing.JInternalFrame {
         lbXacNhan.setForeground(new java.awt.Color(252, 244, 252));
         lbXacNhan.setText("Xác nhận: ");
 
-        lbMaNV.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        lbMaNV.setForeground(new java.awt.Color(252, 244, 252));
-        lbMaNV.setText("Mã nhân viên:  ");
-
         txtTenDangNhap.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
-
-        txtXacNhan.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
-
-        txtMatKhau.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
-        txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMatKhauActionPerformed(evt);
-            }
-        });
-
-        txtMaNV.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
 
         cbbVaiTro.setEditable(true);
         cbbVaiTro.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
@@ -156,8 +139,6 @@ public class DangKy extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbVaiTro)
-                                    .addComponent(lbMaNV)
                                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                         .addGap(57, 57, 57)
                                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,23 +147,17 @@ public class DangKy extends javax.swing.JInternalFrame {
                                                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(lbXacNhan)
                                                     .addComponent(lbMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addComponent(lbTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                        .addGap(74, 74, 74)
-                                        .addComponent(btnDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(lbTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(35, 35, 35))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbVaiTro)
+                                        .addGap(52, 52, 52)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtMaNV)
-                                            .addComponent(txtMatKhau)
-                                            .addComponent(txtXacNhan)
-                                            .addComponent(txtTenDangNhap)
-                                            .addComponent(cbbVaiTro, 0, 300, Short.MAX_VALUE)))
-                                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                                        .addGap(56, 56, 56)
-                                        .addComponent(btnVaoQuanLi, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 94, Short.MAX_VALUE)))))
+                                    .addComponent(tpPass)
+                                    .addComponent(txtTenDangNhap)
+                                    .addComponent(cbbVaiTro, 0, 351, Short.MAX_VALUE)
+                                    .addComponent(tpConfirm))))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -197,6 +172,10 @@ public class DangKy extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel3)
                                 .addGap(71, 71, 71))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                                .addComponent(btnDangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(btnVaoQuanLi, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
                                 .addComponent(jLabel4)
                                 .addGap(65, 65, 65))))))
         );
@@ -214,30 +193,29 @@ public class DangKy extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbMatKhau)
-                    .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                    .addComponent(tpPass, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbXacNhan))
+                    .addComponent(lbXacNhan)
+                    .addComponent(tpConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addGap(8, 8, 8)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbbVaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbVaiTro))
-                .addGap(27, 27, 27)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbMaNV))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDangKi)
-                    .addComponent(btnVaoQuanLi))
-                .addGap(30, 30, 30))
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbbVaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbVaiTro))
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel4))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDangKi)
+                            .addComponent(btnVaoQuanLi))))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -248,36 +226,30 @@ public class DangKy extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMatKhauActionPerformed
 
     private void btnDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKiActionPerformed
         // TODO add your handling code here:[
         if (this.batLoi() == true) {
             PreparedStatement ps = null;
             try {
-                ps = cn.prepareStatement("insert into nguoidung values(?,?,?,?)");
+                ps = cn.prepareStatement("insert into nguoidung values(?,?,?)");
                 ps.setString(1, txtTenDangNhap.getText());
-                ps.setString(2, txtMatKhau.getText());
-                ps.setString(3, txtMaNV.getText());
+                String passWord = new String(tpPass.getPassword());
+
+                ps.setString(2, passWord);
                 Boolean vaitro;
                 if (cbbVaiTro.getSelectedItem().equals("Quản lí")) {
-                    vaitro=true;
+                    vaitro = true;
+                } else {
+                    vaitro = false;
                 }
-                else{
-                    vaitro=false;
-                }
-                ps.setBoolean(4, vaitro);
-                
+                ps.setBoolean(3, vaitro);
+
                 int ret = ps.executeUpdate();
                 if (ret != -1) {
                     JOptionPane.showMessageDialog(this, "Đăng kí thành công");
@@ -296,9 +268,9 @@ public class DangKy extends javax.swing.JInternalFrame {
                     ex2.printStackTrace();
                 }
             }
-            
+
         }
-        
+
 
     }//GEN-LAST:event_btnDangKiActionPerformed
 
@@ -307,7 +279,7 @@ public class DangKy extends javax.swing.JInternalFrame {
         System.exit(0);
     }//GEN-LAST:event_btnVaoQuanLiActionPerformed
     public boolean batLoi() {
-        boolean tdn = false, matkhau = false, xacnhan = false, manv = false;
+        boolean tdn = false, matkhau = false, xacnhan = false;
         if (txtTenDangNhap.getText().length() == 0) {
             jLabel1.setText("Bạn chưa nhập tên đăng nhập");
             tdn = false;
@@ -315,28 +287,22 @@ public class DangKy extends javax.swing.JInternalFrame {
             jLabel1.setText(null);
             tdn = true;
         }
-        if (txtMatKhau.getText().length() == 0) {
+        if (tpPass.getText().length() == 0) {
             jLabel2.setText("Bạn chưa nhập mật khẩu");
             matkhau = false;
         } else {
             jLabel2.setText(null);
             matkhau = true;
         }
-        if ((txtXacNhan.equals(txtMatKhau))) {
+        if ((tpConfirm.equals(tpPass))) {
             jLabel3.setText("Mật khẩu không khớp");
             xacnhan = false;
         } else {
             xacnhan = true;
             jLabel3.setText(null);
         }
-        if (txtMaNV.getText().length() == 0) {
-            jLabel4.setText("Bạn chưa nhập mã nhân viên");
-            manv = false;
-        } else {
-            manv = true;
-            jLabel4.setText(null);
-        }
-        if (tdn == true && matkhau == true && xacnhan == true && manv == true) {
+       
+        if (tdn == true && matkhau == true && xacnhan == true ) {
             return true;
         } else {
             return false;
@@ -380,14 +346,12 @@ public class DangKy extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lbDangKy;
-    private javax.swing.JLabel lbMaNV;
     private javax.swing.JLabel lbMatKhau;
     private javax.swing.JLabel lbTenDangNhap;
     private javax.swing.JLabel lbVaiTro;
     private javax.swing.JLabel lbXacNhan;
-    private javax.swing.JTextField txtMaNV;
-    private javax.swing.JTextField txtMatKhau;
+    private javax.swing.JPasswordField tpConfirm;
+    private javax.swing.JPasswordField tpPass;
     private javax.swing.JTextField txtTenDangNhap;
-    private javax.swing.JTextField txtXacNhan;
     // End of variables declaration//GEN-END:variables
 }
