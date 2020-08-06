@@ -23,13 +23,16 @@ import myClass.ClassSanPham;
  */
 public class QuanLySanPham extends javax.swing.JInternalFrame {
 
+    boolean VaiTro;
     List<ClassSanPham> listSanPham = new ArrayList<>();
     Connection cn;
     int index = 0;
 
-    public QuanLySanPham() {
+    public QuanLySanPham(boolean vaitro) {
+        VaiTro = vaitro;
         initComponents();
         cn = connectionSQL.ketnoi("QLIPHONE");
+        this.dongChucNang();
         fillToTable();
         addsp();
 
@@ -280,17 +283,25 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    //khởi tạo chức năng dành cho từng đối tượng
 
+    public void dongChucNang() {
+        if (VaiTro) {
+            //
+        } else {
+            btnThemSP.setEnabled(false);
+            btnSuaSP.setEnabled(false);
+        }
+    }
     private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
         if (this.batLoi()) {
             this.themSp();
-            
 
         }
     }//GEN-LAST:event_btnThemSPActionPerformed
 
     private void tbQLSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLSPMouseClicked
-        showDetail(); 
+        showDetail();
         elbfale();
     }//GEN-LAST:event_tbQLSPMouseClicked
 
@@ -299,7 +310,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSuaSPActionPerformed
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-       this.elb();
+        this.elb();
         this.clear();
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
@@ -566,16 +577,18 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         txtCauHinh.setText("");
 
     }
-    private void elb(){
-      txtMaSP.setEditable(true);
-      txtTenSP.setEditable(true);
-      txtCauHinh.setEditable(true);
-      cbbTrangThai.enable(true);
+
+    private void elb() {
+        txtMaSP.setEditable(true);
+        txtTenSP.setEditable(true);
+        txtCauHinh.setEditable(true);
+        cbbTrangThai.enable(true);
     }
-        private void elbfale(){
-      txtMaSP.setEditable(false);
-      txtTenSP.setEditable(false);
-      txtCauHinh.setEditable(false); 
-      cbbTrangThai.enable(false);
+
+    private void elbfale() {
+        txtMaSP.setEditable(false);
+        txtTenSP.setEditable(false);
+        txtCauHinh.setEditable(false);
+        cbbTrangThai.enable(false);
     }
 }
