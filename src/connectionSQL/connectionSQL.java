@@ -9,9 +9,10 @@ public class connectionSQL {
         try {
             String user = "sa", password = "123", databaseName = "QLIPHONE";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://DESKTOP-TJJ188P\\SQLEXPRESS:1433;databaseName=" + databaseName;
+            String url = "jdbc:sqlserver://DESKTOP-BFNI15L\\SQLEXPRESS:1433;databaseName=" + databaseName;
 
             Connection con = DriverManager.getConnection(url, user, password);
+            System.out.println("Kết nối thành công");
             return con;
 
         } catch (Exception e) {
