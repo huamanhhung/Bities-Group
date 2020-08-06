@@ -27,10 +27,17 @@ public class DangKy extends javax.swing.JInternalFrame {
     ArrayList<ClassNguoiDung> lstAccount = new ArrayList<>();
     Connection cn;
     int index = 0;
-
+    
     public DangKy() {
         initComponents();
         cn = connectionSQL.ketnoi("QLIPHONE");
+    }
+    
+    public void lamMoi() {
+        txtTenDangNhap.setText(null);
+        tpConfirm.setText(null);
+        tpPass.setText(null);
+        cbbVaiTro.setSelectedItem("Quản lí");
     }
 
     /**
@@ -152,7 +159,6 @@ public class DangKy extends javax.swing.JInternalFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
                                         .addComponent(lbVaiTro)
                                         .addGap(52, 52, 52)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tpPass)
                                     .addComponent(txtTenDangNhap)
@@ -191,9 +197,9 @@ public class DangKy extends javax.swing.JInternalFrame {
                 .addGap(4, 4, 4)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbMatKhau)
-                    .addComponent(tpPass, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tpPass, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbMatKhau))
                 .addGap(15, 15, 15)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -240,7 +246,7 @@ public class DangKy extends javax.swing.JInternalFrame {
                 ps = cn.prepareStatement("insert into nguoidung values(?,?,?)");
                 ps.setString(1, txtTenDangNhap.getText());
                 String passWord = new String(tpPass.getPassword());
-
+                
                 ps.setString(2, passWord);
                 Boolean vaitro;
                 if (cbbVaiTro.getSelectedItem().equals("Quản lí")) {
@@ -249,10 +255,11 @@ public class DangKy extends javax.swing.JInternalFrame {
                     vaitro = false;
                 }
                 ps.setBoolean(3, vaitro);
-
+                
                 int ret = ps.executeUpdate();
                 if (ret != -1) {
                     JOptionPane.showMessageDialog(this, "Đăng kí thành công");
+                    this.lamMoi();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -268,15 +275,15 @@ public class DangKy extends javax.swing.JInternalFrame {
                     ex2.printStackTrace();
                 }
             }
-
+            
         }
-
+        
 
     }//GEN-LAST:event_btnDangKiActionPerformed
 
     private void btnVaoQuanLiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaoQuanLiActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVaoQuanLiActionPerformed
     public boolean batLoi() {
         boolean tdn = false, matkhau = false, xacnhan = false;
@@ -301,8 +308,8 @@ public class DangKy extends javax.swing.JInternalFrame {
             xacnhan = true;
             jLabel3.setText(null);
         }
-       
-        if (tdn == true && matkhau == true && xacnhan == true ) {
+        
+        if (tdn == true && matkhau == true && xacnhan == true) {
             return true;
         } else {
             return false;

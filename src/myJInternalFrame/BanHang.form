@@ -413,22 +413,14 @@
                           <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtNgayMua" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtMaNV" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtNhanvienbanhang2" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtMaHD" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtKH2" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
-                                  <Component id="lbNgayMua2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                                  <Component id="txtTenKH2" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="btnInHoaDon" min="-2" pref="180" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
+                          <Component id="lbNgayMua2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                          <Component id="txtTenKH2" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -449,16 +441,15 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbMaHD" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtMaHD" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                      <Component id="btnInHoaDon" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbMaNV" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtMaNV" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="txtNhanvienbanhang2" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -479,7 +470,7 @@
                       <Component id="lbTongTien2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnInHoaDon2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="39" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -504,7 +495,7 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtMaNV">
+        <Component class="javax.swing.JTextField" name="txtNhanvienbanhang2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Monospaced" size="24" style="1"/>
@@ -520,7 +511,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fc" green="f4" red="fc" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="M&#xe3; nh&#xe2;n vi&#xea;n:"/>
+            <Property name="text" type="java.lang.String" value="Nh&#xe2;n vi&#xea;n:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbNgayMua">
@@ -588,20 +579,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n:..............."/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnInHoaDon">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Monospaced" size="24" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="8b" green="3d" red="48" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Quay l&#x1ea1;i"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInHoaDonActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbNgayMua1">
           <Properties>
