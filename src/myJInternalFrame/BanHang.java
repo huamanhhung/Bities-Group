@@ -225,32 +225,33 @@ public class BanHang extends javax.swing.JInternalFrame {
             st = con.createStatement();
             rs = st.executeQuery(sql0);
             while (rs.next()) {
-                sizeList = sizeList + 1;
+                sizeList++;
             }
         } catch (Exception e) {
         }
         st = null;
         rs = null;
-        int x = sizeList;
-        String soHD;
         String maHD = null;
         try {
             st = con.createStatement();
             rs = st.executeQuery(sql0);
             while (rs.next()) {
-                soHD = String.valueOf(sizeList);
-                maHD = "HD0" + txtMaKH1.getText() + soHD;
+                if (sizeList < 10) {
+                    maHD = "HD0" + sizeList + txtMaKH1.getText();
+                } else {
+                    maHD = "HD" + sizeList + txtMaKH1.getText();
+                }
+
                 try {
                     if (maHD.trim().equalsIgnoreCase(rs.getString(1).trim())) {
                         checkMa = false;
-                        sizeList = sizeList + 1;
+                        sizeList++;
                     }
                 } catch (Exception e) {
                 }
             }
         } catch (Exception e) {
         }
-        System.out.println(maHD);
         this.mahd = maHD;
         return maHD;
     }
