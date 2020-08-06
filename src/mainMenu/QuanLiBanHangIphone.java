@@ -253,7 +253,7 @@ public class QuanLiBanHangIphone extends javax.swing.JFrame {
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
         // TODO add your handling code here:
-        QuanLySanPham qlsp = new QuanLySanPham();
+        QuanLySanPham qlsp = new QuanLySanPham(vaiTro);
         Desktop.add(qlsp);
         qlsp.setVisible(true);
         
