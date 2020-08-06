@@ -5,6 +5,13 @@
  */
 package myJInternalFrame;
 
+import connectionSQL.connectionSQL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author markhyun
@@ -14,8 +21,42 @@ public class ThongKe extends javax.swing.JInternalFrame {
     /**
      * Creates new form QuanLyKhachHnag
      */
+    Connection cnn;
+    DefaultTableModel model;
+
     public ThongKe() {
+        connectionSQL kn = new connectionSQL();
+        cnn = kn.ketnoi(title);
         initComponents();
+        this.thongKe();
+    }
+
+    //thỐng kê
+    public void thongKe() {
+        model = (DefaultTableModel) tbThongKe.getModel();
+        model.setRowCount(0);
+        String sql = "select CTHOADON.MASP, TENSP, CAUHINH, TRANGTHAI, RIGHT(CONVERT(varchar(20),NGAYBAN,105),7), SUM(THANHTIEN) AS DOANHTHU\n"
+                + "FROM SANPHAM JOIN CTHOADON ON SANPHAM.MASP = CTHOADON.MASP\n"
+                + "JOIN HOADON ON HOADON.MAHD = CTHOADON.MAHD\n"
+                + "GROUP BY CTHOADON.MASP, TENSP, CAUHINH, TRANGTHAI, RIGHT(CONVERT(varchar(20),NGAYBAN,105),7)";
+        try {
+            Statement stm = cnn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            int index = 0;
+            while (rs.next()) {
+                index++;
+                Vector v = new Vector();
+                v.add(index);
+                v.add(rs.getString(1));
+                v.add(rs.getString(2) + rs.getString(3) + rs.getString(4));
+                v.add(rs.getString(5));
+                v.add(rs.getString(6));
+
+                model.addRow(v);
+            }
+
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -41,15 +82,17 @@ public class ThongKe extends javax.swing.JInternalFrame {
         kGradientPanel4.setkGradientFocus(1000);
         kGradientPanel4.setkStartColor(new java.awt.Color(168, 168, 233));
 
+        tbThongKe.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tbThongKe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "STT", "THỜI GIAN( THÁNG / NĂM)", "TỔNG  DOANH THU"
+                "STT", "Mã Sản Phẩm", "Tên Sản Phẩm", "THỜI GIAN( THÁNG / NĂM)", "TỔNG  DOANH THU"
             }
         ));
         tbThongKe.setFillsViewportHeight(true);
+        tbThongKe.setRowHeight(30);
         cpThongKe.setViewportView(tbThongKe);
 
         javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);

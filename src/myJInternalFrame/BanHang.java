@@ -129,11 +129,11 @@ public class BanHang extends javax.swing.JInternalFrame {
                     String dg = rs.getString("DONGIA");
                     double dg2 = Double.parseDouble(rs.getString("DONGIA"));
                     //set don gia và thành tiền vào list
-                    bn.setDongia(dg);
+                    bn.setDongia(dg2);
                     //bn.setThanhtien(dg);
                     //set don gia và thành tiền vào list
 //                    bn.setDongia(Double.parseDouble(rs.getString(3)));
-                    bn.setThanhtien(String.valueOf((int) sol * dg2));
+                    bn.setThanhtien((int) sol * dg2);
                     //set mã sp vào list
                     bn.setMasp(rs.getString("MASP"));
                 }
@@ -184,7 +184,7 @@ public class BanHang extends javax.swing.JInternalFrame {
     //tính tổng tiền trên toàn bộ hóa đơn
     public void tongTien() {
         for (ClassBanHang bh : listBH) {
-            double tt = Double.parseDouble(bh.getThanhtien());
+            double tt = bh.getThanhtien();
             tongtien = (int) (tongtien + tt);
         }
         lbTongTien1.setText("Tổng tiền: " + tongtien + " VND");
@@ -284,15 +284,15 @@ public class BanHang extends javax.swing.JInternalFrame {
         try {
             for (ClassBanHang bh : listBH) {
                 String sql = "insert into CTHOADON values(?,?,?,?,?)";
-                float dg = Integer.parseInt(bh.getDongia());
-                float tt = Integer.parseInt(bh.getThanhtien());
+                double dg = bh.getDongia();
+                double tt = bh.getThanhtien();
                 PreparedStatement pstm = con.prepareStatement(sql);
 
                 pstm.setString(1, this.mahd);
                 pstm.setString(2, bh.getMasp());
                 pstm.setInt(3, bh.getSoluong());
-                pstm.setFloat(4, dg);
-                pstm.setFloat(5, tt);
+                pstm.setDouble(4, dg);
+                pstm.setDouble(5, tt);
 
                 int row = pstm.executeUpdate();
                 if (row > 0) {
