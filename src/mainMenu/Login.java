@@ -5,34 +5,31 @@
  */
 package mainMenu;
 
-import com.sun.net.httpserver.Authenticator;
-import connectionSQL.connectionSQL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author HungIT
+ * @author markhyun
  */
 public class Login extends javax.swing.JFrame {
 
     /**
-     * Creates new form Login
+     * Creates new form Login1
      */
     Connection cn;
     boolean vaitro;
-    
+
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
         try {
             String user = "sa", password = "123";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://DESKTOP-BFNI15L\\SQLEXPRESS:1433;databaseName=QLIPHONE";
+            String url = "jdbc:sqlserver://DESKTOP-TJJ188P\\SQLEXPRESS:1433;databaseName=QLIPHONE";
             cn = DriverManager.getConnection(url, user, password);
             if (cn != null) {
                 System.out.println("Kết nối thành công");
@@ -51,27 +48,49 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         kGradientPanel1 = new keeptoo.KGradientPanel();
-        cbNhoMatKhau = new javax.swing.JCheckBox();
-        btnHuy = new javax.swing.JButton();
-        btnDangNhap = new javax.swing.JButton();
-        lbMatKhau = new javax.swing.JLabel();
-        txtTenDN = new javax.swing.JTextField();
-        lbTenDangNhap = new javax.swing.JLabel();
         lbTitle = new javax.swing.JLabel();
+        lbTenDangNhap = new javax.swing.JLabel();
+        txtTenDN = new javax.swing.JTextField();
         tpPassworld = new javax.swing.JPasswordField();
+        lbMatKhau = new javax.swing.JLabel();
+        btnDangNhap = new javax.swing.JButton();
+        btnHuy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(624, 428));
+        setPreferredSize(null);
 
         kGradientPanel1.setkEndColor(new java.awt.Color(229, 189, 240));
         kGradientPanel1.setkStartColor(new java.awt.Color(168, 168, 233));
-        kGradientPanel1.setPreferredSize(new java.awt.Dimension(624, 428));
+        kGradientPanel1.setPreferredSize(new java.awt.Dimension(0, 0));
 
-        cbNhoMatKhau.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        cbNhoMatKhau.setForeground(new java.awt.Color(252, 244, 252));
-        cbNhoMatKhau.setText("Nhớ mật khẩu ");
-        cbNhoMatKhau.setIconTextGap(10);
-        cbNhoMatKhau.setOpaque(false);
+        lbTitle.setFont(new java.awt.Font("Monospaced", 1, 48)); // NOI18N
+        lbTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lbTitle.setText("Đăng nhập");
+
+        lbTenDangNhap.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        lbTenDangNhap.setForeground(new java.awt.Color(252, 244, 252));
+        lbTenDangNhap.setText("Tên đăng nhập: ");
+
+        txtTenDN.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+
+        tpPassworld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tpPassworldActionPerformed(evt);
+            }
+        });
+
+        lbMatKhau.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        lbMatKhau.setForeground(new java.awt.Color(252, 244, 252));
+        lbMatKhau.setText("Mật khẩu: ");
+
+        btnDangNhap.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        btnDangNhap.setForeground(new java.awt.Color(72, 61, 139));
+        btnDangNhap.setText("Đăng nhập");
+        btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangNhapActionPerformed(evt);
+            }
+        });
 
         btnHuy.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         btnHuy.setForeground(new java.awt.Color(72, 61, 139));
@@ -83,72 +102,36 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnDangNhap.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        btnDangNhap.setForeground(new java.awt.Color(72, 61, 139));
-        btnDangNhap.setText("Đăng nhập");
-        btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDangNhapActionPerformed(evt);
-            }
-        });
-
-        lbMatKhau.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        lbMatKhau.setForeground(new java.awt.Color(252, 244, 252));
-        lbMatKhau.setText("Mật khẩu: ");
-
-        txtTenDN.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
-
-        lbTenDangNhap.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        lbTenDangNhap.setForeground(new java.awt.Color(252, 244, 252));
-        lbTenDangNhap.setText("Tên đăng nhập: ");
-
-        lbTitle.setFont(new java.awt.Font("Monospaced", 1, 48)); // NOI18N
-        lbTitle.setForeground(new java.awt.Color(255, 255, 255));
-        lbTitle.setText("Đăng nhập");
-
-        tpPassworld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tpPassworldActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(lbTitle)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbTenDangNhap)
-                            .addComponent(lbMatKhau))
+                            .addComponent(lbTenDangNhap, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbMatKhau, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(37, 37, 37)
-                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTenDN)
-                            .addComponent(tpPassworld))
-                        .addGap(17, 17, 17))
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(cbNhoMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                            .addComponent(tpPassworld, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lbTitle))
+                .addContainerGap(50, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
+                .addGap(47, 47, 47)
                 .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addGap(82, 82, 82))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -158,32 +141,31 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addComponent(tpPassworld, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)))
-                .addGap(33, 33, 33)
-                .addComponent(cbNhoMatKhau)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDangNhap)
                     .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53))
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 648, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE))
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 454, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tpPassworldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpPassworldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tpPassworldActionPerformed
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         if (this.batLoi()) {
@@ -192,7 +174,7 @@ public class Login extends javax.swing.JFrame {
             String sql = "select * from NGUOIDUNG\n"
                     + "WHERE USENAME = ?";
             try {
-                
+
                 PreparedStatement pstm = cn.prepareStatement(sql);
                 pstm.setString(1, txtTenDN.getText());
                 ResultSet rs = pstm.executeQuery();
@@ -216,45 +198,18 @@ public class Login extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, "Bạn là nhân viên");
                             vaitro = false;
                         }
-                        
+
                         QuanLiBanHangIphone ql = new QuanLiBanHangIphone(vaitro, name);
                         ql.setLocationRelativeTo(null);
                         ql.setVisible(true);
                         this.setVisible(false);
                     }
                 }
-                
+
             } catch (Exception e) {
             }
         }
     }//GEN-LAST:event_btnDangNhapActionPerformed
-//    public boolean role(){
-//    
-//    }
-
-    public boolean batLoi() {
-        boolean tdn = false, matkhau = false;
-        if (txtTenDN.getText().length() == 0) {
-            JOptionPane.showMessageDialog(this, "Mời bạn chọn tên đăng nhập");
-            tdn = false;
-        } else {
-            tdn = true;
-        }
-        if (tpPassworld.getText().length() == 0) {
-            JOptionPane.showMessageDialog(this, "Mời bạn nhập mật khẩu");
-            matkhau = false;
-        } else {
-            matkhau = true;
-        }
-        if (tdn == true && matkhau == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    private void tpPassworldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tpPassworldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tpPassworldActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
         // TODO add your handling code here:
@@ -287,6 +242,7 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -299,7 +255,6 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangNhap;
     private javax.swing.JButton btnHuy;
-    private javax.swing.JCheckBox cbNhoMatKhau;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lbMatKhau;
     private javax.swing.JLabel lbTenDangNhap;
@@ -307,4 +262,25 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField tpPassworld;
     private javax.swing.JTextField txtTenDN;
     // End of variables declaration//GEN-END:variables
+
+    public boolean batLoi() {
+        boolean tdn = false, matkhau = false;
+        if (txtTenDN.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Mời bạn chọn tên đăng nhập");
+            tdn = false;
+        } else {
+            tdn = true;
+        }
+        if (tpPassworld.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Mời bạn nhập mật khẩu");
+            matkhau = false;
+        } else {
+            matkhau = true;
+        }
+        if (tdn == true && matkhau == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
