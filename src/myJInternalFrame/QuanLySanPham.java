@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,7 +35,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         cn = connectionSQL.ketnoi("QLIPHONE");
         this.dongChucNang();
         fillToTable();
-        addsp();
+//        addsp();
 
     }
 
@@ -150,6 +151,11 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         btnTimkiemSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Search_Icon_32.png"))); // NOI18N
         btnTimkiemSP.setText("Tìm kiếm SP");
         btnTimkiemSP.setPreferredSize(new java.awt.Dimension(293, 41));
+        btnTimkiemSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimkiemSPActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
@@ -201,6 +207,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         lbTrangThai.setText("  Trạng thái:");
 
         cbbTrangThai.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FULL BOX", "99%", "Đã Active", "Chưa Active", "Cũ" }));
         cbbTrangThai.setToolTipText("");
 
         javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
@@ -314,6 +321,10 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         this.clear();
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
+    private void btnTimkiemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemSPActionPerformed
+        this.timSp();
+    }//GEN-LAST:event_btnTimkiemSPActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaSP;
@@ -390,20 +401,19 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
 
     }
 
-    private void addsp() {
-        Statement stm = null;
-        ResultSet rs = null;
-        String sql = "SELECT TRANGTHAI FROM SANPHAM";
-        try {
-            stm = cn.createStatement();
-            rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                cbbTrangThai.addItem(rs.getString(1));
-            }
-        } catch (Exception e) {
-        }
-    }
-
+//    private void addsp() {
+//        Statement stm = null;
+//        ResultSet rs = null;
+//        String sql = "SELECT TRANGTHAI FROM SANPHAM";
+//        try {
+//            stm = cn.createStatement();
+//            rs = stm.executeQuery(sql);
+//            while (rs.next()) {
+//                cbbTrangThai.addItem(rs.getString(1));
+//            }
+//        } catch (Exception e) {
+//        }
+//    }
     private boolean batLoi() {
         boolean tma = false, tten = false, tDonGia = false, tSL = false, tCH = false;
 
@@ -590,5 +600,70 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         txtTenSP.setEditable(false);
         txtCauHinh.setEditable(false);
         cbbTrangThai.enable(false);
+    }
+
+    private void timSp() {
+        DefaultTableModel model = (DefaultTableModel) tbQLSP.getModel();
+        String option[] = {"Tìm theo mã SP", "Tìm theo tên sp", "Hủy"};
+        ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
+
+        int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm Sản Phẩm", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, iconFind, option, null);
+
+        if (result == 0) {
+            String masp = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập mã Sản Phẩm", "Tìm kiếm bằng mã Sản phẩm", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listSanPham.size(); i++) {
+                if (masp.equals(listSanPham.get(i).getMaSP())) {
+                    JOptionPane.showMessageDialog(this, "Tìm thấy Sản Phẩm !", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+                    resultInput = true;
+                    txtMaSP.setText(listSanPham.get(i).getMaSP());
+                    txtTenSP.setText(listSanPham.get(i).getTenSP());
+                    txtDonGia.setText(listSanPham.get(i).getDonGia() + "");
+                    txtSoLuongSP.setText(listSanPham.get(i).getSoLuong() + "");
+                    txtCauHinh.setText(listSanPham.get(i).getCauHinh());
+                    cbbTrangThai.setSelectedItem(listSanPham.get(i).getTrangThai());
+                    model.setRowCount(0);
+
+                    Object obsp[] = new Object[]{
+                        listSanPham.get(i).getMaSP(),
+                        listSanPham.get(i).getTenSP(),
+                        listSanPham.get(i).getDonGia(),
+                        listSanPham.get(i).getSoLuong(),
+                        listSanPham.get(i).getCauHinh(),
+                        listSanPham.get(i).getTrangThai(),};
+                }
+
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
+        } else if (result == 1) {
+            String tenSp = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập tên Sản Phẩm", "Tìm kiếm bằng tên Sản phẩm", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listSanPham.size(); i++) {
+                if (tenSp.equals(listSanPham.get(i).getTenSP())) {
+                    JOptionPane.showMessageDialog(this, "Tìm thấy Sản Phẩm !", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+                    resultInput = true;
+                    txtMaSP.setText(listSanPham.get(i).getMaSP());
+                    txtTenSP.setText(listSanPham.get(i).getTenSP());
+                    txtDonGia.setText(listSanPham.get(i).getDonGia() + "");
+                    txtSoLuongSP.setText(listSanPham.get(i).getSoLuong() + "");
+                    txtCauHinh.setText(listSanPham.get(i).getCauHinh());
+                    cbbTrangThai.setSelectedItem(listSanPham.get(i).getTrangThai());
+                    model.setRowCount(0);
+
+                    Object obsp[] = new Object[]{
+                        listSanPham.get(i).getMaSP(),
+                        listSanPham.get(i).getTenSP(),
+                        listSanPham.get(i).getDonGia(),
+                        listSanPham.get(i).getSoLuong(),
+                        listSanPham.get(i).getCauHinh(),
+                        listSanPham.get(i).getTrangThai(),};
+                }
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
+        }
     }
 }
