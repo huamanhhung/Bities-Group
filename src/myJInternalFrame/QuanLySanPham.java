@@ -319,6 +319,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         this.elb();
         this.clear();
+        this.fillToTable();
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnTimkiemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemSPActionPerformed
@@ -631,6 +632,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                         listSanPham.get(i).getSoLuong(),
                         listSanPham.get(i).getCauHinh(),
                         listSanPham.get(i).getTrangThai(),};
+                    model.addRow(obsp);
                 }
 
             }
@@ -659,6 +661,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                         listSanPham.get(i).getSoLuong(),
                         listSanPham.get(i).getCauHinh(),
                         listSanPham.get(i).getTrangThai(),};
+                    model.addRow(obsp);
                 }
             }
             if (resultInput == false) {

@@ -280,6 +280,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         this.clear();
         setTextMaKH();
+        this.fillToTable();
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void tbQLKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLKHMouseClicked

@@ -284,6 +284,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         this.clear();
+        this.fillToTable();
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
