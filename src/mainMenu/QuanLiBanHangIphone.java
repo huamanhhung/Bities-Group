@@ -59,6 +59,7 @@ public class QuanLiBanHangIphone extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         menuItemDangKy = new javax.swing.JMenuItem();
+        menuItemDangKy1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -185,6 +186,15 @@ public class QuanLiBanHangIphone extends javax.swing.JFrame {
             }
         });
         jMenu2.add(menuItemDangKy);
+
+        menuItemDangKy1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuItemDangKy1.setText("Quản lý tài khoản");
+        menuItemDangKy1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemDangKy1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuItemDangKy1);
 
         jMenuBar1.add(jMenu2);
 
@@ -370,6 +380,10 @@ public class QuanLiBanHangIphone extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void menuItemDangKy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemDangKy1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuItemDangKy1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -429,5 +443,6 @@ public class QuanLiBanHangIphone extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem menuItemDangKy;
+    private javax.swing.JMenuItem menuItemDangKy1;
     // End of variables declaration//GEN-END:variables
 }
