@@ -159,7 +159,7 @@ public class BanHang extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
         if (bn.getSoluong() > SLton) {
-            JOptionPane.showMessageDialog(this, bn.getTensp() + " Chỉ còn " + SLton + "chiếc");
+            JOptionPane.showMessageDialog(this, bn.getTensp() + " Chỉ còn " + SLton + " chiếc");
         } else {
             JOptionPane.showMessageDialog(this, "Thêm thành công");
             listBH.add(bn);
@@ -751,6 +751,28 @@ public class BanHang extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
+
+    //update lại sản phẩm ở form sản phẩm vào csdl
+    public void updateSP() {
+        for (ClassBanHang bh : listBH) {
+            String sql = "update SANPHAM\n"
+                    + "set SOLUONG = SOLUONG - ?\n"
+                    + "where MASP = ?";
+            try {
+                PreparedStatement pstm = con.prepareStatement(sql);
+                pstm.setInt(1, bh.getSoluong());
+                pstm.setString(2, bh.getMasp());
+                int row = pstm.executeUpdate();
+                if (row > 0) {
+                    System.out.println("Update sản phẩm oke");
+                } else {
+                    System.out.println("update sản phẩm Không được");
+                }
+            } catch (Exception e) {
+            }
+
+        }
+    }
     private void btnThanhToan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToan1ActionPerformed
         // TODO add your handling code here:
         if (listBH.size() == 0) {
@@ -762,6 +784,7 @@ public class BanHang extends javax.swing.JInternalFrame {
                 this.themHoaDon();
                 this.themCTHoaDon();
                 this.addDataFormInHD();
+                this.updateSP();
                 txtNhanvienbanhang2.setText(nhanVien);
                 pnBanHang.setVisible(false);
                 pnXuatHoaDon.setVisible(true);
