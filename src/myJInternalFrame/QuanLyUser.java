@@ -5,17 +5,32 @@
  */
 package myJInternalFrame;
 
+import connectionSQL.connectionSQL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import myClass.ClassUser;
+
 /**
  *
  * @author ducmc
  */
 public class QuanLyUser extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form QuanLyUser
-     */
+    List<ClassUser> listUser = new ArrayList<>();
+    Connection cn;
+    int index = 0;
+
     public QuanLyUser() {
         initComponents();
+        cn = connectionSQL.ketnoi("QLIPHONE");
+        fillToTable();
     }
 
     /**
@@ -100,7 +115,7 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         pnButton.add(btnSuaUser, gridBagConstraints);
 
@@ -118,7 +133,8 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 19, 0);
         pnButton.add(btnTimkiemUser, gridBagConstraints);
 
         btnXoaUser.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
@@ -134,11 +150,15 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_END;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         pnButton.add(btnXoaUser, gridBagConstraints);
 
         cbbQuen.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        cbbQuen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Nhân Viên" }));
         cbbQuen.setToolTipText("");
 
         javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
@@ -183,7 +203,7 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
                     .addGroup(kGradientPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(pnButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 22, Short.MAX_VALUE)
                 .addComponent(cpQLUser, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -207,20 +227,20 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTaiKhoanActionPerformed
 
     private void tbQLUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLUserMouseClicked
-        
+
     }//GEN-LAST:event_tbQLUserMouseClicked
 
     private void btnSuaUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaUserActionPerformed
-        // TODO add your handling code here:
-      
+        this.suaUser();
+        txtTaiKhoan.setEditable(true);
     }//GEN-LAST:event_btnSuaUserActionPerformed
 
     private void btnTimkiemUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemUserActionPerformed
-    
+      timKiem();
     }//GEN-LAST:event_btnTimkiemUserActionPerformed
 
     private void btnXoaUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaUserActionPerformed
-      
+
     }//GEN-LAST:event_btnXoaUserActionPerformed
 
 
@@ -239,4 +259,106 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMatKhau;
     private javax.swing.JTextField txtTaiKhoan;
     // End of variables declaration//GEN-END:variables
+private void fillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tbQLUser.getModel();
+        model.setRowCount(0);
+
+        try {
+            listUser.clear();
+            Statement st = cn.createStatement();
+            String sql = "SELECT * FROM NGUOIDUNG";
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                String tk = rs.getString(1);
+                String mk = rs.getString(2);
+                String quen = rs.getString(3);
+
+                ClassUser us = new ClassUser(tk, mk, quen);
+                listUser.add(us);
+            }
+            for (int i = 0; i < listUser.size(); i++) {
+                Object[] usob = new Object[]{
+                    listUser.get(i).getTaiKhoan(),
+                    listUser.get(i).getMatKhau(),
+                    listUser.get(i).getQuen()};
+                model.addRow(usob);
+            }
+        } catch (Exception e) {
+        }
+
+    }
+
+    private void suaUser() {
+        try {
+            String sql = "UPDATE NGUOI DUNG \n"
+                    + "set PASSWORD = ?"
+                    + "WHERE USENAME = ?";
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ps.setString(2, txtTaiKhoan.getText());
+            ps.setString(1, txtMatKhau.getText());
+
+            int row = ps.executeUpdate();
+            if (row > 0) {
+                JOptionPane.showMessageDialog(this, "Thay đổi mật khẩu thành công");
+                index = listUser.size() - 1;
+                showDetail();
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Lỗi đổi mật khẩu");
+            }
+            ps.close();
+            fillToTable();
+        } catch (Exception e) {
+        }
+
+    }
+
+    private void showDetail() {
+        try {
+            int selectRow = tbQLUser.getSelectedRow();
+            ClassUser us = listUser.get(selectRow);
+
+            txtTaiKhoan.setText(us.getTaiKhoan());
+            txtMatKhau.setText(us.getMatKhau());
+            cbbQuen.setSelectedItem(us.getQuen());
+
+        } catch (Exception e) {
+        }
+
+    }
+
+    private void timKiem() {
+        DefaultTableModel model = (DefaultTableModel) tbQLUser.getModel();
+        String option[] = {"Tìm kiếm tài khoản", "Hủy"};
+        ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
+        int result = JOptionPane.showOptionDialog(this, "Tìm kiếm!", "Tìm kiếm Sản phẩm", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, iconFind, option, null);
+
+        if (result == 0) {
+            String tk = (String) JOptionPane.showInputDialog(this, "Mời bạn tài khoản!", "Tìm kiếm bằng tài khoản", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            boolean resultInput = false;
+            for (int i = 0; i < listUser.size(); i++) {
+                if (tk.equals(listUser.get(i).getTaiKhoan())) {
+                    JOptionPane.showMessageDialog(this, "Tìm thấy tài khoản");
+                    resultInput = true;
+                    txtTaiKhoan.setText(listUser.get(i).getTaiKhoan());
+                    txtMatKhau.setText(listUser.get(i).getMatKhau());
+                    cbbQuen.setSelectedItem(listUser.get(i).getQuen());
+                    model.setRowCount(0);
+
+                    Object[] usob = new Object[]{
+                        listUser.get(i).getTaiKhoan(),
+                        listUser.get(i).getMatKhau(),
+                        listUser.get(i).getQuen()};
+                    model.addRow(usob);
+                }
+
+            }
+            if (resultInput == false) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
+        }
+
+    }
+
 }
