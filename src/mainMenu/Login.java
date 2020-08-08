@@ -29,7 +29,7 @@ public class Login extends javax.swing.JFrame {
         try {
             String user = "sa", password = "123";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://DESKTOP-TJJ188P\\SQLEXPRESS:1433;databaseName=QLIPHONE";
+            String url = "jdbc:sqlserver://DESKTOP-BFNI15L\\SQLEXPRESS:1433;databaseName=QLIPHONE";
             cn = DriverManager.getConnection(url, user, password);
             if (cn != null) {
                 System.out.println("Kết nối thành công");
