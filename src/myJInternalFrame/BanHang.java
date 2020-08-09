@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ public class BanHang extends javax.swing.JInternalFrame {
      */
     List<ClassBanHang> listBH = new ArrayList<>();
     int index;
-    int tongtien = 0;
+    double tongtien = 0;
     String mahd;
     Connection con;
     String nhanVien;
@@ -40,6 +42,12 @@ public class BanHang extends javax.swing.JInternalFrame {
         initComponents();
         con = connectionSQL.ketnoi("QLIPHONE");
         this.addCBX();
+    }
+
+    //định dạng tiền tệ
+    public String dinhDangTien(double so) {
+        NumberFormat fomatter = new DecimalFormat("###,###,###,###" + " VND");
+        return fomatter.format(so);
     }
 
     //check loi
@@ -175,8 +183,8 @@ public class BanHang extends javax.swing.JInternalFrame {
                 bh.getMasp(),
                 bh.getTensp(),
                 bh.getSoluong(),
-                bh.getDongia(),
-                bh.getThanhtien()
+                this.dinhDangTien(bh.getDongia()),
+                this.dinhDangTien(bh.getThanhtien())
             };
             model.addRow(hang);
         }
@@ -204,11 +212,12 @@ public class BanHang extends javax.swing.JInternalFrame {
 
     //tính tổng tiền trên toàn bộ hóa đơn
     public void tongTien() {
+        tongtien = 0;
         for (ClassBanHang bh : listBH) {
             double tt = bh.getThanhtien();
-            tongtien = (int) (tongtien + tt);
+            tongtien = tongtien + tt;
         }
-        lbTongTien1.setText("Tổng tiền: " + tongtien + " VND");
+        lbTongTien1.setText("Tổng tiền: " + this.dinhDangTien(tongtien));
     }
 
     //tìm đúng kh có mã vừa nhập
@@ -285,7 +294,7 @@ public class BanHang extends javax.swing.JInternalFrame {
             pstm.setString(1, this.taoMaHoaDon());
             pstm.setString(2, nhanVien);
             pstm.setString(3, txtMaKH1.getText());
-            pstm.setInt(4, tongtien);
+            pstm.setFloat(4, (float) tongtien);
             //pstm.setString(5, null);
 
             int row = pstm.executeUpdate();
@@ -735,7 +744,7 @@ public class BanHang extends javax.swing.JInternalFrame {
         txtKH2.setText(txtMaKH1.getText());
         txtTenKH2.setText(txtTenKH1.getText());
         this.fillTotable(tbInHoaDon);
-        lbTongTien2.setText("Tổng tiền: " + this.tongtien + " VND");
+        lbTongTien2.setText("Tổng tiền: " + this.dinhDangTien(tongtien));
         //lấy ngày mua
         try {
             String sql = "select ngayban from hoadon\n"
