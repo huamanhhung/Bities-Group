@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import connectionSQL.connectionSQL;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -21,12 +23,19 @@ public class HoaDon extends javax.swing.JInternalFrame {
 
     List<ClassHoaDon> listHoaDon = new ArrayList<>();
     Connection cn;
+    DefaultTableModel model;
 
     public HoaDon() throws SQLException {
         initComponents();
         cn = connectionSQL.ketnoi("QLIPHONE");
         fillToTable();
 
+    }
+
+    //dịnh dạng tiền
+    public String dinhDangtien(double so) {
+        NumberFormat fomatter = new DecimalFormat("###,###,###,###" + " VND");
+        return fomatter.format(so);
     }
 
     /**
@@ -84,7 +93,7 @@ public class HoaDon extends javax.swing.JInternalFrame {
         lbMaNV.setBackground(new java.awt.Color(252, 244, 252));
         lbMaNV.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         lbMaNV.setForeground(new java.awt.Color(252, 244, 252));
-        lbMaNV.setText("Mã nhân viên:");
+        lbMaNV.setText("Nhân viên bán:");
 
         lbNgayMua.setBackground(new java.awt.Color(252, 244, 252));
         lbNgayMua.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
@@ -242,7 +251,7 @@ public class HoaDon extends javax.swing.JInternalFrame {
     private void btnTimKiemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemHoaDonActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tbHoaDon.getModel();
-        
+
         String option[] = {"Tìm bằng mã HD", "Tìm bằng mã NV", "Tìm bằng mã KH", "Hủy"};
         ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
 
@@ -258,15 +267,15 @@ public class HoaDon extends javax.swing.JInternalFrame {
                     txtMaNV.setText(listHoaDon.get(i).getMaNV());
                     txtNgayMua.setText(listHoaDon.get(i).getNgayBan());
                     txtMaKH.setText(listHoaDon.get(i).getMaKH());
-                    txtTongTien.setText(Double.toString(listHoaDon.get(i).getTongTien()));
+                    txtTongTien.setText(this.dinhDangtien(listHoaDon.get(i).getTongTien()));
                     model.setRowCount(0);
-                    
-                    Object [] objectHD = new Object[]{
+
+                    Object[] objectHD = new Object[]{
                         listHoaDon.get(i).getMaHD(),
                         listHoaDon.get(i).getMaNV(),
                         listHoaDon.get(i).getNgayBan(),
                         listHoaDon.get(i).getMaKH(),
-                        Double.toString(listHoaDon.get(i).getTongTien())
+                        this.dinhDangtien(listHoaDon.get(i).getTongTien())
                     };
                     model.addRow(objectHD);
                 }
@@ -285,15 +294,15 @@ public class HoaDon extends javax.swing.JInternalFrame {
                     txtMaNV.setText(listHoaDon.get(i).getMaNV());
                     txtNgayMua.setText(listHoaDon.get(i).getNgayBan());
                     txtMaKH.setText(listHoaDon.get(i).getMaKH());
-                    txtTongTien.setText(Double.toString(listHoaDon.get(i).getTongTien()));
+                    txtTongTien.setText(this.dinhDangtien(listHoaDon.get(i).getTongTien()));
                     model.setRowCount(0);
-                    
-                    Object [] objectHD = new Object[]{
+
+                    Object[] objectHD = new Object[]{
                         listHoaDon.get(i).getMaHD(),
                         listHoaDon.get(i).getMaNV(),
                         listHoaDon.get(i).getNgayBan(),
                         listHoaDon.get(i).getMaKH(),
-                        Double.toString(listHoaDon.get(i).getTongTien())
+                        this.dinhDangtien(listHoaDon.get(i).getTongTien())
                     };
                     model.addRow(objectHD);
                 }
@@ -312,15 +321,15 @@ public class HoaDon extends javax.swing.JInternalFrame {
                     txtMaNV.setText(listHoaDon.get(i).getMaNV());
                     txtNgayMua.setText(listHoaDon.get(i).getNgayBan());
                     txtMaKH.setText(listHoaDon.get(i).getMaKH());
-                    txtTongTien.setText(Double.toString(listHoaDon.get(i).getTongTien()));
+                    txtTongTien.setText(this.dinhDangtien(listHoaDon.get(i).getTongTien()));
                     model.setRowCount(0);
-                    
-                    Object [] objectHD = new Object[]{
+
+                    Object[] objectHD = new Object[]{
                         listHoaDon.get(i).getMaHD(),
                         listHoaDon.get(i).getMaNV(),
                         listHoaDon.get(i).getNgayBan(),
                         listHoaDon.get(i).getMaKH(),
-                        Double.toString(listHoaDon.get(i).getTongTien())
+                        this.dinhDangtien(listHoaDon.get(i).getTongTien())
                     };
                     model.addRow(objectHD);
                 }
@@ -362,7 +371,7 @@ public class HoaDon extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void fillToTable() {
-        DefaultTableModel model = (DefaultTableModel) tbHoaDon.getModel();
+        model = (DefaultTableModel) tbHoaDon.getModel();
         model.setRowCount(0);
 
         try {
@@ -387,7 +396,7 @@ public class HoaDon extends javax.swing.JInternalFrame {
                     listHoaDon.get(i).getMaNV(),
                     listHoaDon.get(i).getNgayBan(),
                     listHoaDon.get(i).getMaKH(),
-                    listHoaDon.get(i).getTongTien(),};
+                    this.dinhDangtien(listHoaDon.get(i).getTongTien()),};
                 model.addRow(hoaDonObject);
             }
         } catch (Exception e) {
@@ -398,13 +407,11 @@ public class HoaDon extends javax.swing.JInternalFrame {
     //show hóa đơn lên textfield
     private void showDetail() {
         int selectRow = tbHoaDon.getSelectedRow();
-
-        ClassHoaDon hd = listHoaDon.get(selectRow);
-
-        txtMaHD.setText(hd.getMaHD());
-        txtMaNV.setText(hd.getMaNV());
-        txtNgayMua.setText(hd.getNgayBan());
-        txtMaKH.setText(hd.getMaKH());
-        txtTongTien.setText(Double.toString(hd.getTongTien()));
+        model = (DefaultTableModel) tbHoaDon.getModel();
+        txtMaHD.setText((String) model.getValueAt(selectRow, 0));
+        txtMaNV.setText((String) model.getValueAt(selectRow, 1));
+        txtNgayMua.setText((String) model.getValueAt(selectRow, 2));
+        txtMaKH.setText((String) model.getValueAt(selectRow, 3));
+        txtTongTien.setText((String) model.getValueAt(selectRow, 4));
     }
 }

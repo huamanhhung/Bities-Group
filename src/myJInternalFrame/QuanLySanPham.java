@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -28,6 +30,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     List<ClassSanPham> listSanPham = new ArrayList<>();
     Connection cn;
     int index = 0;
+    DefaultTableModel model;
 
     public QuanLySanPham(boolean vaitro) {
         VaiTro = vaitro;
@@ -37,6 +40,12 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         fillToTable();
 //        addsp();
 
+    }
+
+    //định dạng tiền
+    public String dinhDangTien(double so) {
+        NumberFormat fomatter = new DecimalFormat("###,###,###,###");
+        return fomatter.format(so);
     }
 
     /**
@@ -70,6 +79,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         lbCauHinh = new javax.swing.JLabel();
         lbTrangThai = new javax.swing.JLabel();
         cbbTrangThai = new javax.swing.JComboBox<>();
+        lbDonGia1 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -84,9 +94,9 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         txtTenSP.setEditable(false);
         txtTenSP.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
 
-        lbDonGia.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        lbDonGia.setFont(new java.awt.Font("Monospaced", 1, 36)); // NOI18N
         lbDonGia.setForeground(new java.awt.Color(252, 244, 252));
-        lbDonGia.setText("     Đơn giá:");
+        lbDonGia.setText("VND");
 
         txtDonGia.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
 
@@ -210,34 +220,44 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FULL BOX", "99%", "Đã Active", "Chưa Active", "Cũ" }));
         cbbTrangThai.setToolTipText("");
 
+        lbDonGia1.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        lbDonGia1.setForeground(new java.awt.Color(252, 244, 252));
+        lbDonGia1.setText("     Đơn giá:");
+
         javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
         kGradientPanel4.setLayout(kGradientPanel4Layout);
         kGradientPanel4Layout.setHorizontalGroup(
             kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cpQLSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1305, Short.MAX_VALUE)
+            .addComponent(cpQLSP, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(kGradientPanel4Layout.createSequentialGroup()
                 .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel4Layout.createSequentialGroup()
                         .addGap(162, 162, 162)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbSoLuongSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbDonGia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbMaSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbTenSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbCauHinh))
+                            .addComponent(lbCauHinh)
+                            .addComponent(lbDonGia1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(75, 75, 75))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lbTrangThai)
                         .addGap(66, 66, 66)))
                 .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtTenSP, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDonGia, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cpCauHinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
-                    .addComponent(txtSoLuongSP, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMaSP))
-                .addGap(125, 125, 125)
+                    .addGroup(kGradientPanel4Layout.createSequentialGroup()
+                        .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTenSP)
+                            .addComponent(cbbTrangThai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cpCauHinh)
+                            .addComponent(txtSoLuongSP)
+                            .addComponent(txtMaSP, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(125, 125, 125))
+                    .addGroup(kGradientPanel4Layout.createSequentialGroup()
+                        .addComponent(txtDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108)))
                 .addComponent(pnButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(104, 104, 104))
         );
@@ -258,9 +278,10 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                             .addComponent(lbTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbDonGia1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDonGia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbSoLuongSP, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -338,6 +359,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     private keeptoo.KGradientPanel kGradientPanel4;
     private javax.swing.JLabel lbCauHinh;
     private javax.swing.JLabel lbDonGia;
+    private javax.swing.JLabel lbDonGia1;
     private javax.swing.JLabel lbMaSP;
     private javax.swing.JLabel lbSoLuongSP;
     private javax.swing.JLabel lbTenSP;
@@ -351,7 +373,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTenSP;
     // End of variables declaration//GEN-END:variables
   private void fillToTable() {
-        DefaultTableModel model = (DefaultTableModel) tbQLSP.getModel();
+        model = (DefaultTableModel) tbQLSP.getModel();
         model.setRowCount(0);
 
         try {
@@ -375,8 +397,8 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                 Object[] sanPhamObject = new Object[]{
                     listSanPham.get(i).getMaSP(),
                     listSanPham.get(i).getTenSP(),
-                    listSanPham.get(i).getSoLuong(),
-                    listSanPham.get(i).getDonGia(),
+                    String.valueOf(listSanPham.get(i).getSoLuong()),
+                    this.dinhDangTien(listSanPham.get(i).getDonGia()),
                     listSanPham.get(i).getCauHinh(),
                     listSanPham.get(i).getTrangThai(),};
                 model.addRow(sanPhamObject);
@@ -387,16 +409,17 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
 
     private void showDetail() {
         try {
+            model = (DefaultTableModel) tbQLSP.getModel();
             int selectRow = tbQLSP.getSelectedRow();
 
             ClassSanPham sp = listSanPham.get(selectRow);
 
-            txtMaSP.setText(sp.getMaSP());
-            txtTenSP.setText(sp.getTenSP());
-            txtDonGia.setText(sp.getDonGia() + "");
-            txtSoLuongSP.setText(sp.getSoLuong() + "");
-            txtCauHinh.setText(sp.getCauHinh());
-            cbbTrangThai.setSelectedItem(sp.getCauHinh());
+            txtMaSP.setText((String) model.getValueAt(selectRow, 0));
+            txtTenSP.setText((String) model.getValueAt(selectRow, 1));
+            txtSoLuongSP.setText((String) model.getValueAt(selectRow, 2));
+            txtDonGia.setText((String) model.getValueAt(selectRow, 3));
+            txtCauHinh.setText((String) model.getValueAt(selectRow, 4));
+            cbbTrangThai.setSelectedItem(((String) model.getValueAt(selectRow, 5)).trim());
         } catch (Exception e) {
         }
 
@@ -511,8 +534,8 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(1, txtMaSP.getText());
             ps.setString(2, txtTenSP.getText());
-            ps.setString(3, txtDonGia.getText());
-            ps.setString(4, txtSoLuongSP.getText());
+            ps.setString(3, txtSoLuongSP.getText());
+            ps.setString(4, txtDonGia.getText());
             ps.setString(5, txtCauHinh.getText());
             ps.setString(6, (String) cbbTrangThai.getSelectedItem());
 
@@ -552,7 +575,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                 index = listSanPham.size() - 1;
                 showDetail();
             } else {
-                JOptionPane.showMessageDialog(this, "Lỗi sửa");
+                JOptionPane.showMessageDialog(this, "Sửa không thành công");
             }
             ps.close();
             fillToTable();
@@ -570,7 +593,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
             Object[] sanPhamObject = new Object[]{
                 listSanPham.get(i).getMaSP(),
                 listSanPham.get(i).getTenSP(),
-                listSanPham.get(i).getDonGia(),
+                this.dinhDangTien(listSanPham.get(i).getDonGia()),
                 listSanPham.get(i).getSoLuong(),
                 listSanPham.get(i).getCauHinh(),
                 listSanPham.get(i).getTrangThai()};
@@ -593,14 +616,14 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         txtMaSP.setEditable(true);
         txtTenSP.setEditable(true);
         txtCauHinh.setEditable(true);
-        cbbTrangThai.enable(true);
+        cbbTrangThai.setEnabled(true);
     }
 
     private void elbfale() {
         txtMaSP.setEditable(false);
         txtTenSP.setEditable(false);
         txtCauHinh.setEditable(false);
-        cbbTrangThai.enable(false);
+        cbbTrangThai.setEnabled(false);
     }
 
     private void timSp() {
@@ -619,8 +642,8 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                     resultInput = true;
                     txtMaSP.setText(listSanPham.get(i).getMaSP());
                     txtTenSP.setText(listSanPham.get(i).getTenSP());
-                    txtDonGia.setText(listSanPham.get(i).getDonGia() + "");
-                    txtSoLuongSP.setText(listSanPham.get(i).getSoLuong() + "");
+                    txtDonGia.setText(this.dinhDangTien(listSanPham.get(i).getDonGia()));
+                    txtSoLuongSP.setText(String.valueOf(listSanPham.get(i).getSoLuong()));
                     txtCauHinh.setText(listSanPham.get(i).getCauHinh());
                     cbbTrangThai.setSelectedItem(listSanPham.get(i).getTrangThai());
                     model.setRowCount(0);
@@ -628,7 +651,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                     Object obsp[] = new Object[]{
                         listSanPham.get(i).getMaSP(),
                         listSanPham.get(i).getTenSP(),
-                        listSanPham.get(i).getDonGia(),
+                        this.dinhDangTien(listSanPham.get(i).getDonGia()),
                         listSanPham.get(i).getSoLuong(),
                         listSanPham.get(i).getCauHinh(),
                         listSanPham.get(i).getTrangThai(),};
@@ -648,8 +671,8 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                     resultInput = true;
                     txtMaSP.setText(listSanPham.get(i).getMaSP());
                     txtTenSP.setText(listSanPham.get(i).getTenSP());
-                    txtDonGia.setText(listSanPham.get(i).getDonGia() + "");
-                    txtSoLuongSP.setText(listSanPham.get(i).getSoLuong() + "");
+                    txtDonGia.setText(this.dinhDangTien(listSanPham.get(i).getDonGia()));
+                    txtSoLuongSP.setText(String.valueOf(listSanPham.get(i).getSoLuong()));
                     txtCauHinh.setText(listSanPham.get(i).getCauHinh());
                     cbbTrangThai.setSelectedItem(listSanPham.get(i).getTrangThai());
                     model.setRowCount(0);
@@ -657,7 +680,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
                     Object obsp[] = new Object[]{
                         listSanPham.get(i).getMaSP(),
                         listSanPham.get(i).getTenSP(),
-                        listSanPham.get(i).getDonGia(),
+                        this.dinhDangTien(listSanPham.get(i).getDonGia()),
                         listSanPham.get(i).getSoLuong(),
                         listSanPham.get(i).getCauHinh(),
                         listSanPham.get(i).getTrangThai(),};

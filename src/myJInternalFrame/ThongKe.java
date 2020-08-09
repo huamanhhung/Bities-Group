@@ -9,6 +9,8 @@ import connectionSQL.connectionSQL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,12 +25,18 @@ public class ThongKe extends javax.swing.JInternalFrame {
      */
     Connection cnn;
     DefaultTableModel model;
-
+    
     public ThongKe() {
         connectionSQL kn = new connectionSQL();
         cnn = kn.ketnoi(title);
         initComponents();
         this.chon();
+    }
+
+    //dịnh dạng tiền tệ
+    public String dinhDangTien(double so) {
+        NumberFormat fomatter = new DecimalFormat("###,###,###,###" + " VND");
+        return fomatter.format(so);
     }
 
     //chọn kiểu thống kê 
@@ -43,7 +51,7 @@ public class ThongKe extends javax.swing.JInternalFrame {
         if (chonK.trim().equalsIgnoreCase("Doanh thu tất cả sản phẩm theo năm")) {
             this.thongke3();
         }
-
+        
     }
 
     //thỐng kê
@@ -69,13 +77,13 @@ public class ThongKe extends javax.swing.JInternalFrame {
                 v.add(rs.getString(1));
                 v.add(rs.getString(2) + rs.getString(3) + rs.getString(4));
                 v.add(rs.getString(5));
-                v.add(rs.getString(6));
-
+                v.add(this.dinhDangTien(rs.getFloat(6)));
+                
                 model.addRow(v);
             }
             stm.close();
             rs.close();
-
+            
         } catch (Exception e) {
         }
     }
@@ -101,13 +109,13 @@ public class ThongKe extends javax.swing.JInternalFrame {
                 Vector v = new Vector();
                 v.add(index);
                 v.add(rs.getString(1));
-                v.add(rs.getString(2));
-
+                v.add(this.dinhDangTien(rs.getFloat(2)));
+                
                 model.addRow(v);
             }
             stm.close();
             rs.close();
-
+            
         } catch (Exception e) {
         }
     }
@@ -133,13 +141,13 @@ public class ThongKe extends javax.swing.JInternalFrame {
                 Vector v = new Vector();
                 v.add(index);
                 v.add(rs.getString(1));
-                v.add(rs.getString(2));
-
+                v.add(this.dinhDangTien(rs.getFloat(2)));
+                
                 model.addRow(v);
             }
             stm.close();
             rs.close();
-
+            
         } catch (Exception e) {
         }
     }

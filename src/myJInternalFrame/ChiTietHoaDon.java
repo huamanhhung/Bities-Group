@@ -15,6 +15,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import connectionSQL.connectionSQL;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 /**
  *
@@ -27,11 +29,18 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
      */
     Connection cn;
     List<ClassCTHoaDon> listCTHD = new ArrayList<>();
-
+    DefaultTableModel model;
+    
     public ChiTietHoaDon() {
         initComponents();
         cn = connectionSQL.ketnoi("QLIPHONE");
         fillToTable();
+    }
+
+    //dịnh dạng tiền
+    public String dinhDangtien(double so) {
+        NumberFormat fomatter = new DecimalFormat("###,###,###,###" + " VND");
+        return fomatter.format(so);
     }
 
     /**
@@ -202,27 +211,27 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTimKiemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemHoaDonActionPerformed
-        DefaultTableModel model = (DefaultTableModel) tbHoaDonChiTiet.getModel();
-        model.setRowCount(0);
+        DefaultTableModel model = (DefaultTableModel) tbHoaDonChiTiet.getModel();       
         String option[] = {"Tìm bằng mã HD", "Tìm bằng mã SP", "Hủy"};
         ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
         int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, iconFind, option, null);
         if (result == 0) {
             String maHD = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập mã hóa đơn!", "Tìm kiếm bằng mã hóa đơn", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
             boolean resultInput = false;
+            model.setRowCount(0);
             for (int i = 0; i < listCTHD.size(); i++) {
                 if (maHD.equals(listCTHD.get(i).getMaHD())) {
                     resultInput = true;
                     txtMaHD.setText(listCTHD.get(i).getMaHD());
                     txtMaSP.setText(listCTHD.get(i).getMaSP());
                     txtSoLuong.setText(Integer.toString(listCTHD.get(i).getSoLuong()));
-
+                    
                     Object[] objectHD = new Object[]{
                         listCTHD.get(i).getMaHD(),
                         listCTHD.get(i).getMaSP(),
                         listCTHD.get(i).getSoLuong(),
-                        listCTHD.get(i).getDonGia(),
-                        listCTHD.get(i).getThanhTien()
+                        this.dinhDangtien(listCTHD.get(i).getDonGia()),
+                        this.dinhDangtien(listCTHD.get(i).getThanhTien())
                     };
                     model.addRow(objectHD);
                 }
@@ -235,19 +244,20 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
         } else if (result == 1) {
             String maSP = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập mã sản phẩm!", "Tìm kiếm bằng mã sản phẩm", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
             boolean resultInput = false;
+            model.setRowCount(0);
             for (int i = 0; i < listCTHD.size(); i++) {
                 if (maSP.equals(listCTHD.get(i).getMaSP())) {
                     resultInput = true;
                     txtMaHD.setText(listCTHD.get(i).getMaHD());
                     txtMaSP.setText(listCTHD.get(i).getMaSP());
                     txtSoLuong.setText(Integer.toString(listCTHD.get(i).getSoLuong()));
-
+                    
                     Object[] objectHD = new Object[]{
                         listCTHD.get(i).getMaHD(),
                         listCTHD.get(i).getMaSP(),
                         listCTHD.get(i).getSoLuong(),
-                        listCTHD.get(i).getDonGia(),
-                        listCTHD.get(i).getThanhTien()
+                        this.dinhDangtien(listCTHD.get(i).getDonGia()),
+                        this.dinhDangtien(listCTHD.get(i).getThanhTien())
                     };
                     model.addRow(objectHD);
                 }
@@ -288,47 +298,47 @@ public class ChiTietHoaDon extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void fillToTable() {
-        DefaultTableModel model = (DefaultTableModel) tbHoaDonChiTiet.getModel();
+        model = (DefaultTableModel) tbHoaDonChiTiet.getModel();
         model.setRowCount(0);
-
+        
         try {
             listCTHD.clear();
             Statement st = connectionSQL.ketnoi("QLIPHONE").createStatement();
-
+            
             String sql = "SELECT * FROM CTHOADON";
-
+            
             ResultSet rs = st.executeQuery(sql);
-
+            
             while (rs.next()) {
                 String maHD = rs.getString(1);
                 String maSP = rs.getString(2);
                 int soLuong = rs.getInt(3);
                 double donGia = rs.getDouble(4);
                 double thanhTien = rs.getDouble(5);
-
+                
                 ClassCTHoaDon cthd = new ClassCTHoaDon(maHD, maSP, soLuong, donGia, thanhTien);
                 listCTHD.add(cthd);
             }
-
+            
             for (int i = 0; i < listCTHD.size(); i++) {
                 Object[] cthdObject = new Object[]{
                     listCTHD.get(i).getMaHD(),
                     listCTHD.get(i).getMaSP(),
-                    listCTHD.get(i).getSoLuong(),
-                    listCTHD.get(i).getDonGia(),
-                    listCTHD.get(i).getThanhTien(),};
+                    String.valueOf(listCTHD.get(i).getSoLuong()),
+                    this.dinhDangtien(listCTHD.get(i).getDonGia()),
+                    this.dinhDangtien(listCTHD.get(i).getThanhTien()),};
                 model.addRow(cthdObject);
             }
         } catch (Exception e) {
         }
     }
-
+    
     private void showDetail() {
         int selectRow = tbHoaDonChiTiet.getSelectedRow();
         ClassCTHoaDon cthd = listCTHD.get(selectRow);
-
-        txtMaHD.setText(cthd.getMaHD());
-        txtMaSP.setText(cthd.getMaSP());
-        txtSoLuong.setText(Integer.toString(cthd.getSoLuong()));
+        model = (DefaultTableModel) tbHoaDonChiTiet.getModel();
+        txtMaHD.setText((String) model.getValueAt(selectRow, 0));
+        txtMaSP.setText((String) model.getValueAt(selectRow, 1));
+        txtSoLuong.setText((String) model.getValueAt(selectRow, 2));
     }
 }
