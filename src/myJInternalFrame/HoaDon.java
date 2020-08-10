@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import connectionSQL.connectionSQL;
+import java.sql.PreparedStatement;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -252,7 +254,7 @@ public class HoaDon extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tbHoaDon.getModel();
 
-        String option[] = {"Tìm bằng mã HD", "Tìm bằng mã NV", "Tìm bằng mã KH", "Hủy"};
+        String option[] = {"Tìm bằng mã HD", "Tìm bằng mã KH", "Hủy"};
         ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
 
         int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, iconFind, option, null);
@@ -284,45 +286,19 @@ public class HoaDon extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Không tồn tại mã hóa đơn này!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
             }
         } else if (result == 1) {
-            String maNV = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập vào mã nhân viên!", "Tìm kiếm bằng mã nhân viên", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
-            boolean resultInput = false;
-            for (int i = 0; i < listHoaDon.size(); i++) {
-                if (maNV.equals(listHoaDon.get(i).getMaNV())) {
-                    JOptionPane.showMessageDialog(this, "Tìm thấy hóa đơn!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
-                    resultInput = true;
-                    txtMaHD.setText(listHoaDon.get(i).getMaHD());
-                    txtMaNV.setText(listHoaDon.get(i).getMaNV());
-                    txtNgayMua.setText(listHoaDon.get(i).getNgayBan());
-                    txtMaKH.setText(listHoaDon.get(i).getMaKH());
-                    txtTongTien.setText(this.dinhDangtien(listHoaDon.get(i).getTongTien()));
-                    model.setRowCount(0);
-
-                    Object[] objectHD = new Object[]{
-                        listHoaDon.get(i).getMaHD(),
-                        listHoaDon.get(i).getMaNV(),
-                        listHoaDon.get(i).getNgayBan(),
-                        listHoaDon.get(i).getMaKH(),
-                        this.dinhDangtien(listHoaDon.get(i).getTongTien())
-                    };
-                    model.addRow(objectHD);
-                }
-            }
-            if (resultInput == false) {
-                JOptionPane.showMessageDialog(this, "Không tồn tại mã nhân viên này trong bảng hóa đơn!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
-            }
-        } else if (result == 2) {
             String maKH = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập vào mã khách hàng!", "Tìm kiếm bằng mã khách hàng", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
+            model.setRowCount(0);
             boolean resultInput = false;
+            int j = 0;
             for (int i = 0; i < listHoaDon.size(); i++) {
                 if (maKH.equals(listHoaDon.get(i).getMaKH())) {
-                    JOptionPane.showMessageDialog(this, "Tìm thấy hóa đơn!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+                    j++;
                     resultInput = true;
                     txtMaHD.setText(listHoaDon.get(i).getMaHD());
                     txtMaNV.setText(listHoaDon.get(i).getMaNV());
                     txtNgayMua.setText(listHoaDon.get(i).getNgayBan());
                     txtMaKH.setText(listHoaDon.get(i).getMaKH());
                     txtTongTien.setText(this.dinhDangtien(listHoaDon.get(i).getTongTien()));
-                    model.setRowCount(0);
 
                     Object[] objectHD = new Object[]{
                         listHoaDon.get(i).getMaHD(),
@@ -332,10 +308,17 @@ public class HoaDon extends javax.swing.JInternalFrame {
                         this.dinhDangtien(listHoaDon.get(i).getTongTien())
                     };
                     model.addRow(objectHD);
+
                 }
             }
+            if (j != 0) {
+                resultInput = true;
+                JOptionPane.showMessageDialog(this, "Tìm thấy " + j + " hóa đơn!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+            }
+
             if (resultInput == false) {
-                JOptionPane.showMessageDialog(this, "Không tồn tại ngày giao dịch này trong bảng hóa đơn!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
+                fillToTable();
+                JOptionPane.showMessageDialog(this, "Không tồn giao dịch này trong bảng hóa đơn!", "Tìm kiếm", JOptionPane.INFORMATION_MESSAGE, iconFind);
             }
         }
     }//GEN-LAST:event_btnTimKiemHoaDonActionPerformed
