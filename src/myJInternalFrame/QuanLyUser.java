@@ -26,6 +26,7 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
     List<ClassUser> listUser = new ArrayList<>();
     Connection cn;
     int index = 0;
+    DefaultTableModel model;
 
     public QuanLyUser() {
         initComponents();
@@ -56,16 +57,27 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
         btnTimkiemUser = new javax.swing.JButton();
         btnXoaUser = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         kGradientPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quản lý User", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Monospaced", 1, 48), new java.awt.Color(255, 255, 255))); // NOI18N
         kGradientPanel4.setkEndColor(new java.awt.Color(229, 189, 240));
         kGradientPanel4.setkGradientFocus(1000);
         kGradientPanel4.setkStartColor(new java.awt.Color(168, 168, 233));
+        kGradientPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                kGradientPanel4MouseClicked(evt);
+            }
+        });
 
         lblTaiKhoan.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         lblTaiKhoan.setForeground(new java.awt.Color(252, 244, 252));
         lblTaiKhoan.setText("Tài Khoản : ");
 
         txtTaiKhoan.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        txtTaiKhoan.setEnabled(false);
         txtTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTaiKhoanActionPerformed(evt);
@@ -80,7 +92,7 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
 
         lbQuen.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         lbQuen.setForeground(new java.awt.Color(252, 244, 252));
-        lbQuen.setText("Quền :");
+        lbQuen.setText("Quyền :");
 
         tbQLUser.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         tbQLUser.setModel(new javax.swing.table.DefaultTableModel(
@@ -154,16 +166,16 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, kGradientPanel4Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbQuen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTaiKhoan, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel4Layout.createSequentialGroup()
                                 .addComponent(lbMatKhau)
-                                .addGap(13, 13, 13)))
+                                .addGap(13, 13, 13))
+                            .addComponent(lbQuen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtMatKhau)
                             .addComponent(txtTaiKhoan)
-                            .addComponent(cbbQuen, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbbQuen, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(76, 76, 76)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSuaUser)
@@ -197,7 +209,7 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
                         .addComponent(btnTimkiemUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)
                         .addComponent(btnXoaUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(cpQLUser, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -219,9 +231,9 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
     private void txtTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaiKhoanActionPerformed
 
     }//GEN-LAST:event_txtTaiKhoanActionPerformed
-
+    // đưa thông tin từ bảng lên form
     private void tbQLUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLUserMouseClicked
-
+        this.showDetail();
     }//GEN-LAST:event_tbQLUserMouseClicked
 
     private void btnSuaUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaUserActionPerformed
@@ -230,12 +242,17 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSuaUserActionPerformed
 
     private void btnTimkiemUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemUserActionPerformed
-      timKiem();
+        timKiem();
     }//GEN-LAST:event_btnTimkiemUserActionPerformed
 
     private void btnXoaUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaUserActionPerformed
 
     }//GEN-LAST:event_btnXoaUserActionPerformed
+
+    private void kGradientPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel4MouseClicked
+        // TODO add your handling code here:
+        this.fillToTable();
+    }//GEN-LAST:event_kGradientPanel4MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -254,7 +271,7 @@ public class QuanLyUser extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTaiKhoan;
     // End of variables declaration//GEN-END:variables
 private void fillToTable() {
-        DefaultTableModel model = (DefaultTableModel) tbQLUser.getModel();
+        model = (DefaultTableModel) tbQLUser.getModel();
         model.setRowCount(0);
 
         try {
@@ -275,7 +292,7 @@ private void fillToTable() {
                 Object[] usob = new Object[]{
                     listUser.get(i).getTaiKhoan(),
                     listUser.get(i).getMatKhau(),
-                    listUser.get(i).getQuen()};
+                    listUser.get(i).getQuen().equalsIgnoreCase("1") ? "Admin" : "Nhân Viên",};
                 model.addRow(usob);
             }
         } catch (Exception e) {
@@ -310,12 +327,13 @@ private void fillToTable() {
 
     private void showDetail() {
         try {
+            model = (DefaultTableModel) tbQLUser.getModel();
             int selectRow = tbQLUser.getSelectedRow();
             ClassUser us = listUser.get(selectRow);
 
-            txtTaiKhoan.setText(us.getTaiKhoan());
-            txtMatKhau.setText(us.getMatKhau());
-            cbbQuen.setSelectedItem(us.getQuen());
+            txtTaiKhoan.setText((String) model.getValueAt(selectRow, 0));
+            txtMatKhau.setText((String) model.getValueAt(selectRow, 1));
+            cbbQuen.setSelectedItem((String) model.getValueAt(selectRow, 2));
 
         } catch (Exception e) {
         }
