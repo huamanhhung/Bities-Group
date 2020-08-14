@@ -63,36 +63,56 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lbSoLuongSP" alignment="0" max="32767" attributes="0"/>
                               <Component id="lbMaSP" alignment="1" max="32767" attributes="0"/>
                               <Component id="lbTenSP" alignment="1" max="32767" attributes="0"/>
-                              <Component id="lbCauHinh" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lbDonGia1" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lbTrangThai" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lbSoLuongSP" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lbCauHinh" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace pref="9" max="-2" attributes="0"/>
+                                  <Component id="lbTrangThai" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtTenSP" alignment="0" max="32767" attributes="0"/>
-                              <Component id="cbbTrangThai" alignment="0" max="32767" attributes="0"/>
-                              <Component id="cpCauHinh" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtSoLuongSP" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtMaSP" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="txtDonGia" min="-2" pref="285" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lbDonGia" min="-2" pref="78" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="cpCauHinh" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="cbbTrangThai" min="-2" pref="169" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="chkNgungKinhDoanh" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="txtSoLuongSP" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="pnButton" min="-2" max="-2" attributes="0"/>
@@ -104,10 +124,6 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="pnButton" min="-2" pref="329" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -122,27 +138,40 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lbDonGia" min="-2" pref="43" max="-2" attributes="0"/>
-                              <Component id="lbDonGia1" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
-                              <Component id="txtDonGia" alignment="1" pref="47" max="32767" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="lbDonGia1" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                                  <Component id="txtDonGia" alignment="3" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lbSoLuongSP" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                              <Component id="txtSoLuongSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cpCauHinh" min="-2" pref="83" max="-2" attributes="0"/>
-                              <Component id="lbCauHinh" min="-2" pref="43" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="txtSoLuongSP" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                  <Component id="cpCauHinh" min="-2" pref="83" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="cbbTrangThai" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chkNgungKinhDoanh" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="lbSoLuongSP" min="-2" pref="43" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                  <Component id="lbCauHinh" min="-2" pref="43" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                                  <Component id="lbTrangThai" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbTrangThai" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbbTrangThai" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="pnButton" min="-2" pref="329" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   <Component id="cpQLSP" min="-2" pref="207" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -473,6 +502,17 @@
               <Color blue="fc" green="f4" red="fc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="     &#x110;&#x1a1;n gi&#xe1;:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="chkNgungKinhDoanh">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Ng&#x1eeb;ng kinh doanh"/>
           </Properties>
         </Component>
       </SubComponents>

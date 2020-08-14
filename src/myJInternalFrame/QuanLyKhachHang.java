@@ -18,6 +18,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     List<ClassKhachHang> listKhachHang = new ArrayList<>();
     Connection cn;
     int index = 0;
+    DefaultTableModel model;
 
     public QuanLyKhachHang() throws SQLException {
         initComponents();
@@ -54,6 +55,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         cpDiaChi = new javax.swing.JScrollPane();
         taDiaChi = new javax.swing.JTextArea();
         erroMaKH = new javax.swing.JLabel();
+        chkKhachHang = new javax.swing.JCheckBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -183,12 +185,20 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
         erroMaKH.setText("dffffddffdfd");
 
+        chkKhachHang.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkKhachHang.setForeground(new java.awt.Color(255, 255, 255));
+        chkKhachHang.setText("Khách hàng hạn chế");
+
         javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
         kGradientPanel4.setLayout(kGradientPanel4Layout);
         kGradientPanel4Layout.setHorizontalGroup(
             kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel4Layout.createSequentialGroup()
                 .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel4Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(erroMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(292, 292, 292))
                     .addGroup(kGradientPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,15 +213,16 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
                                     .addComponent(lbDiaChi))
                                 .addGap(29, 29, 29)))
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTenKH)
-                            .addComponent(txtMaKH, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cpDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
-                            .addComponent(txtSoDT, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(137, 137, 137))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel4Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(erroMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(292, 292, 292)))
+                            .addGroup(kGradientPanel4Layout.createSequentialGroup()
+                                .addComponent(chkKhachHang)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(kGradientPanel4Layout.createSequentialGroup()
+                                .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTenKH)
+                                    .addComponent(txtMaKH, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cpDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                                    .addComponent(txtSoDT, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(137, 137, 137)))))
                 .addComponent(pnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99))
             .addComponent(cpQLKH)
@@ -239,7 +250,9 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cpDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 40, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(chkKhachHang)
+                        .addGap(0, 10, Short.MAX_VALUE))
                     .addComponent(pnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cpQLKH, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -266,7 +279,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             this.themKH();
             this.clear();
             this.fillToTable();
-            
+
             int index = listKhachHang.size() - 1;
             txtMaKH.setText(listKhachHang.get(index).getMaKH());
             txtTenKH.setText(listKhachHang.get(index).getTenKH());
@@ -284,15 +297,20 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void tbQLKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLKHMouseClicked
+        chkKhachHang.setSelected(false);
+        chkKhachHang.setVisible(true);
         showDeail();
     }//GEN-LAST:event_tbQLKHMouseClicked
 
     private void btnSuaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaKHActionPerformed
+
         this.suaKH();
         this.clear();
     }//GEN-LAST:event_btnSuaKHActionPerformed
 
     private void btnTimkiemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemKHActionPerformed
+        chkKhachHang.setSelected(false);
+        chkKhachHang.setVisible(true);
         this.timKH();
     }//GEN-LAST:event_btnTimkiemKHActionPerformed
 
@@ -302,6 +320,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnThemKH;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnTimkiemKH;
+    private javax.swing.JCheckBox chkKhachHang;
     private javax.swing.JScrollPane cpDiaChi;
     private javax.swing.JScrollPane cpQLKH;
     private javax.swing.JLabel erroMaKH;
@@ -319,7 +338,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void fillToTable() {
-        DefaultTableModel model = (DefaultTableModel) tbQLKH.getModel();
+        model = (DefaultTableModel) tbQLKH.getModel();
         model.setRowCount(0);
 
         try {
@@ -333,10 +352,16 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
                 String tenKH = rs.getString(2);
                 String soDT = rs.getString(3);
                 String diaChi = rs.getString(4);
-
+                //
+                String trangThaiKH = "1";
+                trangThaiKH = rs.getString(5);
+                System.out.println(trangThaiKH);
+                //
                 ClassKhachHang kh = new ClassKhachHang(maKH, tenKH, soDT, diaChi);
+                if (trangThaiKH.equals("1")) {
+                    listKhachHang.add(kh);
+                }
 
-                listKhachHang.add(kh);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -418,21 +443,22 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 
     private void showDeail() {
         try {
+            model = (DefaultTableModel) tbQLKH.getModel();
             int selextRow = tbQLKH.getSelectedRow();
 
             ClassKhachHang kh = listKhachHang.get(selextRow);
 
-            txtMaKH.setText(kh.getMaKH());
-            txtTenKH.setText(kh.getTenKH());
-            txtSoDT.setText(kh.getSdt());
-            taDiaChi.setText(kh.getDiaChi());
+            txtMaKH.setText((String) model.getValueAt(selextRow, 0));
+            txtTenKH.setText((String) model.getValueAt(selextRow, 1));
+            txtSoDT.setText((String) model.getValueAt(selextRow, 2));
+            taDiaChi.setText((String) model.getValueAt(selextRow, 3));
         } catch (Exception e) {
         }
     }
 
     private void themKH() {
         try {
-            String sql = "INSERT INTO KHACHHANG\n" + "VALUES(?,?,?,?)";
+            String sql = "INSERT INTO KHACHHANG\n" + "VALUES(?,?,?,?,1)";
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(1, txtMaKH.getText());
             ps.setString(2, txtTenKH.getText());
@@ -458,14 +484,19 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     private void suaKH() {
         try {
             String sql = "update KHACHHANG\n"
-                    + "set HOVATEN=?, SDT=?, DIACHI=?\n"
+                    + "set HOVATEN=?, SDT=?, DIACHI=?,TrangThaiKH = ?\n"
                     + "where MAKH=?";
 
             PreparedStatement ps = cn.prepareStatement(sql);
-            ps.setString(4, txtMaKH.getText());
+            ps.setString(5, txtMaKH.getText());
             ps.setString(1, txtTenKH.getText());
             ps.setString(2, txtSoDT.getText());
             ps.setString(3, taDiaChi.getText());
+            if (chkKhachHang.isSelected()) {
+                ps.setString(4, chkKhachHang.getText());
+            } else {
+                ps.setString(4, "");
+            }
 
             int row = ps.executeUpdate();
             if (row > 0) {
@@ -483,6 +514,9 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     }
 
     private void clear() {
+        chkKhachHang.setSelected(false);
+        chkKhachHang.setVisible(false);
+
         txtMaKH.setText("");
         txtTenKH.setText("");
         txtSoDT.setText("");
@@ -632,7 +666,17 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
 //        }
 //    }
     private void setTextMaKH() {
-        int lastKH = listKhachHang.size() + 1;
+        String sql = "SELECT * FROM KHACHHANG";
+        int SLKH = 0;
+        try {
+            Statement stm = cn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                SLKH++;
+            }
+        } catch (Exception e) {
+        }
+        int lastKH = SLKH + 1;
         String first = "KH";
         String first1 = "KH0";
 

@@ -195,13 +195,16 @@ public class BanHang extends javax.swing.JInternalFrame {
         lbNhanVienBanHang1.setText("Nhân viên bán hàng: " + nhanVien);
         Statement stm = null;
         ResultSet rs = null;
-        String sql = "select MASP,TENSP,CAUHINH,TRANGTHAI from SANPHAM";
+        String sql = "select MASP,TENSP,CAUHINH,TRANGTHAI,TrangThaiKinhDoanh from SANPHAM";
         try {
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
             while (rs.next()) {
-                cbbSanPham1.addItem(rs.getString("TENSP") + " " + rs.getString("CAUHINH")
-                        + " " + rs.getString("TRANGTHAI"));
+                String trangThai = rs.getString(5);
+                if (trangThai.equals("1")) {
+                    cbbSanPham1.addItem(rs.getString("TENSP") + " " + rs.getString("CAUHINH")
+                            + " " + rs.getString("TRANGTHAI"));
+                }
             }
             stm.close();
             rs.close();
@@ -222,24 +225,28 @@ public class BanHang extends javax.swing.JInternalFrame {
 
     //tìm đúng kh có mã vừa nhập
     public void timKH() {
-        Statement stm = null;
-        ResultSet rs = null;
-        String sql = "select MAKH,HOVATEN from KHACHHANG";
+        String hoten = "", trangthai = "";
+        String sql = "select MAKH,HOVATEN,TrangThaiKH\n"
+                + "from KHACHHANG\n"
+                + "where MAKH=?";
         try {
-            stm = con.createStatement();
-            rs = stm.executeQuery(sql);
-            txtTenKH1.setText(null);
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1, txtMaKH1.getText());
+            ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                String maKhTxt = txtMaKH1.getText();
-                String maKhCsdl = rs.getString("MAKH");
-                if (maKhTxt.trim().equals(maKhCsdl.trim())) {
-                    txtTenKH1.setText(rs.getString("HOVATEN"));
+                hoten = rs.getString(2);
+                trangthai = rs.getString(3);
+            }
+            if (hoten.length() != 0) {
+                if (trangthai.equals("1")) {
+                    txtTenKH1.setText(hoten);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Khách hàng " + hoten + " trong danh sách hạn chế");
                 }
             }
-            stm.close();
-            rs.close();
         } catch (Exception e) {
         }
+
     }
 
     public String taoMaHoaDon() {

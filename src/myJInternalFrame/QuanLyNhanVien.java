@@ -61,6 +61,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         btnSuaNhanVien = new javax.swing.JButton();
         btnTimkiemnv = new javax.swing.JButton();
         btnThemMoi = new javax.swing.JButton();
+        chkNghiviec = new javax.swing.JCheckBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -192,12 +193,17 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
         pnButton.add(btnThemMoi, gridBagConstraints);
 
+        chkNghiviec.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        chkNghiviec.setForeground(new java.awt.Color(255, 255, 255));
+        chkNghiviec.setText("Nghỉ việc");
+
         javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
         kGradientPanel4.setLayout(kGradientPanel4Layout);
         kGradientPanel4Layout.setHorizontalGroup(
             kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(cpQLNV, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(kGradientPanel4Layout.createSequentialGroup()
-                .addGap(148, 148, 148)
+                .addGap(109, 109, 109)
                 .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel4Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
@@ -206,22 +212,29 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
                     .addComponent(lbSoDT)
                     .addComponent(lbDiaChi))
                 .addGap(39, 39, 39)
-                .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtSoDT, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTenNV, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMaNV, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cpDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(103, 103, 103)
-                .addComponent(pnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(103, 103, 103))
-            .addComponent(cpQLNV, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kGradientPanel4Layout.createSequentialGroup()
+                        .addComponent(chkNghiviec)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(kGradientPanel4Layout.createSequentialGroup()
+                        .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtSoDT, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTenNV, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMaNV, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cpDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(142, 142, 142)
+                        .addComponent(pnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(103, 103, 103))))
         );
         kGradientPanel4Layout.setVerticalGroup(
             kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel4Layout.createSequentialGroup()
                 .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel4Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
+                        .addGap(57, 57, 57)
+                        .addComponent(pnButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(kGradientPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -236,11 +249,10 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
                         .addGap(29, 29, 29)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cpDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(kGradientPanel4Layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(pnButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                            .addComponent(cpDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chkNghiviec)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(cpQLNV, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -270,21 +282,27 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnThemnvActionPerformed
 
     private void tbQLNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLNVMouseClicked
+        chkNghiviec.setVisible(true);
         this.showDetail();
     }//GEN-LAST:event_tbQLNVMouseClicked
 
     private void btnSuaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaNhanVienActionPerformed
         // TODO add your handling code here:
+
         this.suaNhanVien();
+        chkNghiviec.setVisible(true);
+        return;
     }//GEN-LAST:event_btnSuaNhanVienActionPerformed
 
     private void btnTimkiemnvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimkiemnvActionPerformed
         timNV();
+        chkNghiviec.setVisible(true);
     }//GEN-LAST:event_btnTimkiemnvActionPerformed
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
         this.clear();
         this.fillToTable();
+        this.setTextMaNV();
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -292,6 +310,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnThemnv;
     private javax.swing.JButton btnTimkiemnv;
+    private javax.swing.JCheckBox chkNghiviec;
     private javax.swing.JScrollPane cpDiaChi;
     private javax.swing.JScrollPane cpQLNV;
     private keeptoo.KGradientPanel kGradientPanel4;
@@ -322,9 +341,12 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
                 String tenNV = rs.getString(2);
                 String soDT = rs.getString(3);
                 String diaChi = rs.getString(4);
+                String trangThaiNv = rs.getString(5);
 
                 ClassNhanVien nv = new ClassNhanVien(maNV, tenNV, soDT, diaChi);
-                listNhanVien.add(nv);
+                if (trangThaiNv.equals("1")) {
+                    listNhanVien.add(nv);
+                }
             }
             for (int i = 0; i < listNhanVien.size(); i++) {
                 Object[] khachHangObject = new Object[]{
@@ -357,7 +379,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
 
     private void themNV() {
         try {
-            String sql = "INSERT INTO NHANVIEN\n" + "VALUES(?,?,?,?)";
+            String sql = "INSERT INTO NHANVIEN\n" + "VALUES(?,?,?,?,1)";
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(1, txtMaNV.getText());
             ps.setString(2, txtTenNV.getText());
@@ -369,13 +391,14 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
                 index = listNhanVien.size() - 1;
                 showDetail();
+                this.fillToTable();
             } else {
-                JOptionPane.showMessageDialog(this, "Lỗi thêm");
+                JOptionPane.showMessageDialog(this, "Thêm nhân viên không thành công");
             }
             ps.close();
             fillToTable();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Thêm nhân viên không thành công");
+            JOptionPane.showMessageDialog(this, "Lỗi thêm");
         }
 
     }
@@ -383,27 +406,32 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
     private void suaNhanVien() {
         try {
             String sql = "UPDATE NHANVIEN\n"
-                    + "set TENNV=?, SDT=?, DIACHI=?\n"
+                    + "set TENNV=?, SDT=?, DIACHI=?, TrangThaiNV=?\n"
                     + "where MANV=?";
 
             PreparedStatement ps = cn.prepareStatement(sql);
-            ps.setString(4, txtMaNV.getText());
+            ps.setString(5, txtMaNV.getText());
             ps.setString(1, txtTenNV.getText());
             ps.setString(2, txtSoDT.getText());
             ps.setString(3, txtDiaChi.getText());
-
+            if (chkNghiviec.isSelected()) {
+                ps.setString(4, chkNghiviec.getText());
+            } else {
+                ps.setString(4, "1");
+            }
             int row = ps.executeUpdate();
             if (row > 0) {
                 JOptionPane.showMessageDialog(this, "Sửa thông tin nhân viên thành công");
                 index = listNhanVien.size() - 1;
+                this.fillToTable();
                 showDetail();
+                return;
             } else {
-                JOptionPane.showMessageDialog(this, "Lỗi Sửa");
+                JOptionPane.showMessageDialog(this, "Sửa thông tin nhân viên không thành công");
+                return;
             }
-            cn.close();
-            fillToTable();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Sửa thông tin nhân viên không thành công");
+            JOptionPane.showMessageDialog(this, "Lỗi Sửa");
         }
     }
 
@@ -505,6 +533,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
     }
 
     private void clear() {
+        chkNghiviec.setVisible(false);
         txtMaNV.setText("");
         txtTenNV.setText("");
         txtSoDT.setText("");
@@ -576,7 +605,7 @@ public class QuanLyNhanVien extends javax.swing.JInternalFrame {
     }
 
     private void setTextMaNV() {
-
+        chkNghiviec.setVisible(false);
         int size = 0;
 
         try {
