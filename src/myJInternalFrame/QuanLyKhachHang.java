@@ -14,17 +14,18 @@ import javax.swing.table.DefaultTableModel;
 import myClass.ClassKhachHang;
 
 public class QuanLyKhachHang extends javax.swing.JInternalFrame {
-
+    
     List<ClassKhachHang> listKhachHang = new ArrayList<>();
     Connection cn;
     int index = 0;
     DefaultTableModel model;
-
+    
     public QuanLyKhachHang() throws SQLException {
         initComponents();
         cn = connectionSQL.ketnoi("QLIPHONE");
         fillToTable();
         setTextMaKH();
+        chkKhachHang.setVisible(false);
     }
 
     /**
@@ -274,18 +275,18 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKHActionPerformed
-
+        
         if (this.batLoi()) {
             this.themKH();
             this.clear();
             this.fillToTable();
-
+            
             int index = listKhachHang.size() - 1;
             txtMaKH.setText(listKhachHang.get(index).getMaKH());
             txtTenKH.setText(listKhachHang.get(index).getTenKH());
             txtSoDT.setText(listKhachHang.get(index).getSdt());
             taDiaChi.setText(listKhachHang.get(index).getDiaChi());
-
+            
         }
 
     }//GEN-LAST:event_btnThemKHActionPerformed
@@ -303,7 +304,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tbQLKHMouseClicked
 
     private void btnSuaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaKHActionPerformed
-
+        
         this.suaKH();
         this.clear();
     }//GEN-LAST:event_btnSuaKHActionPerformed
@@ -340,13 +341,13 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
     private void fillToTable() {
         model = (DefaultTableModel) tbQLKH.getModel();
         model.setRowCount(0);
-
+        
         try {
             listKhachHang.clear();
             Statement st = connectionSQL.ketnoi("QLIPHONE").createStatement();
             String sql = "SELECT * FROM KHACHHANG";
             ResultSet rs = st.executeQuery(sql);
-
+            
             while (rs.next()) {
                 String maKH = rs.getString(1);
                 String tenKH = rs.getString(2);
@@ -355,18 +356,17 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
                 //
                 String trangThaiKH = "1";
                 trangThaiKH = rs.getString(5);
-                System.out.println(trangThaiKH);
                 //
                 ClassKhachHang kh = new ClassKhachHang(maKH, tenKH, soDT, diaChi);
                 if (trangThaiKH.equals("1")) {
                     listKhachHang.add(kh);
                 }
-
+                
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-
+        
         for (int i = 0; i < listKhachHang.size(); i++) {
             Object[] khachHangObject = new Object[]{
                 listKhachHang.get(i).getMaKH(),
@@ -376,7 +376,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             model.addRow(khachHangObject);
         }
     }
-
+    
     public boolean batLoi() {
         boolean tma = false, tten = false, tsdt = false, tdiachi = false;
         //bắt lỗi mã
@@ -440,14 +440,14 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             return false;
         }
     }
-
+    
     private void showDeail() {
         try {
             model = (DefaultTableModel) tbQLKH.getModel();
             int selextRow = tbQLKH.getSelectedRow();
-
+            
             ClassKhachHang kh = listKhachHang.get(selextRow);
-
+            
             txtMaKH.setText((String) model.getValueAt(selextRow, 0));
             txtTenKH.setText((String) model.getValueAt(selextRow, 1));
             txtSoDT.setText((String) model.getValueAt(selextRow, 2));
@@ -455,7 +455,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
-
+    
     private void themKH() {
         try {
             String sql = "INSERT INTO KHACHHANG\n" + "VALUES(?,?,?,?,1)";
@@ -464,7 +464,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             ps.setString(2, txtTenKH.getText());
             ps.setString(3, txtSoDT.getText());
             ps.setString(4, taDiaChi.getText());
-
+            
             int row = ps.executeUpdate();
             if (row > 0) {
                 JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
@@ -478,15 +478,15 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Thêm khách hàng không thành công");
         }
-
+        
     }
-
+    
     private void suaKH() {
         try {
             String sql = "update KHACHHANG\n"
                     + "set HOVATEN=?, SDT=?, DIACHI=?,TrangThaiKH = ?\n"
                     + "where MAKH=?";
-
+            
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(5, txtMaKH.getText());
             ps.setString(1, txtTenKH.getText());
@@ -497,7 +497,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             } else {
                 ps.setString(4, "");
             }
-
+            
             int row = ps.executeUpdate();
             if (row > 0) {
                 JOptionPane.showMessageDialog(this, "Sửa thông tin khách hàng thành công");
@@ -512,21 +512,21 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Sửa thông tin khách hàng không thành công");
         }
     }
-
+    
     private void clear() {
         chkKhachHang.setSelected(false);
         chkKhachHang.setVisible(false);
-
+        
         txtMaKH.setText("");
         txtTenKH.setText("");
         txtSoDT.setText("");
         taDiaChi.setText("");
     }
-
+    
     private void loadTable() {
         DefaultTableModel model = (DefaultTableModel) tbQLKH.getModel();
         model.setRowCount(0);
-
+        
         for (int i = 0; i < listKhachHang.size(); i++) {
             Object[] khachHangObject = new Object[]{
                 listKhachHang.get(i).getMaKH(),
@@ -534,17 +534,17 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
                 listKhachHang.get(i).getSdt(),
                 listKhachHang.get(i).getDiaChi()};
             model.addRow(khachHangObject);
-
+            
         }
     }
-
+    
     private void timKH() {
         DefaultTableModel model = (DefaultTableModel) tbQLKH.getModel();
         String option[] = {"Tìm theo mã KH", "Tìm theo tên KH", "Tìm theo SĐT KH", "Hủy"};
         ImageIcon iconFind = new ImageIcon("src//icons//Search_Icon_32.png");
-
+        
         int result = JOptionPane.showOptionDialog(this, "Mời bạn chọn cách thức tìm kiếm!", "Tìm kiếm Khách hàng", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, iconFind, option, null);
-
+        
         if (result == 0) {
             String makh = (String) JOptionPane.showInputDialog(this, "Mời bạn nhập mã Khách hàng!", "Tìm kiếm bằng mã khách hàng", JOptionPane.INFORMATION_MESSAGE, iconFind, null, null);
             boolean resultInput = false;
@@ -557,7 +557,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
                     txtSoDT.setText(listKhachHang.get(i).getSdt());
                     taDiaChi.setText(listKhachHang.get(i).getDiaChi());
                     model.setRowCount(0);
-
+                    
                     Object objectKH[] = new Object[]{
                         listKhachHang.get(i).getMaKH(),
                         listKhachHang.get(i).getTenKH(),
@@ -581,7 +581,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
                     txtSoDT.setText(listKhachHang.get(i).getSdt());
                     taDiaChi.setText(listKhachHang.get(i).getDiaChi());
                     model.setRowCount(0);
-
+                    
                     Object objectKH[] = new Object[]{
                         listKhachHang.get(i).getMaKH(),
                         listKhachHang.get(i).getTenKH(),
@@ -605,7 +605,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
                     txtSoDT.setText(listKhachHang.get(i).getSdt());
                     taDiaChi.setText(listKhachHang.get(i).getDiaChi());
                     model.setRowCount(0);
-
+                    
                     Object objectKH[] = new Object[]{
                         listKhachHang.get(i).getMaKH(),
                         listKhachHang.get(i).getTenKH(),
@@ -679,7 +679,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
         int lastKH = SLKH + 1;
         String first = "KH";
         String first1 = "KH0";
-
+        
         if (lastKH < 10) {
             txtMaKH.setText(first1 + lastKH);
         } else {

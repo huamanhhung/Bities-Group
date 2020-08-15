@@ -38,6 +38,7 @@ public class QuanLySanPham extends javax.swing.JInternalFrame {
         cn = connectionSQL.ketnoi("QLIPHONE");
         this.dongChucNang();
         fillToTable();
+        chkNgungKinhDoanh.setVisible(false);
 //        addsp();
 
     }
