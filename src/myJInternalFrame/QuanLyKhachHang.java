@@ -495,7 +495,7 @@ public class QuanLyKhachHang extends javax.swing.JInternalFrame {
             if (chkKhachHang.isSelected()) {
                 ps.setString(4, chkKhachHang.getText());
             } else {
-                ps.setString(4, "");
+                ps.setString(4, "1");
             }
             
             int row = ps.executeUpdate();

@@ -108,7 +108,7 @@ public class HoaDon extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Mã hóa đơn", "Mã nhân viên", "Ngày bán", "Mã khách hàng", "Tổng tiền"
+                "Mã hóa đơn", "Nhân viên bán", "Ngày bán", "Mã khách hàng", "Tổng tiền"
             }
         ));
         tbHoaDon.setFillsViewportHeight(true);
